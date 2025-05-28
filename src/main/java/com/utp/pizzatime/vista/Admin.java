@@ -9,7 +9,10 @@ import java.awt.CardLayout;
 public class Admin extends javax.swing.JFrame {
     private CardLayout card; //se crea para inicializarse luego
     private ConsultarStock consultar =  new ConsultarStock(); //instancia de los paneles del primer boton, se hace así por cada panel por botón
-
+    private Pedido_ingredientes pedido_ing= new Pedido_ingredientes();
+    private Gestion_usu gest_usu= new Gestion_usu();
+    
+    
     /**
      * Creates new form Admin
      */
@@ -20,6 +23,8 @@ public class Admin extends javax.swing.JFrame {
         
         //tarjetas (aqui coloquen las tarjetas de los nuevos paneles que creen)
         panelAdm.add(consultar,"consultarStock");
+        panelAdm.add(pedido_ing, "pedido_ingredientes");
+        panelAdm.add(gest_usu, "gestion_usu");
         
     }
 
@@ -66,6 +71,11 @@ public class Admin extends javax.swing.JFrame {
         btnUsuarios.setForeground(new java.awt.Color(255, 255, 255));
         btnUsuarios.setText("Gestionar Usuarios");
         btnUsuarios.setBorder(javax.swing.BorderFactory.createEmptyBorder(1, 1, 1, 1));
+        btnUsuarios.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnUsuariosActionPerformed(evt);
+            }
+        });
 
         btnReportes.setBackground(new java.awt.Color(0, 109, 86));
         btnReportes.setFont(new java.awt.Font("Segoe UI Variable", 1, 14)); // NOI18N
@@ -78,6 +88,11 @@ public class Admin extends javax.swing.JFrame {
         btnPedidos.setForeground(new java.awt.Color(255, 255, 255));
         btnPedidos.setText("Generar Pedidos");
         btnPedidos.setBorder(javax.swing.BorderFactory.createEmptyBorder(1, 1, 1, 1));
+        btnPedidos.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnPedidosActionPerformed(evt);
+            }
+        });
 
         btnRegistrarIngredientes.setBackground(new java.awt.Color(0, 109, 86));
         btnRegistrarIngredientes.setFont(new java.awt.Font("Segoe UI Variable", 1, 14)); // NOI18N
@@ -176,6 +191,16 @@ public class Admin extends javax.swing.JFrame {
         login.setVisible(true);
         this.dispose();
     }//GEN-LAST:event_btnlogoutActionPerformed
+
+    private void btnPedidosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnPedidosActionPerformed
+        // TODO add your handling code here:
+        card.show(panelAdm, "pedido_ingredientes");
+    }//GEN-LAST:event_btnPedidosActionPerformed
+
+    private void btnUsuariosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnUsuariosActionPerformed
+        // TODO add your handling code here:
+        card.show(panelAdm, "gestion_usu");
+    }//GEN-LAST:event_btnUsuariosActionPerformed
 
     /**
      * @param args the command line arguments
