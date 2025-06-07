@@ -4,9 +4,15 @@
  */
 package com.utp.pizzatime.view;
 import java.awt.Color;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
+import java.awt.event.MouseListener;
+import javax.swing.JMenuItem;
+import javax.swing.JPopupMenu;
 import javax.swing.JTable;
 import javax.swing.SwingConstants;
 import javax.swing.table.DefaultTableCellRenderer;
+import javax.swing.table.DefaultTableModel;
 
 /**
  *
@@ -17,11 +23,46 @@ public class Pedido_ingredientes extends javax.swing.JPanel {
     /**
      * Creates new form Pedido_ingredientes
      */
+    
+    JPopupMenu popmenuanticlick; //para q al hacer anticlick en un row se pueda eliminar
+    JMenuItem elimitem;
+    
     public Pedido_ingredientes() {
         initComponents();
         
-        //JTableHeader tableheader= tbped_ing.getTableHeader();
         table_head_color(tbped_ing);
+        popmenuanticlick = new JPopupMenu();
+        elimitem = new JMenuItem("Eliminar");
+        elimitem.addActionListener(e -> elim_row_peding());
+        popmenuanticlick.add(elimitem); 
+        
+        MouseListener popuplistens = new PopupListener();//es un obj PopupListener, solo funciona pq no tiene constructor, solo se ve interfaz generica
+        tbped_ing.addMouseListener(popuplistens);  
+        
+        
+        //JTableHeader tableheader= tbped_ing.getTableHeader();
+    }
+    
+    class PopupListener extends MouseAdapter{//clase q reescribe los eventos para q se ejecute el metodo chiquito ese
+        @Override
+        public void mousePressed(MouseEvent e){
+            
+            plswork(e);          
+        }
+        
+        @Override
+        public void mouseReleased(MouseEvent e){
+            
+            plswork(e);    
+        }
+        
+        public void plswork(MouseEvent e){
+            if (e.isPopupTrigger()) {
+                popmenuanticlick.show(e.getComponent(), e.getX(), e.getY());//enseña el menu en donde esta el mouse
+                
+            }
+            
+        }
         
     }
     
@@ -34,6 +75,16 @@ public class Pedido_ingredientes extends javax.swing.JPanel {
         
         tbped_ing.getTableHeader().setDefaultRenderer(header_ren);//agarra el header y le pone la cosa personalizada
 }
+    
+    private void elim_row_peding(){
+        DefaultTableModel tb_model_peding = (DefaultTableModel) tbped_ing.getModel();
+        int row= tbped_ing.getSelectedRow();
+        
+        tb_model_peding.removeRow(row);//ya q no guarda hasta q se presiona el boton de pedir
+        
+    }
+    
+    
     
     
 
@@ -51,12 +102,13 @@ public class Pedido_ingredientes extends javax.swing.JPanel {
         jLabel3 = new javax.swing.JLabel();
         cbonomingre = new javax.swing.JComboBox<>();
         txtcantcajas = new javax.swing.JTextField();
-        jButton1 = new javax.swing.JButton();
+        btnaddingadmin = new javax.swing.JButton();
         jScrollPane1 = new javax.swing.JScrollPane();
         tbped_ing = new javax.swing.JTable();
         jLabel4 = new javax.swing.JLabel();
         txttotalpedido_ing = new javax.swing.JLabel();
-        jButton2 = new javax.swing.JButton();
+        btnpediringadmin = new javax.swing.JButton();
+        btncancelingadmin = new javax.swing.JButton();
 
         setBackground(new java.awt.Color(255, 255, 255));
         setPreferredSize(new java.awt.Dimension(770, 524));
@@ -82,11 +134,16 @@ public class Pedido_ingredientes extends javax.swing.JPanel {
         txtcantcajas.setText("jTextField1");
         txtcantcajas.setBorder(javax.swing.BorderFactory.createEtchedBorder(new java.awt.Color(204, 204, 204), new java.awt.Color(204, 204, 204)));
 
-        jButton1.setBackground(new java.awt.Color(204, 204, 204));
-        jButton1.setFont(new java.awt.Font("Tahoma", 3, 12)); // NOI18N
-        jButton1.setForeground(new java.awt.Color(0, 109, 86));
-        jButton1.setText("Agregar");
-        jButton1.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED, new java.awt.Color(204, 204, 204), new java.awt.Color(204, 204, 204), null, null));
+        btnaddingadmin.setBackground(new java.awt.Color(204, 204, 204));
+        btnaddingadmin.setFont(new java.awt.Font("Tahoma", 3, 12)); // NOI18N
+        btnaddingadmin.setForeground(new java.awt.Color(0, 109, 86));
+        btnaddingadmin.setText("Agregar");
+        btnaddingadmin.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED, new java.awt.Color(204, 204, 204), new java.awt.Color(204, 204, 204), null, null));
+        btnaddingadmin.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnaddingadminActionPerformed(evt);
+            }
+        });
 
         tbped_ing.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED, new java.awt.Color(204, 204, 204), new java.awt.Color(204, 204, 204), null, null));
         tbped_ing.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
@@ -126,11 +183,20 @@ public class Pedido_ingredientes extends javax.swing.JPanel {
         txttotalpedido_ing.setForeground(new java.awt.Color(110, 104, 104));
         txttotalpedido_ing.setText(".......");
 
-        jButton2.setBackground(new java.awt.Color(0, 109, 86));
-        jButton2.setFont(new java.awt.Font("Tahoma", 3, 14)); // NOI18N
-        jButton2.setForeground(new java.awt.Color(204, 204, 204));
-        jButton2.setText("Pedir");
-        jButton2.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED, new java.awt.Color(204, 204, 204), new java.awt.Color(204, 204, 204), null, null));
+        btnpediringadmin.setBackground(new java.awt.Color(0, 109, 86));
+        btnpediringadmin.setFont(new java.awt.Font("Tahoma", 3, 14)); // NOI18N
+        btnpediringadmin.setText("Pedir");
+        btnpediringadmin.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED, new java.awt.Color(204, 204, 204), new java.awt.Color(204, 204, 204), null, null));
+        btnpediringadmin.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnpediringadminActionPerformed(evt);
+            }
+        });
+
+        btncancelingadmin.setBackground(new java.awt.Color(0, 109, 86));
+        btncancelingadmin.setFont(new java.awt.Font("Tahoma", 3, 14)); // NOI18N
+        btncancelingadmin.setText("Cancelar");
+        btncancelingadmin.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED, new java.awt.Color(204, 204, 204), new java.awt.Color(204, 204, 204), null, null));
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
@@ -152,7 +218,7 @@ public class Pedido_ingredientes extends javax.swing.JPanel {
                             .addComponent(txtcantcajas)
                             .addComponent(cbonomingre, 0, 347, Short.MAX_VALUE))))
                 .addGap(48, 48, 48)
-                .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 86, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(btnaddingadmin, javax.swing.GroupLayout.PREFERRED_SIZE, 86, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(29, 29, 29))
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                 .addGap(0, 42, Short.MAX_VALUE)
@@ -166,7 +232,9 @@ public class Pedido_ingredientes extends javax.swing.JPanel {
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addComponent(txttotalpedido_ing)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(jButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 95, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(btncancelingadmin, javax.swing.GroupLayout.PREFERRED_SIZE, 95, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(107, 107, 107)
+                        .addComponent(btnpediringadmin, javax.swing.GroupLayout.PREFERRED_SIZE, 95, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(52, 52, 52))))
         );
         layout.setVerticalGroup(
@@ -183,23 +251,38 @@ public class Pedido_ingredientes extends javax.swing.JPanel {
                     .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                         .addComponent(jLabel3)
                         .addComponent(txtcantcajas, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 36, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(btnaddingadmin, javax.swing.GroupLayout.PREFERRED_SIZE, 36, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(31, 31, 31)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 232, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(24, 24, 24)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel4)
                     .addComponent(txttotalpedido_ing)
-                    .addComponent(jButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(btnpediringadmin, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(btncancelingadmin, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addContainerGap(34, Short.MAX_VALUE))
         );
     }// </editor-fold>//GEN-END:initComponents
 
+    private void btnaddingadminActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnaddingadminActionPerformed
+        // TODO add your handling code here:
+        String nom_ing= (String)cbonomingre.getSelectedItem();//convierte a string el item seleccionado
+        int cant_caj_ing= Integer.parseInt(txtcantcajas.getText());
+        
+        
+    }//GEN-LAST:event_btnaddingadminActionPerformed
+
+    private void btnpediringadminActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnpediringadminActionPerformed
+        // TODO add your handling code here:
+        /*Tendra que agarrar todos los rows del jtable en un loop y meterlos con shift a una lista para q esa lista vaya al bd*/
+    }//GEN-LAST:event_btnpediringadminActionPerformed
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton btnaddingadmin;
+    private javax.swing.JButton btncancelingadmin;
+    private javax.swing.JButton btnpediringadmin;
     private javax.swing.JComboBox<String> cbonomingre;
-    private javax.swing.JButton jButton1;
-    private javax.swing.JButton jButton2;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
