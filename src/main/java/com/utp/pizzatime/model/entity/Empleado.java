@@ -1,5 +1,4 @@
 package com.utp.pizzatime.model.entity;
-
 /**
  *
  * @author BeeIsMega
@@ -46,6 +45,4 @@ public class Empleado {
     public void setPass(String pass) {
         this.pass = pass;
     }
-    
-    
 }

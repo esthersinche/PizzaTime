@@ -1,13 +1,14 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Interface.java to edit this template
- */
 package com.utp.pizzatime.model.dao;
+
+import com.utp.pizzatime.model.entity.Empleado;
+import java.sql.SQLException;
+import java.util.logging.Logger;
 
 /**
  *
  * @author BeeIsMega
  */
 public interface EmpleadoDAO {
-    
+    Empleado findByDniAndPass(int dni, String pass) throws SQLException;
+
 }
