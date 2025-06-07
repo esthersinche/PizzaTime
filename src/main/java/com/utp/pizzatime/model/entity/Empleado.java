@@ -1,7 +1,7 @@
 package com.utp.pizzatime.model.entity;
 /**
  *
- * @author BeeIsMega
+ * @author EstherSinche
  */
 public class Empleado {
     int dni_emp;
