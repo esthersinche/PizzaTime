@@ -1,13 +1,15 @@
-/*
+ /*
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JPanel.java to edit this template
  */
-package com.utp.pizzatime.view;
+package com.utp.pizzatime.vista;
 
 /**
  *
  * @author Dell
  */
+
+
 public class RegistroIngresoo extends javax.swing.JPanel {
 
     /**
@@ -26,30 +28,43 @@ public class RegistroIngresoo extends javax.swing.JPanel {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        jTabbedPane1 = new javax.swing.JTabbedPane();
-        jPanel2 = new javax.swing.JPanel();
+        Boton_Ingreso_Salida = new javax.swing.JTabbedPane();
+        Panel_RegistroIngreso = new javax.swing.JPanel();
         jScrollPane2 = new javax.swing.JScrollPane();
-        jTable2 = new javax.swing.JTable();
-        jButton3 = new javax.swing.JButton();
-        jButton1 = new javax.swing.JButton();
-        jLabel6 = new javax.swing.JLabel();
-        jTextField4 = new javax.swing.JTextField();
-        jLabel1 = new javax.swing.JLabel();
-        jLabel2 = new javax.swing.JLabel();
+        Tabla_Productos = new javax.swing.JTable();
+        Boton_Cancelar = new javax.swing.JButton();
+        Boton_Guardar = new javax.swing.JButton();
+        Text_FechaaIngreso = new javax.swing.JLabel();
+        Field_FechaIngreso = new javax.swing.JTextField();
+        Texto_RegistroIngreso = new javax.swing.JLabel();
+        Text_Ingrediente = new javax.swing.JLabel();
+        ComboBox_Ingredientes = new javax.swing.JComboBox<>();
+        Text_CantidadCajas = new javax.swing.JLabel();
+        Field_CantidadCajas = new javax.swing.JTextField();
+        Text_Lote = new javax.swing.JLabel();
+        Field_Lote = new javax.swing.JTextField();
+        Text_FechaCaducidad = new javax.swing.JLabel();
+        Field_FechaCaducidad = new javax.swing.JTextField();
+        Panel_RegistroSalida = new javax.swing.JPanel();
+        jScrollPane3 = new javax.swing.JScrollPane();
+        Tabla_Productos_Salida = new javax.swing.JTable();
+        Boton_Cancelar_Salida = new javax.swing.JButton();
+        Boton_Guardar_Salida = new javax.swing.JButton();
+        Text_Ingrediente1 = new javax.swing.JLabel();
+        Texto_RegistroIngreso1 = new javax.swing.JLabel();
+        ComboBox_Ingredientes_Salida = new javax.swing.JComboBox<>();
+        Text_CantidadCajas1 = new javax.swing.JLabel();
+        Field_CantidadCajas_Salida = new javax.swing.JTextField();
+        Text_Lote1 = new javax.swing.JLabel();
+        Field_Lote_Salida = new javax.swing.JTextField();
         jComboBox1 = new javax.swing.JComboBox<>();
-        jLabel3 = new javax.swing.JLabel();
-        jTextField1 = new javax.swing.JTextField();
-        jLabel4 = new javax.swing.JLabel();
-        jTextField2 = new javax.swing.JTextField();
-        jLabel5 = new javax.swing.JLabel();
-        jTextField3 = new javax.swing.JTextField();
-        jPanel1 = new javax.swing.JPanel();
+        jLabel1 = new javax.swing.JLabel();
 
-        jTabbedPane1.setBackground(new java.awt.Color(0, 109, 86));
+        Boton_Ingreso_Salida.setBackground(new java.awt.Color(0, 109, 86));
 
-        jPanel2.setBackground(new java.awt.Color(255, 255, 255));
+        Panel_RegistroIngreso.setBackground(new java.awt.Color(255, 255, 255));
 
-        jTable2.setModel(new javax.swing.table.DefaultTableModel(
+        Tabla_Productos.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {null, null, null, null},
                 {null, null, null, null},
@@ -59,151 +74,269 @@ public class RegistroIngresoo extends javax.swing.JPanel {
                 "Producto", "Cantidad", "Fecha de ingreso", "Fecha de caducidad"
             }
         ));
-        jScrollPane2.setViewportView(jTable2);
+        jScrollPane2.setViewportView(Tabla_Productos);
 
-        jButton3.setBackground(new java.awt.Color(0, 109, 86));
-        jButton3.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
-        jButton3.setText("Cancelar");
-        jButton3.addActionListener(new java.awt.event.ActionListener() {
+        Boton_Cancelar.setBackground(new java.awt.Color(0, 109, 86));
+        Boton_Cancelar.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
+        Boton_Cancelar.setText("Cancelar");
+        Boton_Cancelar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton3ActionPerformed(evt);
+                Boton_CancelarActionPerformed(evt);
             }
         });
 
-        jButton1.setBackground(new java.awt.Color(0, 109, 86));
-        jButton1.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
-        jButton1.setText("Guardar");
-        jButton1.addActionListener(new java.awt.event.ActionListener() {
+        Boton_Guardar.setBackground(new java.awt.Color(0, 109, 86));
+        Boton_Guardar.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
+        Boton_Guardar.setText("Guardar");
+        Boton_Guardar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton1ActionPerformed(evt);
+                Boton_GuardarActionPerformed(evt);
             }
         });
 
-        jLabel6.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
-        jLabel6.setText("Fecha de Ingreso");
+        Text_FechaaIngreso.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        Text_FechaaIngreso.setText("Fecha de Ingreso");
 
-        jLabel1.setFont(new java.awt.Font("Segoe UI", 1, 24)); // NOI18N
-        jLabel1.setForeground(new java.awt.Color(0, 109, 86));
-        jLabel1.setText("Registro de Ingreso");
+        Texto_RegistroIngreso.setFont(new java.awt.Font("Segoe UI", 1, 24)); // NOI18N
+        Texto_RegistroIngreso.setForeground(new java.awt.Color(0, 109, 86));
+        Texto_RegistroIngreso.setText("Registro de Ingreso");
 
-        jLabel2.setBackground(new java.awt.Color(0, 0, 0));
-        jLabel2.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
-        jLabel2.setText("Ingrediente");
+        Text_Ingrediente.setBackground(new java.awt.Color(0, 0, 0));
+        Text_Ingrediente.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        Text_Ingrediente.setText("Ingrediente");
 
-        jComboBox1.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
-        jComboBox1.addActionListener(new java.awt.event.ActionListener() {
+        ComboBox_Ingredientes.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+        ComboBox_Ingredientes.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jComboBox1ActionPerformed(evt);
+                ComboBox_IngredientesActionPerformed(evt);
             }
         });
 
-        jLabel3.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
-        jLabel3.setText("Cantidad Cajas");
+        Text_CantidadCajas.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        Text_CantidadCajas.setText("Cantidad Cajas");
 
-        jLabel4.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
-        jLabel4.setText("Lote");
+        Text_Lote.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        Text_Lote.setText("Lote");
 
-        jTextField2.addActionListener(new java.awt.event.ActionListener() {
+        Field_Lote.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jTextField2ActionPerformed(evt);
+                Field_LoteActionPerformed(evt);
             }
         });
 
-        jLabel5.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
-        jLabel5.setText("Fecha Caducidad");
+        Text_FechaCaducidad.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        Text_FechaCaducidad.setText("Fecha Caducidad");
 
-        jTextField3.addActionListener(new java.awt.event.ActionListener() {
+        Field_FechaCaducidad.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jTextField3ActionPerformed(evt);
+                Field_FechaCaducidadActionPerformed(evt);
             }
         });
 
-        javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
-        jPanel2.setLayout(jPanel2Layout);
-        jPanel2Layout.setHorizontalGroup(
-            jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel2Layout.createSequentialGroup()
-                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jPanel2Layout.createSequentialGroup()
+        javax.swing.GroupLayout Panel_RegistroIngresoLayout = new javax.swing.GroupLayout(Panel_RegistroIngreso);
+        Panel_RegistroIngreso.setLayout(Panel_RegistroIngresoLayout);
+        Panel_RegistroIngresoLayout.setHorizontalGroup(
+            Panel_RegistroIngresoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(Panel_RegistroIngresoLayout.createSequentialGroup()
+                .addGroup(Panel_RegistroIngresoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(Panel_RegistroIngresoLayout.createSequentialGroup()
                         .addGap(36, 36, 36)
-                        .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(jPanel2Layout.createSequentialGroup()
-                                .addComponent(jLabel2)
+                        .addGroup(Panel_RegistroIngresoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(Panel_RegistroIngresoLayout.createSequentialGroup()
+                                .addComponent(Text_Ingrediente)
                                 .addGap(35, 35, 35)
-                                .addComponent(jComboBox1, javax.swing.GroupLayout.PREFERRED_SIZE, 245, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addComponent(jLabel1)
-                            .addGroup(jPanel2Layout.createSequentialGroup()
-                                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addGroup(jPanel2Layout.createSequentialGroup()
-                                        .addComponent(jLabel3)
+                                .addComponent(ComboBox_Ingredientes, javax.swing.GroupLayout.PREFERRED_SIZE, 245, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addComponent(Texto_RegistroIngreso)
+                            .addGroup(Panel_RegistroIngresoLayout.createSequentialGroup()
+                                .addGroup(Panel_RegistroIngresoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addGroup(Panel_RegistroIngresoLayout.createSequentialGroup()
+                                        .addComponent(Text_CantidadCajas)
                                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                        .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addComponent(Field_CantidadCajas, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                                         .addGap(12, 12, 12)
-                                        .addComponent(jLabel4)
+                                        .addComponent(Text_Lote)
                                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                        .addComponent(jTextField2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                    .addGroup(jPanel2Layout.createSequentialGroup()
-                                        .addComponent(jLabel5)
+                                        .addComponent(Field_Lote, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                    .addGroup(Panel_RegistroIngresoLayout.createSequentialGroup()
+                                        .addComponent(Text_FechaCaducidad)
                                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                        .addComponent(jTextField3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addComponent(Field_FechaCaducidad, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                                         .addGap(12, 12, 12)
-                                        .addComponent(jLabel6)))
-                                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addGroup(jPanel2Layout.createSequentialGroup()
+                                        .addComponent(Text_FechaaIngreso)))
+                                .addGroup(Panel_RegistroIngresoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addGroup(Panel_RegistroIngresoLayout.createSequentialGroup()
                                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                        .addComponent(jTextField4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                    .addGroup(jPanel2Layout.createSequentialGroup()
+                                        .addComponent(Field_FechaIngreso, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                    .addGroup(Panel_RegistroIngresoLayout.createSequentialGroup()
                                         .addGap(55, 55, 55)
-                                        .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 92, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                                        .addComponent(Boton_Guardar, javax.swing.GroupLayout.PREFERRED_SIZE, 92, javax.swing.GroupLayout.PREFERRED_SIZE))))
                             .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 460, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                    .addGroup(jPanel2Layout.createSequentialGroup()
+                    .addGroup(Panel_RegistroIngresoLayout.createSequentialGroup()
                         .addGap(214, 214, 214)
-                        .addComponent(jButton3, javax.swing.GroupLayout.PREFERRED_SIZE, 92, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addComponent(Boton_Cancelar, javax.swing.GroupLayout.PREFERRED_SIZE, 92, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addContainerGap(46, Short.MAX_VALUE))
         );
-        jPanel2Layout.setVerticalGroup(
-            jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
+        Panel_RegistroIngresoLayout.setVerticalGroup(
+            Panel_RegistroIngresoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, Panel_RegistroIngresoLayout.createSequentialGroup()
                 .addGap(12, 12, 12)
-                .addComponent(jLabel1)
+                .addComponent(Texto_RegistroIngreso)
                 .addGap(15, 15, 15)
-                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel2)
-                    .addComponent(jComboBox1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGroup(Panel_RegistroIngresoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(Text_Ingrediente)
+                    .addComponent(ComboBox_Ingredientes, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
-                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel4)
-                    .addComponent(jTextField2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel3)
-                    .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGroup(Panel_RegistroIngresoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(Field_CantidadCajas, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(Text_Lote)
+                    .addComponent(Field_Lote, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(Text_CantidadCajas)
+                    .addComponent(Boton_Guardar, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel5)
-                    .addComponent(jTextField3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel6)
-                    .addComponent(jTextField4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGroup(Panel_RegistroIngresoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(Text_FechaCaducidad)
+                    .addComponent(Field_FechaCaducidad, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(Text_FechaaIngreso)
+                    .addComponent(Field_FechaIngreso, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 229, Short.MAX_VALUE)
                 .addGap(18, 18, 18)
-                .addComponent(jButton3, javax.swing.GroupLayout.PREFERRED_SIZE, 29, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(Boton_Cancelar, javax.swing.GroupLayout.PREFERRED_SIZE, 29, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(12, 12, 12))
         );
 
-        jTabbedPane1.addTab("Ingreso", jPanel2);
+        Boton_Ingreso_Salida.addTab("Ingreso", Panel_RegistroIngreso);
 
-        javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
-        jPanel1.setLayout(jPanel1Layout);
-        jPanel1Layout.setHorizontalGroup(
-            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 542, Short.MAX_VALUE)
+        Panel_RegistroSalida.setBackground(new java.awt.Color(255, 255, 255));
+
+        Tabla_Productos_Salida.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null}
+            },
+            new String [] {
+                "Producto", "Cantidad", "Fecha de ingreso", "Fecha de caducidad"
+            }
+        ));
+        jScrollPane3.setViewportView(Tabla_Productos_Salida);
+
+        Boton_Cancelar_Salida.setBackground(new java.awt.Color(0, 109, 86));
+        Boton_Cancelar_Salida.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
+        Boton_Cancelar_Salida.setText("Cancelar");
+        Boton_Cancelar_Salida.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                Boton_Cancelar_SalidaActionPerformed(evt);
+            }
+        });
+
+        Boton_Guardar_Salida.setBackground(new java.awt.Color(0, 109, 86));
+        Boton_Guardar_Salida.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
+        Boton_Guardar_Salida.setText("Guardar");
+        Boton_Guardar_Salida.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                Boton_Guardar_SalidaActionPerformed(evt);
+            }
+        });
+
+        Text_Ingrediente1.setBackground(new java.awt.Color(0, 0, 0));
+        Text_Ingrediente1.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        Text_Ingrediente1.setText("Ingrediente");
+
+        Texto_RegistroIngreso1.setFont(new java.awt.Font("Segoe UI", 1, 24)); // NOI18N
+        Texto_RegistroIngreso1.setForeground(new java.awt.Color(0, 109, 86));
+        Texto_RegistroIngreso1.setText("Registro de Salida");
+
+        ComboBox_Ingredientes_Salida.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+        ComboBox_Ingredientes_Salida.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                ComboBox_Ingredientes_SalidaActionPerformed(evt);
+            }
+        });
+
+        Text_CantidadCajas1.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        Text_CantidadCajas1.setText("Cantidad Cajas");
+
+        Text_Lote1.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        Text_Lote1.setText("Lote");
+
+        Field_Lote_Salida.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                Field_Lote_SalidaActionPerformed(evt);
+            }
+        });
+
+        jComboBox1.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+
+        jLabel1.setText("Motivo");
+
+        javax.swing.GroupLayout Panel_RegistroSalidaLayout = new javax.swing.GroupLayout(Panel_RegistroSalida);
+        Panel_RegistroSalida.setLayout(Panel_RegistroSalidaLayout);
+        Panel_RegistroSalidaLayout.setHorizontalGroup(
+            Panel_RegistroSalidaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(Panel_RegistroSalidaLayout.createSequentialGroup()
+                .addGroup(Panel_RegistroSalidaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(Panel_RegistroSalidaLayout.createSequentialGroup()
+                        .addGap(36, 36, 36)
+                        .addGroup(Panel_RegistroSalidaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(Texto_RegistroIngreso1)
+                            .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 460, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addGroup(Panel_RegistroSalidaLayout.createSequentialGroup()
+                                .addComponent(Text_CantidadCajas1)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                .addComponent(Field_CantidadCajas_Salida, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                .addComponent(Text_Lote1)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                .addComponent(Field_Lote_Salida, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addGroup(Panel_RegistroSalidaLayout.createSequentialGroup()
+                                .addGroup(Panel_RegistroSalidaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(Text_Ingrediente1)
+                                    .addComponent(jLabel1))
+                                .addGap(35, 35, 35)
+                                .addGroup(Panel_RegistroSalidaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                    .addComponent(ComboBox_Ingredientes_Salida, 0, 245, Short.MAX_VALUE)
+                                    .addComponent(jComboBox1, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                                .addGap(18, 18, 18)
+                                .addComponent(Boton_Guardar_Salida, javax.swing.GroupLayout.PREFERRED_SIZE, 92, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                    .addGroup(Panel_RegistroSalidaLayout.createSequentialGroup()
+                        .addGap(214, 214, 214)
+                        .addComponent(Boton_Cancelar_Salida, javax.swing.GroupLayout.PREFERRED_SIZE, 92, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addContainerGap(46, Short.MAX_VALUE))
         );
-        jPanel1Layout.setVerticalGroup(
-            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 463, Short.MAX_VALUE)
+        Panel_RegistroSalidaLayout.setVerticalGroup(
+            Panel_RegistroSalidaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, Panel_RegistroSalidaLayout.createSequentialGroup()
+                .addGap(12, 12, 12)
+                .addComponent(Texto_RegistroIngreso1)
+                .addGroup(Panel_RegistroSalidaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(Panel_RegistroSalidaLayout.createSequentialGroup()
+                        .addGap(15, 15, 15)
+                        .addGroup(Panel_RegistroSalidaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(Text_Ingrediente1)
+                            .addComponent(ComboBox_Ingredientes_Salida, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(18, 18, 18)
+                        .addGroup(Panel_RegistroSalidaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(jComboBox1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jLabel1))
+                        .addGap(20, 20, 20))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, Panel_RegistroSalidaLayout.createSequentialGroup()
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(Boton_Guardar_Salida, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(36, 36, 36)))
+                .addGroup(Panel_RegistroSalidaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(Text_CantidadCajas1)
+                    .addComponent(Field_CantidadCajas_Salida, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(Text_Lote1)
+                    .addComponent(Field_Lote_Salida, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(jScrollPane3, javax.swing.GroupLayout.DEFAULT_SIZE, 229, Short.MAX_VALUE)
+                .addGap(18, 18, 18)
+                .addComponent(Boton_Cancelar_Salida, javax.swing.GroupLayout.PREFERRED_SIZE, 29, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(12, 12, 12))
         );
 
-        jTabbedPane1.addTab("Salida", jPanel1);
+        Boton_Ingreso_Salida.addTab("Salida", Panel_RegistroSalida);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
@@ -211,57 +344,86 @@ public class RegistroIngresoo extends javax.swing.JPanel {
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addGap(35, 35, 35)
-                .addComponent(jTabbedPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 542, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(Boton_Ingreso_Salida, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(193, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addGap(20, 20, 20)
-                .addComponent(jTabbedPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 494, Short.MAX_VALUE)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                .addContainerGap(16, Short.MAX_VALUE)
+                .addComponent(Boton_Ingreso_Salida, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap())
         );
     }// </editor-fold>//GEN-END:initComponents
 
-    private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
+    private void Boton_CancelarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_Boton_CancelarActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_jButton3ActionPerformed
+    }//GEN-LAST:event_Boton_CancelarActionPerformed
 
-    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+    private void Boton_GuardarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_Boton_GuardarActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_jButton1ActionPerformed
+    }//GEN-LAST:event_Boton_GuardarActionPerformed
 
-    private void jComboBox1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jComboBox1ActionPerformed
+    private void ComboBox_IngredientesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ComboBox_IngredientesActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_jComboBox1ActionPerformed
+    }//GEN-LAST:event_ComboBox_IngredientesActionPerformed
 
-    private void jTextField2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField2ActionPerformed
+    private void Field_LoteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_Field_LoteActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_jTextField2ActionPerformed
+    }//GEN-LAST:event_Field_LoteActionPerformed
 
-    private void jTextField3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField3ActionPerformed
+    private void Field_FechaCaducidadActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_Field_FechaCaducidadActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_jTextField3ActionPerformed
+    }//GEN-LAST:event_Field_FechaCaducidadActionPerformed
+
+    private void Boton_Cancelar_SalidaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_Boton_Cancelar_SalidaActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_Boton_Cancelar_SalidaActionPerformed
+
+    private void Boton_Guardar_SalidaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_Boton_Guardar_SalidaActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_Boton_Guardar_SalidaActionPerformed
+
+    private void ComboBox_Ingredientes_SalidaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ComboBox_Ingredientes_SalidaActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_ComboBox_Ingredientes_SalidaActionPerformed
+
+    private void Field_Lote_SalidaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_Field_Lote_SalidaActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_Field_Lote_SalidaActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton jButton1;
-    private javax.swing.JButton jButton3;
+    private javax.swing.JButton Boton_Cancelar;
+    private javax.swing.JButton Boton_Cancelar_Salida;
+    private javax.swing.JButton Boton_Guardar;
+    private javax.swing.JButton Boton_Guardar_Salida;
+    private javax.swing.JTabbedPane Boton_Ingreso_Salida;
+    private javax.swing.JComboBox<String> ComboBox_Ingredientes;
+    private javax.swing.JComboBox<String> ComboBox_Ingredientes_Salida;
+    private javax.swing.JTextField Field_CantidadCajas;
+    private javax.swing.JTextField Field_CantidadCajas_Salida;
+    private javax.swing.JTextField Field_FechaCaducidad;
+    private javax.swing.JTextField Field_FechaIngreso;
+    private javax.swing.JTextField Field_Lote;
+    private javax.swing.JTextField Field_Lote_Salida;
+    private javax.swing.JPanel Panel_RegistroIngreso;
+    private javax.swing.JPanel Panel_RegistroSalida;
+    private javax.swing.JTable Tabla_Productos;
+    private javax.swing.JTable Tabla_Productos_Salida;
+    private javax.swing.JLabel Text_CantidadCajas;
+    private javax.swing.JLabel Text_CantidadCajas1;
+    private javax.swing.JLabel Text_FechaCaducidad;
+    private javax.swing.JLabel Text_FechaaIngreso;
+    private javax.swing.JLabel Text_Ingrediente;
+    private javax.swing.JLabel Text_Ingrediente1;
+    private javax.swing.JLabel Text_Lote;
+    private javax.swing.JLabel Text_Lote1;
+    private javax.swing.JLabel Texto_RegistroIngreso;
+    private javax.swing.JLabel Texto_RegistroIngreso1;
     private javax.swing.JComboBox<String> jComboBox1;
     private javax.swing.JLabel jLabel1;
-    private javax.swing.JLabel jLabel2;
-    private javax.swing.JLabel jLabel3;
-    private javax.swing.JLabel jLabel4;
-    private javax.swing.JLabel jLabel5;
-    private javax.swing.JLabel jLabel6;
-    private javax.swing.JPanel jPanel1;
-    private javax.swing.JPanel jPanel2;
     private javax.swing.JScrollPane jScrollPane2;
-    private javax.swing.JTabbedPane jTabbedPane1;
-    private javax.swing.JTable jTable2;
-    private javax.swing.JTextField jTextField1;
-    private javax.swing.JTextField jTextField2;
-    private javax.swing.JTextField jTextField3;
-    private javax.swing.JTextField jTextField4;
+    private javax.swing.JScrollPane jScrollPane3;
     // End of variables declaration//GEN-END:variables
 }
