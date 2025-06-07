@@ -2,7 +2,7 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JPanel.java to edit this template
  */
-package com.utp.pizzatime.vista;
+package com.utp.pizzatime.view;
 import java.awt.Color;
 import javax.swing.JTable;
 import javax.swing.SwingConstants;
@@ -73,13 +73,11 @@ public class Pedido_ingredientes extends javax.swing.JPanel {
         jLabel3.setForeground(new java.awt.Color(110, 104, 104));
         jLabel3.setText("Cantidad Cajas :");
 
-        cbonomingre.setBackground(new java.awt.Color(255, 255, 255));
         cbonomingre.setForeground(new java.awt.Color(110, 104, 104));
         cbonomingre.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
         cbonomingre.setBorder(javax.swing.BorderFactory.createEtchedBorder(new java.awt.Color(204, 204, 204), null));
         cbonomingre.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
 
-        txtcantcajas.setBackground(new java.awt.Color(255, 255, 255));
         txtcantcajas.setForeground(new java.awt.Color(110, 104, 104));
         txtcantcajas.setText("jTextField1");
         txtcantcajas.setBorder(javax.swing.BorderFactory.createEtchedBorder(new java.awt.Color(204, 204, 204), new java.awt.Color(204, 204, 204)));
@@ -90,7 +88,6 @@ public class Pedido_ingredientes extends javax.swing.JPanel {
         jButton1.setText("Agregar");
         jButton1.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED, new java.awt.Color(204, 204, 204), new java.awt.Color(204, 204, 204), null, null));
 
-        tbped_ing.setBackground(new java.awt.Color(255, 255, 255));
         tbped_ing.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED, new java.awt.Color(204, 204, 204), new java.awt.Color(204, 204, 204), null, null));
         tbped_ing.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
         tbped_ing.setForeground(new java.awt.Color(0, 109, 86));

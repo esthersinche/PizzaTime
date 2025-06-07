@@ -11,7 +11,7 @@ public class SQLConexion {
     private Connection conectar = null;
 
     private final String usuario = "sa";              // Tu usuario SQL Server
-    private final String contrasenia = "contrasena";  // Tu contraseña
+    private final String contrasenia = "1234";  // Tu contraseña
     private final String bd = "BDPIZZA";              // Nombre de tu base de datos
     private final String ip = "localhost";            // IP o nombre del host
     private final String puerto = "1433";             // Puerto por defecto de SQL Server

@@ -2,7 +2,7 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JPanel.java to edit this template
  */
-package com.utp.pizzatime.vista;
+package com.utp.pizzatime.view;
 
 import java.awt.Color;
 import javax.swing.JTable;
@@ -64,7 +64,6 @@ public class Gestion_usu extends javax.swing.JPanel {
         jLabel2.setForeground(new java.awt.Color(110, 104, 104));
         jLabel2.setText("DNI del Empleado: ");
 
-        txtdnigest_usu.setBackground(new java.awt.Color(255, 255, 255));
         txtdnigest_usu.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
         txtdnigest_usu.setForeground(new java.awt.Color(110, 104, 104));
         txtdnigest_usu.setText("DNI");
@@ -80,13 +79,11 @@ public class Gestion_usu extends javax.swing.JPanel {
         jLabel3.setForeground(new java.awt.Color(110, 104, 104));
         jLabel3.setText("Valor a Cambiar :");
 
-        cbovalorgest_usu.setBackground(new java.awt.Color(255, 255, 255));
         cbovalorgest_usu.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         cbovalorgest_usu.setForeground(new java.awt.Color(110, 104, 104));
         cbovalorgest_usu.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
         cbovalorgest_usu.setBorder(javax.swing.BorderFactory.createEtchedBorder(new java.awt.Color(204, 204, 204), null));
 
-        jTextField1.setBackground(new java.awt.Color(255, 255, 255));
         jTextField1.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         jTextField1.setForeground(new java.awt.Color(110, 104, 104));
         jTextField1.setText("jTextField1");
@@ -98,7 +95,6 @@ public class Gestion_usu extends javax.swing.JPanel {
         jButton2.setText("Actualizar");
         jButton2.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED, new java.awt.Color(204, 204, 204), new java.awt.Color(204, 204, 204), null, null));
 
-        tbgest_uwu.setBackground(new java.awt.Color(255, 255, 255));
         tbgest_uwu.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
         tbgest_uwu.setForeground(new java.awt.Color(110, 104, 104));
         tbgest_uwu.setModel(new javax.swing.table.DefaultTableModel(

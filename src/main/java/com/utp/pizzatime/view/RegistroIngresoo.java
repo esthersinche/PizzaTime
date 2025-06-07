@@ -2,7 +2,7 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JPanel.java to edit this template
  */
-package com.utp.pizzatime.vista;
+package com.utp.pizzatime.view;
 
 /**
  *
@@ -48,7 +48,6 @@ public class RegistroIngresoo extends javax.swing.JPanel {
         jTabbedPane1.setBackground(new java.awt.Color(0, 109, 86));
 
         jPanel2.setBackground(new java.awt.Color(255, 255, 255));
-        jPanel2.setForeground(new java.awt.Color(0, 0, 0));
 
         jTable2.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
