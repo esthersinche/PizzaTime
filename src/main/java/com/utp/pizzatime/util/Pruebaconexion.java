@@ -2,7 +2,7 @@ package com.utp.pizzatime.util;
 
 import com.sun.tools.javac.Main;
 
-public class main {
+public class Pruebaconexion {
    private static final org.slf4j.Logger log =
         org.slf4j.LoggerFactory.getLogger(Main.class);
 

@@ -9,5 +9,4 @@ import java.sql.SQLException;
  */
 public interface EmpleadoDAO {
     Empleado findByDniAndPass(int dni, String pass) throws SQLException;
-
 }
