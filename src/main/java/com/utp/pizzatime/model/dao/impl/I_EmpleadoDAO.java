@@ -1,17 +1,17 @@
 package com.utp.pizzatime.model.dao.impl;
 
-import com.utp.pizzatime.model.dao.EmpleadoDAO;
 import com.utp.pizzatime.model.entity.Empleado;
 import com.utp.pizzatime.util.SQLConexion;
 import java.sql.*;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import com.utp.pizzatime.model.dao.LoginDAO;
 
 /**
  *
  * @author EstherSinche
  */
-public class I_EmpleadoDAO implements EmpleadoDAO {
+public class I_EmpleadoDAO implements LoginDAO {
 
     private static final Logger log = LoggerFactory.getLogger(I_EmpleadoDAO.class);
 

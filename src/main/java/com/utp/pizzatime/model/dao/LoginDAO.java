@@ -7,6 +7,6 @@ import java.sql.SQLException;
  *
  * @author EstherSinche
  */
-public interface EmpleadoDAO {
+public interface LoginDAO {
     Empleado findByDniAndPass(int dni, String pass) throws SQLException;
 }
