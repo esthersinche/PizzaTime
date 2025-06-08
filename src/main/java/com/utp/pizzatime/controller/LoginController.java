@@ -1,5 +1,6 @@
 package com.utp.pizzatime.controller;
 
+import com.utp.pizzatime.service.SessionService;
 import com.utp.pizzatime.model.dao.EmpleadoDAO;
 import com.utp.pizzatime.model.entity.Empleado;
 import com.utp.pizzatime.model.dao.impl.I_EmpleadoDAO;
@@ -25,7 +26,7 @@ public class LoginController {
         log.debug("Intentando login para DNI={}", dni);
         Empleado emp = empleadoDao.findByDniAndPass(dni, pass);
         if (emp != null) {
-            SessionController.setCurrentUser(emp);
+            SessionService.setCurrentUser(emp);
             log.info("Login OK para DNI={}, rol={}", dni, emp.getRol());
         } else {
             log.warn("Login FALLIDO para DNI={}", dni);

@@ -11,7 +11,7 @@ import java.util.UUID;
 
 /**
  *
- * @author BeeIsMega
+ * @author EstherSinche
  */
 public class I_PedidoDAO implements PedidoDAO {
 

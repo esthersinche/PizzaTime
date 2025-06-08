@@ -1,12 +1,12 @@
-package com.utp.pizzatime.controller;
+package com.utp.pizzatime.service;
 
 import com.utp.pizzatime.model.entity.Empleado;
 
 /**
  *
- * @author BeeIsMega
+ * @author EstherSinche
  */
-public class SessionController {
+public class SessionService {
 
     private static Empleado currentUser;
 

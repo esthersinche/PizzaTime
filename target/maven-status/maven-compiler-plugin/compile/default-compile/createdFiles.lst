@@ -7,6 +7,7 @@ com\utp\pizzatime\view\Employee.class
 com\utp\pizzatime\vista\RegistroIngresoo$2.class
 com\utp\pizzatime\view\Admin$4.class
 com\utp\pizzatime\vista\RegistroIngresoUser.class
+com\utp\pizzatime\service\P_ReportGeneratorService.class
 com\utp\pizzatime\view\Pedido_ingredientes.class
 com\utp\pizzatime\view\Gestion_usu.class
 com\utp\pizzatime\vista\RegistroIngresoUser$3.class
@@ -19,6 +20,7 @@ com\utp\pizzatime\view\Admin$5.class
 com\utp\pizzatime\view\Reportes$2.class
 com\utp\pizzatime\view\Login$3.class
 com\utp\pizzatime\model\dao\impl\I_ProductoDAO.class
+com\utp\pizzatime\service\SessionService.class
 com\utp\pizzatime\model\dao\impl\I_PedidoDAO.class
 com\utp\pizzatime\view\Admin$3.class
 com\utp\pizzatime\vista\RegistroIngresoo$3.class
@@ -53,7 +55,6 @@ com\utp\pizzatime\util\Pruebaconexion.class
 com\utp\pizzatime\PizzaTime.class
 com\utp\pizzatime\view\Admin$7.class
 com\utp\pizzatime\vista\RegistroIngresoo$5.class
-com\utp\pizzatime\controller\SessionController.class
 com\utp\pizzatime\view\Admin$1.class
 com\utp\pizzatime\view\Login$1.class
 com\utp\pizzatime\vista\RegistroIngresoo.class

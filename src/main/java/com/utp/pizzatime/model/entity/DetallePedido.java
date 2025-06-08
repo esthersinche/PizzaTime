@@ -2,7 +2,7 @@ package com.utp.pizzatime.model.entity;
 
 /**
  *
- * @author BeeIsMega
+ * @author EstherSinche
  */
 public class DetallePedido extends Producto_pedido {
 

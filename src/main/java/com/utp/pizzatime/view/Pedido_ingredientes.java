@@ -1,6 +1,6 @@
 package com.utp.pizzatime.view;
 
-import com.utp.pizzatime.controller.SessionController;
+import com.utp.pizzatime.service.SessionService;
 import com.utp.pizzatime.model.dao.PedidoDAO;
 import com.utp.pizzatime.model.dao.ProductoDAO;
 import com.utp.pizzatime.model.dao.impl.I_PedidoDAO;
@@ -9,15 +9,19 @@ import com.utp.pizzatime.model.entity.DetallePedido;
 import com.utp.pizzatime.model.entity.Pedido;
 import com.utp.pizzatime.model.entity.Producto_modificar;
 import com.utp.pizzatime.model.entity.Producto_pedido;
+import com.utp.pizzatime.service.P_ReportGeneratorService;
 import java.awt.Color;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
+import java.io.File;
+import java.io.IOException;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 import javax.swing.DefaultComboBoxModel;
+import javax.swing.JFileChooser;
 import javax.swing.JMenuItem;
 import javax.swing.JOptionPane;
 import javax.swing.JPopupMenu;
@@ -25,10 +29,10 @@ import javax.swing.JTable;
 import javax.swing.SwingConstants;
 import javax.swing.table.DefaultTableCellRenderer;
 import javax.swing.table.DefaultTableModel;
-
+//damn son demasiadas librerias, bombardeen java
 /**
  *
- * @author PERSONAL
+ * @author Laura&EstherSinche
  */
 public class Pedido_ingredientes extends javax.swing.JPanel {
 
@@ -395,29 +399,52 @@ public class Pedido_ingredientes extends javax.swing.JPanel {
         }
 
         try {
-            // No generes aquí idPed: el DAO lo hará usando nextPedidoId()
-            int dniEmp = SessionController.getCurrentDni();  // obtén el dni logueado
+            // 1) Crear objeto Pedido y persistirlo
+            int dniEmp = SessionService.getCurrentDni();  // obtén el dni logueado
             Pedido pedido = new Pedido(null, dniEmp, new Date());
             pedido.setDetalles(new ArrayList<>(listaDetalles));
 
-            // Persiste en BD; el DAO asigna idPed e idDet internamente
             PedidoDAO dao = new I_PedidoDAO();
-            dao.insertPedidoConDetalles(pedido);
+            dao.insertPedidoConDetalles(pedido);  // aquí se asignan idPed e idDet
 
-            JOptionPane.showMessageDialog(this,
-                    "Pedido realizado con éxito",
-                    "OK", JOptionPane.INFORMATION_MESSAGE);
+            // 2) Mostrar diálogo para guardar .docx
+            JFileChooser chooser = new JFileChooser();
+            chooser.setDialogTitle("Guardar Pedido como...");
+            // Nombre por defecto con ID de pedido
+            chooser.setSelectedFile(new File("pedido_" + pedido.getIdPed() + ".docx"));
 
-            // Limpia todo
+            int userSel = chooser.showSaveDialog(this);
+            if (userSel == JFileChooser.APPROVE_OPTION) {
+                File fileToSave = chooser.getSelectedFile();
+                String path = fileToSave.getAbsolutePath();
+                // Asegurar extensión .docx
+                if (!path.toLowerCase().endsWith(".docx")) {
+                    path += ".docx";
+                }
+
+                // 3) Generar el documento Word
+                try {
+                    P_ReportGeneratorService.generatePedidoDocx(path, pedido);
+                    JOptionPane.showMessageDialog(this,
+                            "Pedido y documento guardados correctamente en:\n" + path,
+                            "OK", JOptionPane.INFORMATION_MESSAGE);
+                } catch (IOException ex) {
+                    JOptionPane.showMessageDialog(this,
+                            "Error al generar el documento:\n" + ex.getMessage(),
+                            "Error", JOptionPane.ERROR_MESSAGE);
+                }
+            }
+            // 4) Limpiar UI para un nuevo pedido
             listaDetalles.clear();
             ((DefaultTableModel) tbped_ing.getModel()).setRowCount(0);
             actualizarTotal();
 
         } catch (SQLException ex) {
             JOptionPane.showMessageDialog(this,
-                    "Error al guardar pedido:\n" + ex.getMessage(),
+                    "Error al guardar pedido en BD:\n" + ex.getMessage(),
                     "Error", JOptionPane.ERROR_MESSAGE);
         }
+
     }//GEN-LAST:event_btnpediringadminActionPerformed
 
     private void cbonomingreActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cbonomingreActionPerformed
@@ -435,6 +462,7 @@ public class Pedido_ingredientes extends javax.swing.JPanel {
                 .sum();
         txttotalpedido_ing.setText(String.format("%.2f", suma));
     }
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnaddingadmin;

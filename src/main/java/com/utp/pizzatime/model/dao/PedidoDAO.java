@@ -5,7 +5,7 @@ import java.sql.SQLException;
 
 /**
  *
- * @author BeeIsMega
+ * @author EstherSinche
  */
 public interface PedidoDAO {
     void insertPedidoConDetalles(Pedido pedido) throws SQLException;
