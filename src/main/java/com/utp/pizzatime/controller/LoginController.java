@@ -2,7 +2,7 @@ package com.utp.pizzatime.controller;
 
 import com.utp.pizzatime.model.dao.EmpleadoDAO;
 import com.utp.pizzatime.model.entity.Empleado;
-import com.utp.pizzatime.model.dao.impl.EmpleadoDAOI;
+import com.utp.pizzatime.model.dao.impl.I_EmpleadoDAO;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import java.sql.SQLException;
@@ -15,7 +15,7 @@ import javax.swing.JOptionPane;
 public class LoginController {
 
     private static final Logger log = LoggerFactory.getLogger(LoginController.class);
-    private final EmpleadoDAO empleadoDao = new EmpleadoDAOI();
+    private final EmpleadoDAO empleadoDao = new I_EmpleadoDAO();
 
     /**
      * Devuelve un Empleado si las credenciales son correctas, o null si

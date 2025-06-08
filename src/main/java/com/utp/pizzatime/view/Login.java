@@ -1,7 +1,7 @@
 package com.utp.pizzatime.view;
 
 import com.utp.pizzatime.controller.LoginController;
-import com.utp.pizzatime.model.dao.impl.EmpleadoDAOI;
+import com.utp.pizzatime.model.dao.impl.I_EmpleadoDAO;
 import com.utp.pizzatime.model.entity.Empleado;
 import java.sql.SQLException;
 import javax.swing.JOptionPane;

@@ -1,7 +1,3 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
- */
 package com.utp.pizzatime.model.entity;
 
 /**
@@ -90,9 +86,5 @@ public class Producto_modificar extends Producto_pedido {
     public void setDESCRIPCION(String DESCRIPCION) {
         this.DESCRIPCION = DESCRIPCION;
     }
-    
-    
-    
-    
-    
+
 }

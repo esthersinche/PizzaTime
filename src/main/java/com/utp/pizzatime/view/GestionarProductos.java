@@ -8,12 +8,12 @@ package com.utp.pizzatime.view;
  *
  * @author Dell
  */
-public class Producto extends javax.swing.JPanel {
+public class GestionarProductos extends javax.swing.JPanel {
 
     /**
      * Creates new form Producto
      */
-    public Producto() {
+    public GestionarProductos() {
         initComponents();
     }
 
@@ -196,7 +196,7 @@ public class Producto extends javax.swing.JPanel {
                             .addComponent(jLabel4)
                             .addComponent(txtiproveedor, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addGap(18, 18, 18)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(jLabel6)
                             .addComponent(txtprecio, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addGap(18, 18, 18)

@@ -11,9 +11,9 @@ import org.slf4j.LoggerFactory;
  *
  * @author EstherSinche
  */
-public class EmpleadoDAOI implements EmpleadoDAO {
+public class I_EmpleadoDAO implements EmpleadoDAO {
 
-    private static final Logger log = LoggerFactory.getLogger(EmpleadoDAOI.class);
+    private static final Logger log = LoggerFactory.getLogger(I_EmpleadoDAO.class);
 
     private static final String SQL_LOGIN
             = "SELECT DNI_EMP, NOMBRE_EMP, ROL, PASS "
