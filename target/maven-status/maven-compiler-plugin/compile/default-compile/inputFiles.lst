@@ -1,3 +1,4 @@
+
 C:\Users\Laura\Documents\GitHub\PizzaTime\src\main\java\com\utp\pizzatime\controller\LoginController.java
 C:\Users\Laura\Documents\GitHub\PizzaTime\src\main\java\com\utp\pizzatime\model\dao\EmpleadoDAO.java
 C:\Users\Laura\Documents\GitHub\PizzaTime\src\main\java\com\utp\pizzatime\model\dao\impl\I_EmpleadoDAO.java
@@ -8,7 +9,6 @@ C:\Users\Laura\Documents\GitHub\PizzaTime\src\main\java\com\utp\pizzatime\model\
 C:\Users\Laura\Documents\GitHub\PizzaTime\src\main\java\com\utp\pizzatime\model\entity\Producto.java
 C:\Users\Laura\Documents\GitHub\PizzaTime\src\main\java\com\utp\pizzatime\model\entity\Producto_modificar.java
 C:\Users\Laura\Documents\GitHub\PizzaTime\src\main\java\com\utp\pizzatime\model\entity\Producto_pedido.java
-C:\Users\Laura\Documents\GitHub\PizzaTime\src\main\java\com\utp\pizzatime\PizzaTime.java
 C:\Users\Laura\Documents\GitHub\PizzaTime\src\main\java\com\utp\pizzatime\util\Pruebaconexion.java
 C:\Users\Laura\Documents\GitHub\PizzaTime\src\main\java\com\utp\pizzatime\util\SQLConexion.java
 C:\Users\Laura\Documents\GitHub\PizzaTime\src\main\java\com\utp\pizzatime\view\Admin.java
@@ -20,4 +20,7 @@ C:\Users\Laura\Documents\GitHub\PizzaTime\src\main\java\com\utp\pizzatime\view\L
 C:\Users\Laura\Documents\GitHub\PizzaTime\src\main\java\com\utp\pizzatime\view\Pedido_ingredientes.java
 C:\Users\Laura\Documents\GitHub\PizzaTime\src\main\java\com\utp\pizzatime\view\RegistroIngresoo.java
 C:\Users\Laura\Documents\GitHub\PizzaTime\src\main\java\com\utp\pizzatime\view\RegistroIngresoUser.java
-C:\Users\Laura\Documents\GitHub\PizzaTime\src\main\java\com\utp\pizzatime\view\Reportes.java
+C:\Users\andrecito\Documents\GitHub\PizzaTime\src\main\java\com\utp\pizzatime\model\entity\ExportarExcel.java
+C:\Users\andrecito\Documents\GitHub\PizzaTime\src\main\java\com\utp\pizzatime\PizzaTime.java
+C:\Users\andrecito\Documents\GitHub\PizzaTime\src\main\java\com\utp\pizzatime\view\Reportes.java
+
