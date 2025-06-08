@@ -68,7 +68,7 @@
                                   <Group type="102" alignment="0" attributes="0">
                                       <Component id="Text_Ingrediente" min="-2" max="-2" attributes="0"/>
                                       <EmptySpace min="-2" pref="35" max="-2" attributes="0"/>
-                                      <Component id="ComboBox_Ingredientes" min="-2" pref="245" max="-2" attributes="0"/>
+                                      <Component id="cboingingreso" min="-2" pref="245" max="-2" attributes="0"/>
                                   </Group>
                                   <Component id="Texto_RegistroIngreso" alignment="0" min="-2" max="-2" attributes="0"/>
                                   <Group type="102" alignment="0" attributes="0">
@@ -76,16 +76,16 @@
                                           <Group type="102" alignment="0" attributes="0">
                                               <Component id="Text_CantidadCajas" min="-2" max="-2" attributes="0"/>
                                               <EmptySpace type="unrelated" max="-2" attributes="0"/>
-                                              <Component id="Field_CantidadCajas" min="-2" max="-2" attributes="0"/>
+                                              <Component id="txtcantcajasingreso" min="-2" max="-2" attributes="0"/>
                                               <EmptySpace min="-2" pref="12" max="-2" attributes="0"/>
                                               <Component id="Text_Lote" min="-2" max="-2" attributes="0"/>
                                               <EmptySpace max="-2" attributes="0"/>
-                                              <Component id="Field_Lote" min="-2" max="-2" attributes="0"/>
+                                              <Component id="txtloteingreso" min="-2" max="-2" attributes="0"/>
                                           </Group>
                                           <Group type="102" alignment="0" attributes="0">
                                               <Component id="Text_FechaCaducidad" min="-2" max="-2" attributes="0"/>
                                               <EmptySpace type="unrelated" max="-2" attributes="0"/>
-                                              <Component id="Field_FechaCaducidad" min="-2" max="-2" attributes="0"/>
+                                              <Component id="txtfechacaducidad" min="-2" max="-2" attributes="0"/>
                                               <EmptySpace min="-2" pref="12" max="-2" attributes="0"/>
                                               <Component id="Text_FechaaIngreso" min="-2" max="-2" attributes="0"/>
                                           </Group>
@@ -93,11 +93,11 @@
                                       <Group type="103" groupAlignment="0" attributes="0">
                                           <Group type="102" attributes="0">
                                               <EmptySpace max="-2" attributes="0"/>
-                                              <Component id="Field_FechaIngreso" min="-2" max="-2" attributes="0"/>
+                                              <Component id="txtfechaingreso" min="-2" max="-2" attributes="0"/>
                                           </Group>
                                           <Group type="102" alignment="0" attributes="0">
                                               <EmptySpace min="-2" pref="55" max="-2" attributes="0"/>
-                                              <Component id="Boton_Guardar" min="-2" pref="92" max="-2" attributes="0"/>
+                                              <Component id="btnguardarprodingreso" min="-2" pref="92" max="-2" attributes="0"/>
                                           </Group>
                                       </Group>
                                   </Group>
@@ -106,7 +106,7 @@
                           </Group>
                           <Group type="102" alignment="0" attributes="0">
                               <EmptySpace min="-2" pref="214" max="-2" attributes="0"/>
-                              <Component id="Boton_Cancelar" min="-2" pref="92" max="-2" attributes="0"/>
+                              <Component id="btncancelarprodingreso" min="-2" pref="92" max="-2" attributes="0"/>
                           </Group>
                       </Group>
                       <EmptySpace pref="46" max="32767" attributes="0"/>
@@ -121,27 +121,27 @@
                       <EmptySpace min="-2" pref="15" max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="3" attributes="0">
                           <Component id="Text_Ingrediente" alignment="3" min="-2" max="-2" attributes="0"/>
-                          <Component id="ComboBox_Ingredientes" alignment="3" min="-2" max="-2" attributes="0"/>
+                          <Component id="cboingingreso" alignment="3" min="-2" max="-2" attributes="0"/>
                       </Group>
                       <EmptySpace type="separate" max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="3" attributes="0">
-                          <Component id="Field_CantidadCajas" alignment="3" min="-2" max="-2" attributes="0"/>
+                          <Component id="txtcantcajasingreso" alignment="3" min="-2" max="-2" attributes="0"/>
                           <Component id="Text_Lote" alignment="3" min="-2" max="-2" attributes="0"/>
-                          <Component id="Field_Lote" alignment="3" min="-2" max="-2" attributes="0"/>
+                          <Component id="txtloteingreso" alignment="3" min="-2" max="-2" attributes="0"/>
                           <Component id="Text_CantidadCajas" alignment="3" min="-2" max="-2" attributes="0"/>
-                          <Component id="Boton_Guardar" alignment="3" min="-2" pref="30" max="-2" attributes="0"/>
+                          <Component id="btnguardarprodingreso" alignment="3" min="-2" pref="30" max="-2" attributes="0"/>
                       </Group>
                       <EmptySpace type="unrelated" max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="3" attributes="0">
                           <Component id="Text_FechaCaducidad" alignment="3" min="-2" max="-2" attributes="0"/>
-                          <Component id="Field_FechaCaducidad" alignment="3" min="-2" max="-2" attributes="0"/>
+                          <Component id="txtfechacaducidad" alignment="3" min="-2" max="-2" attributes="0"/>
                           <Component id="Text_FechaaIngreso" alignment="3" min="-2" max="-2" attributes="0"/>
-                          <Component id="Field_FechaIngreso" alignment="3" min="-2" max="-2" attributes="0"/>
+                          <Component id="txtfechaingreso" alignment="3" min="-2" max="-2" attributes="0"/>
                       </Group>
                       <EmptySpace type="unrelated" max="-2" attributes="0"/>
                       <Component id="jScrollPane2" pref="229" max="32767" attributes="0"/>
                       <EmptySpace type="separate" max="-2" attributes="0"/>
-                      <Component id="Boton_Cancelar" min="-2" pref="29" max="-2" attributes="0"/>
+                      <Component id="btncancelarprodingreso" min="-2" pref="29" max="-2" attributes="0"/>
                       <EmptySpace min="-2" pref="12" max="-2" attributes="0"/>
                   </Group>
               </Group>
@@ -155,7 +155,7 @@
 
               <Layout class="org.netbeans.modules.form.compat2.layouts.support.JScrollPaneSupportLayout"/>
               <SubComponents>
-                <Component class="javax.swing.JTable" name="Tabla_Productos">
+                <Component class="javax.swing.JTable" name="tbprodingreso">
                   <Properties>
                     <Property name="model" type="javax.swing.table.TableModel" editor="org.netbeans.modules.form.editors2.TableModelEditor">
                       <Table columnCount="4" rowCount="3">
@@ -172,7 +172,7 @@
                 </Component>
               </SubComponents>
             </Container>
-            <Component class="javax.swing.JButton" name="Boton_Cancelar">
+            <Component class="javax.swing.JButton" name="btncancelarprodingreso">
               <Properties>
                 <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
                   <Color blue="56" green="6d" red="0" type="rgb"/>
@@ -183,10 +183,10 @@
                 <Property name="text" type="java.lang.String" value="Cancelar"/>
               </Properties>
               <Events>
-                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="Boton_CancelarActionPerformed"/>
+                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btncancelarprodingresoActionPerformed"/>
               </Events>
             </Component>
-            <Component class="javax.swing.JButton" name="Boton_Guardar">
+            <Component class="javax.swing.JButton" name="btnguardarprodingreso">
               <Properties>
                 <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
                   <Color blue="56" green="6d" red="0" type="rgb"/>
@@ -197,7 +197,7 @@
                 <Property name="text" type="java.lang.String" value="Guardar"/>
               </Properties>
               <Events>
-                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="Boton_GuardarActionPerformed"/>
+                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnguardarprodingresoActionPerformed"/>
               </Events>
             </Component>
             <Component class="javax.swing.JLabel" name="Text_FechaaIngreso">
@@ -208,7 +208,7 @@
                 <Property name="text" type="java.lang.String" value="Fecha de Ingreso"/>
               </Properties>
             </Component>
-            <Component class="javax.swing.JTextField" name="Field_FechaIngreso">
+            <Component class="javax.swing.JTextField" name="txtfechaingreso">
             </Component>
             <Component class="javax.swing.JLabel" name="Texto_RegistroIngreso">
               <Properties>
@@ -232,7 +232,7 @@
                 <Property name="text" type="java.lang.String" value="Ingrediente"/>
               </Properties>
             </Component>
-            <Component class="javax.swing.JComboBox" name="ComboBox_Ingredientes">
+            <Component class="javax.swing.JComboBox" name="cboingingreso">
               <Properties>
                 <Property name="model" type="javax.swing.ComboBoxModel" editor="org.netbeans.modules.form.editors2.ComboBoxModelEditor">
                   <StringArray count="4">
@@ -244,7 +244,7 @@
                 </Property>
               </Properties>
               <Events>
-                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="ComboBox_IngredientesActionPerformed"/>
+                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="cboingingresoActionPerformed"/>
               </Events>
               <AuxValues>
                 <AuxValue name="JavaCodeGenerator_TypeParameters" type="java.lang.String" value="&lt;String&gt;"/>
@@ -258,7 +258,10 @@
                 <Property name="text" type="java.lang.String" value="Cantidad Cajas"/>
               </Properties>
             </Component>
-            <Component class="javax.swing.JTextField" name="Field_CantidadCajas">
+            <Component class="javax.swing.JTextField" name="txtcantcajasingreso">
+              <Events>
+                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="txtcantcajasingresoActionPerformed"/>
+              </Events>
             </Component>
             <Component class="javax.swing.JLabel" name="Text_Lote">
               <Properties>
@@ -268,9 +271,9 @@
                 <Property name="text" type="java.lang.String" value="Lote"/>
               </Properties>
             </Component>
-            <Component class="javax.swing.JTextField" name="Field_Lote">
+            <Component class="javax.swing.JTextField" name="txtloteingreso">
               <Events>
-                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="Field_LoteActionPerformed"/>
+                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="txtloteingresoActionPerformed"/>
               </Events>
             </Component>
             <Component class="javax.swing.JLabel" name="Text_FechaCaducidad">
@@ -281,9 +284,9 @@
                 <Property name="text" type="java.lang.String" value="Fecha Caducidad"/>
               </Properties>
             </Component>
-            <Component class="javax.swing.JTextField" name="Field_FechaCaducidad">
+            <Component class="javax.swing.JTextField" name="txtfechacaducidad">
               <Events>
-                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="Field_FechaCaducidadActionPerformed"/>
+                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="txtfechacaducidadActionPerformed"/>
               </Events>
             </Component>
           </SubComponents>

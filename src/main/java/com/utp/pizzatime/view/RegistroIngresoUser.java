@@ -28,24 +28,24 @@ public class RegistroIngresoUser extends javax.swing.JPanel {
 
         Panel_RegistroSalida = new javax.swing.JPanel();
         jScrollPane3 = new javax.swing.JScrollPane();
-        Tabla_Productos_Salida = new javax.swing.JTable();
-        Boton_Cancelar_Salida = new javax.swing.JButton();
-        Boton_Guardar_Salida = new javax.swing.JButton();
+        tbprodsalida = new javax.swing.JTable();
+        btncancelarsalida = new javax.swing.JButton();
+        btnguardarsalida = new javax.swing.JButton();
         Text_Ingrediente1 = new javax.swing.JLabel();
         Texto_RegistroIngreso1 = new javax.swing.JLabel();
-        ComboBox_Ingredientes_Salida = new javax.swing.JComboBox<>();
+        cboingsalida = new javax.swing.JComboBox<>();
         Text_CantidadCajas1 = new javax.swing.JLabel();
-        Field_CantidadCajas_Salida = new javax.swing.JTextField();
+        txtcantcajasalida = new javax.swing.JTextField();
         Text_Lote1 = new javax.swing.JLabel();
-        Field_Lote_Salida = new javax.swing.JTextField();
-        jComboBox1 = new javax.swing.JComboBox<>();
+        txtlotesalida = new javax.swing.JTextField();
+        cbomotivosalidaing = new javax.swing.JComboBox<>();
         jLabel1 = new javax.swing.JLabel();
 
         setPreferredSize(new java.awt.Dimension(770, 520));
 
         Panel_RegistroSalida.setBackground(new java.awt.Color(255, 255, 255));
 
-        Tabla_Productos_Salida.setModel(new javax.swing.table.DefaultTableModel(
+        tbprodsalida.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {null, null, null, null},
                 {null, null, null, null},
@@ -55,23 +55,23 @@ public class RegistroIngresoUser extends javax.swing.JPanel {
                 "Producto", "Cantidad", "Fecha de ingreso", "Fecha de caducidad"
             }
         ));
-        jScrollPane3.setViewportView(Tabla_Productos_Salida);
+        jScrollPane3.setViewportView(tbprodsalida);
 
-        Boton_Cancelar_Salida.setBackground(new java.awt.Color(0, 109, 86));
-        Boton_Cancelar_Salida.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
-        Boton_Cancelar_Salida.setText("Cancelar");
-        Boton_Cancelar_Salida.addActionListener(new java.awt.event.ActionListener() {
+        btncancelarsalida.setBackground(new java.awt.Color(0, 109, 86));
+        btncancelarsalida.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
+        btncancelarsalida.setText("Cancelar");
+        btncancelarsalida.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                Boton_Cancelar_SalidaActionPerformed(evt);
+                btncancelarsalidaActionPerformed(evt);
             }
         });
 
-        Boton_Guardar_Salida.setBackground(new java.awt.Color(0, 109, 86));
-        Boton_Guardar_Salida.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
-        Boton_Guardar_Salida.setText("Guardar");
-        Boton_Guardar_Salida.addActionListener(new java.awt.event.ActionListener() {
+        btnguardarsalida.setBackground(new java.awt.Color(0, 109, 86));
+        btnguardarsalida.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
+        btnguardarsalida.setText("Guardar");
+        btnguardarsalida.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                Boton_Guardar_SalidaActionPerformed(evt);
+                btnguardarsalidaActionPerformed(evt);
             }
         });
 
@@ -83,10 +83,10 @@ public class RegistroIngresoUser extends javax.swing.JPanel {
         Texto_RegistroIngreso1.setForeground(new java.awt.Color(0, 109, 86));
         Texto_RegistroIngreso1.setText("Registro de Salida");
 
-        ComboBox_Ingredientes_Salida.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
-        ComboBox_Ingredientes_Salida.addActionListener(new java.awt.event.ActionListener() {
+        cboingsalida.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+        cboingsalida.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                ComboBox_Ingredientes_SalidaActionPerformed(evt);
+                cboingsalidaActionPerformed(evt);
             }
         });
 
@@ -96,13 +96,13 @@ public class RegistroIngresoUser extends javax.swing.JPanel {
         Text_Lote1.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         Text_Lote1.setText("Lote");
 
-        Field_Lote_Salida.addActionListener(new java.awt.event.ActionListener() {
+        txtlotesalida.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                Field_Lote_SalidaActionPerformed(evt);
+                txtlotesalidaActionPerformed(evt);
             }
         });
 
-        jComboBox1.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+        cbomotivosalidaing.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
 
         jLabel1.setText("Motivo");
 
@@ -119,24 +119,24 @@ public class RegistroIngresoUser extends javax.swing.JPanel {
                             .addGroup(Panel_RegistroSalidaLayout.createSequentialGroup()
                                 .addComponent(Text_CantidadCajas1)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                .addComponent(Field_CantidadCajas_Salida, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addComponent(txtcantcajasalida, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                                 .addComponent(Text_Lote1)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                .addComponent(Field_Lote_Salida, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addComponent(txtlotesalida, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                             .addGroup(Panel_RegistroSalidaLayout.createSequentialGroup()
                                 .addGroup(Panel_RegistroSalidaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                     .addComponent(Text_Ingrediente1)
                                     .addComponent(jLabel1))
                                 .addGap(35, 35, 35)
                                 .addGroup(Panel_RegistroSalidaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                    .addComponent(ComboBox_Ingredientes_Salida, 0, 245, Short.MAX_VALUE)
-                                    .addComponent(jComboBox1, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                                    .addComponent(cboingsalida, 0, 245, Short.MAX_VALUE)
+                                    .addComponent(cbomotivosalidaing, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                                 .addGap(18, 18, 18)
-                                .addComponent(Boton_Guardar_Salida, javax.swing.GroupLayout.PREFERRED_SIZE, 92, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                                .addComponent(btnguardarsalida, javax.swing.GroupLayout.PREFERRED_SIZE, 92, javax.swing.GroupLayout.PREFERRED_SIZE))))
                     .addGroup(Panel_RegistroSalidaLayout.createSequentialGroup()
                         .addGap(216, 216, 216)
-                        .addComponent(Boton_Cancelar_Salida, javax.swing.GroupLayout.PREFERRED_SIZE, 92, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addComponent(btncancelarsalida, javax.swing.GroupLayout.PREFERRED_SIZE, 92, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(Panel_RegistroSalidaLayout.createSequentialGroup()
                         .addGap(28, 28, 28)
                         .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 486, javax.swing.GroupLayout.PREFERRED_SIZE)))
@@ -152,25 +152,25 @@ public class RegistroIngresoUser extends javax.swing.JPanel {
                         .addGap(15, 15, 15)
                         .addGroup(Panel_RegistroSalidaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(Text_Ingrediente1)
-                            .addComponent(ComboBox_Ingredientes_Salida, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addComponent(cboingsalida, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addGap(18, 18, 18)
                         .addGroup(Panel_RegistroSalidaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(jComboBox1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(cbomotivosalidaing, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(jLabel1))
                         .addGap(20, 20, 20))
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, Panel_RegistroSalidaLayout.createSequentialGroup()
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(Boton_Guardar_Salida, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(btnguardarsalida, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(36, 36, 36)))
                 .addGroup(Panel_RegistroSalidaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(Text_CantidadCajas1)
-                    .addComponent(Field_CantidadCajas_Salida, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(txtcantcajasalida, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(Text_Lote1)
-                    .addComponent(Field_Lote_Salida, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(txtlotesalida, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(jScrollPane3, javax.swing.GroupLayout.DEFAULT_SIZE, 254, Short.MAX_VALUE)
                 .addGap(18, 18, 18)
-                .addComponent(Boton_Cancelar_Salida, javax.swing.GroupLayout.PREFERRED_SIZE, 29, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(btncancelarsalida, javax.swing.GroupLayout.PREFERRED_SIZE, 29, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap())
         );
 
@@ -192,37 +192,37 @@ public class RegistroIngresoUser extends javax.swing.JPanel {
         );
     }// </editor-fold>//GEN-END:initComponents
 
-    private void Boton_Cancelar_SalidaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_Boton_Cancelar_SalidaActionPerformed
+    private void btncancelarsalidaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btncancelarsalidaActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_Boton_Cancelar_SalidaActionPerformed
+    }//GEN-LAST:event_btncancelarsalidaActionPerformed
 
-    private void Boton_Guardar_SalidaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_Boton_Guardar_SalidaActionPerformed
+    private void btnguardarsalidaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnguardarsalidaActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_Boton_Guardar_SalidaActionPerformed
+    }//GEN-LAST:event_btnguardarsalidaActionPerformed
 
-    private void ComboBox_Ingredientes_SalidaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ComboBox_Ingredientes_SalidaActionPerformed
+    private void cboingsalidaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cboingsalidaActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_ComboBox_Ingredientes_SalidaActionPerformed
+    }//GEN-LAST:event_cboingsalidaActionPerformed
 
-    private void Field_Lote_SalidaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_Field_Lote_SalidaActionPerformed
+    private void txtlotesalidaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtlotesalidaActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_Field_Lote_SalidaActionPerformed
+    }//GEN-LAST:event_txtlotesalidaActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton Boton_Cancelar_Salida;
-    private javax.swing.JButton Boton_Guardar_Salida;
-    private javax.swing.JComboBox<String> ComboBox_Ingredientes_Salida;
-    private javax.swing.JTextField Field_CantidadCajas_Salida;
-    private javax.swing.JTextField Field_Lote_Salida;
     private javax.swing.JPanel Panel_RegistroSalida;
-    private javax.swing.JTable Tabla_Productos_Salida;
     private javax.swing.JLabel Text_CantidadCajas1;
     private javax.swing.JLabel Text_Ingrediente1;
     private javax.swing.JLabel Text_Lote1;
     private javax.swing.JLabel Texto_RegistroIngreso1;
-    private javax.swing.JComboBox<String> jComboBox1;
+    private javax.swing.JButton btncancelarsalida;
+    private javax.swing.JButton btnguardarsalida;
+    private javax.swing.JComboBox<String> cboingsalida;
+    private javax.swing.JComboBox<String> cbomotivosalidaing;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JScrollPane jScrollPane3;
+    private javax.swing.JTable tbprodsalida;
+    private javax.swing.JTextField txtcantcajasalida;
+    private javax.swing.JTextField txtlotesalida;
     // End of variables declaration//GEN-END:variables
 }

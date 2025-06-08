@@ -31,20 +31,20 @@ public class RegistroIngresoo extends javax.swing.JPanel {
         Boton_Ingreso_Salida = new javax.swing.JTabbedPane();
         Panel_RegistroIngreso = new javax.swing.JPanel();
         jScrollPane2 = new javax.swing.JScrollPane();
-        Tabla_Productos = new javax.swing.JTable();
-        Boton_Cancelar = new javax.swing.JButton();
-        Boton_Guardar = new javax.swing.JButton();
+        tbprodingreso = new javax.swing.JTable();
+        btncancelarprodingreso = new javax.swing.JButton();
+        btnguardarprodingreso = new javax.swing.JButton();
         Text_FechaaIngreso = new javax.swing.JLabel();
-        Field_FechaIngreso = new javax.swing.JTextField();
+        txtfechaingreso = new javax.swing.JTextField();
         Texto_RegistroIngreso = new javax.swing.JLabel();
         Text_Ingrediente = new javax.swing.JLabel();
-        ComboBox_Ingredientes = new javax.swing.JComboBox<>();
+        cboingingreso = new javax.swing.JComboBox<>();
         Text_CantidadCajas = new javax.swing.JLabel();
-        Field_CantidadCajas = new javax.swing.JTextField();
+        txtcantcajasingreso = new javax.swing.JTextField();
         Text_Lote = new javax.swing.JLabel();
-        Field_Lote = new javax.swing.JTextField();
+        txtloteingreso = new javax.swing.JTextField();
         Text_FechaCaducidad = new javax.swing.JLabel();
-        Field_FechaCaducidad = new javax.swing.JTextField();
+        txtfechacaducidad = new javax.swing.JTextField();
         Panel_RegistroSalida = new javax.swing.JPanel();
         jScrollPane3 = new javax.swing.JScrollPane();
         Tabla_Productos_Salida = new javax.swing.JTable();
@@ -64,7 +64,7 @@ public class RegistroIngresoo extends javax.swing.JPanel {
 
         Panel_RegistroIngreso.setBackground(new java.awt.Color(255, 255, 255));
 
-        Tabla_Productos.setModel(new javax.swing.table.DefaultTableModel(
+        tbprodingreso.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {null, null, null, null},
                 {null, null, null, null},
@@ -74,23 +74,23 @@ public class RegistroIngresoo extends javax.swing.JPanel {
                 "Producto", "Cantidad", "Fecha de ingreso", "Fecha de caducidad"
             }
         ));
-        jScrollPane2.setViewportView(Tabla_Productos);
+        jScrollPane2.setViewportView(tbprodingreso);
 
-        Boton_Cancelar.setBackground(new java.awt.Color(0, 109, 86));
-        Boton_Cancelar.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
-        Boton_Cancelar.setText("Cancelar");
-        Boton_Cancelar.addActionListener(new java.awt.event.ActionListener() {
+        btncancelarprodingreso.setBackground(new java.awt.Color(0, 109, 86));
+        btncancelarprodingreso.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
+        btncancelarprodingreso.setText("Cancelar");
+        btncancelarprodingreso.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                Boton_CancelarActionPerformed(evt);
+                btncancelarprodingresoActionPerformed(evt);
             }
         });
 
-        Boton_Guardar.setBackground(new java.awt.Color(0, 109, 86));
-        Boton_Guardar.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
-        Boton_Guardar.setText("Guardar");
-        Boton_Guardar.addActionListener(new java.awt.event.ActionListener() {
+        btnguardarprodingreso.setBackground(new java.awt.Color(0, 109, 86));
+        btnguardarprodingreso.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
+        btnguardarprodingreso.setText("Guardar");
+        btnguardarprodingreso.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                Boton_GuardarActionPerformed(evt);
+                btnguardarprodingresoActionPerformed(evt);
             }
         });
 
@@ -105,31 +105,37 @@ public class RegistroIngresoo extends javax.swing.JPanel {
         Text_Ingrediente.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         Text_Ingrediente.setText("Ingrediente");
 
-        ComboBox_Ingredientes.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
-        ComboBox_Ingredientes.addActionListener(new java.awt.event.ActionListener() {
+        cboingingreso.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+        cboingingreso.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                ComboBox_IngredientesActionPerformed(evt);
+                cboingingresoActionPerformed(evt);
             }
         });
 
         Text_CantidadCajas.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         Text_CantidadCajas.setText("Cantidad Cajas");
 
+        txtcantcajasingreso.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                txtcantcajasingresoActionPerformed(evt);
+            }
+        });
+
         Text_Lote.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         Text_Lote.setText("Lote");
 
-        Field_Lote.addActionListener(new java.awt.event.ActionListener() {
+        txtloteingreso.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                Field_LoteActionPerformed(evt);
+                txtloteingresoActionPerformed(evt);
             }
         });
 
         Text_FechaCaducidad.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         Text_FechaCaducidad.setText("Fecha Caducidad");
 
-        Field_FechaCaducidad.addActionListener(new java.awt.event.ActionListener() {
+        txtfechacaducidad.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                Field_FechaCaducidadActionPerformed(evt);
+                txtfechacaducidadActionPerformed(evt);
             }
         });
 
@@ -145,35 +151,35 @@ public class RegistroIngresoo extends javax.swing.JPanel {
                             .addGroup(Panel_RegistroIngresoLayout.createSequentialGroup()
                                 .addComponent(Text_Ingrediente)
                                 .addGap(35, 35, 35)
-                                .addComponent(ComboBox_Ingredientes, javax.swing.GroupLayout.PREFERRED_SIZE, 245, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addComponent(cboingingreso, javax.swing.GroupLayout.PREFERRED_SIZE, 245, javax.swing.GroupLayout.PREFERRED_SIZE))
                             .addComponent(Texto_RegistroIngreso)
                             .addGroup(Panel_RegistroIngresoLayout.createSequentialGroup()
                                 .addGroup(Panel_RegistroIngresoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                     .addGroup(Panel_RegistroIngresoLayout.createSequentialGroup()
                                         .addComponent(Text_CantidadCajas)
                                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                        .addComponent(Field_CantidadCajas, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addComponent(txtcantcajasingreso, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                                         .addGap(12, 12, 12)
                                         .addComponent(Text_Lote)
                                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                        .addComponent(Field_Lote, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                        .addComponent(txtloteingreso, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                                     .addGroup(Panel_RegistroIngresoLayout.createSequentialGroup()
                                         .addComponent(Text_FechaCaducidad)
                                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                        .addComponent(Field_FechaCaducidad, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addComponent(txtfechacaducidad, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                                         .addGap(12, 12, 12)
                                         .addComponent(Text_FechaaIngreso)))
                                 .addGroup(Panel_RegistroIngresoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                     .addGroup(Panel_RegistroIngresoLayout.createSequentialGroup()
                                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                        .addComponent(Field_FechaIngreso, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                        .addComponent(txtfechaingreso, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                                     .addGroup(Panel_RegistroIngresoLayout.createSequentialGroup()
                                         .addGap(55, 55, 55)
-                                        .addComponent(Boton_Guardar, javax.swing.GroupLayout.PREFERRED_SIZE, 92, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                                        .addComponent(btnguardarprodingreso, javax.swing.GroupLayout.PREFERRED_SIZE, 92, javax.swing.GroupLayout.PREFERRED_SIZE))))
                             .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 460, javax.swing.GroupLayout.PREFERRED_SIZE)))
                     .addGroup(Panel_RegistroIngresoLayout.createSequentialGroup()
                         .addGap(214, 214, 214)
-                        .addComponent(Boton_Cancelar, javax.swing.GroupLayout.PREFERRED_SIZE, 92, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addComponent(btncancelarprodingreso, javax.swing.GroupLayout.PREFERRED_SIZE, 92, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addContainerGap(46, Short.MAX_VALUE))
         );
         Panel_RegistroIngresoLayout.setVerticalGroup(
@@ -184,24 +190,24 @@ public class RegistroIngresoo extends javax.swing.JPanel {
                 .addGap(15, 15, 15)
                 .addGroup(Panel_RegistroIngresoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(Text_Ingrediente)
-                    .addComponent(ComboBox_Ingredientes, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(cboingingreso, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
                 .addGroup(Panel_RegistroIngresoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(Field_CantidadCajas, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(txtcantcajasingreso, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(Text_Lote)
-                    .addComponent(Field_Lote, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(txtloteingreso, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(Text_CantidadCajas)
-                    .addComponent(Boton_Guardar, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(btnguardarprodingreso, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(Panel_RegistroIngresoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(Text_FechaCaducidad)
-                    .addComponent(Field_FechaCaducidad, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(txtfechacaducidad, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(Text_FechaaIngreso)
-                    .addComponent(Field_FechaIngreso, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(txtfechaingreso, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 229, Short.MAX_VALUE)
                 .addGap(18, 18, 18)
-                .addComponent(Boton_Cancelar, javax.swing.GroupLayout.PREFERRED_SIZE, 29, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(btncancelarprodingreso, javax.swing.GroupLayout.PREFERRED_SIZE, 29, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(12, 12, 12))
         );
 
@@ -356,25 +362,25 @@ public class RegistroIngresoo extends javax.swing.JPanel {
         );
     }// </editor-fold>//GEN-END:initComponents
 
-    private void Boton_CancelarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_Boton_CancelarActionPerformed
+    private void btncancelarprodingresoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btncancelarprodingresoActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_Boton_CancelarActionPerformed
+    }//GEN-LAST:event_btncancelarprodingresoActionPerformed
 
-    private void Boton_GuardarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_Boton_GuardarActionPerformed
+    private void btnguardarprodingresoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnguardarprodingresoActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_Boton_GuardarActionPerformed
+    }//GEN-LAST:event_btnguardarprodingresoActionPerformed
 
-    private void ComboBox_IngredientesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ComboBox_IngredientesActionPerformed
+    private void cboingingresoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cboingingresoActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_ComboBox_IngredientesActionPerformed
+    }//GEN-LAST:event_cboingingresoActionPerformed
 
-    private void Field_LoteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_Field_LoteActionPerformed
+    private void txtloteingresoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtloteingresoActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_Field_LoteActionPerformed
+    }//GEN-LAST:event_txtloteingresoActionPerformed
 
-    private void Field_FechaCaducidadActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_Field_FechaCaducidadActionPerformed
+    private void txtfechacaducidadActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtfechacaducidadActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_Field_FechaCaducidadActionPerformed
+    }//GEN-LAST:event_txtfechacaducidadActionPerformed
 
     private void Boton_Cancelar_SalidaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_Boton_Cancelar_SalidaActionPerformed
         // TODO add your handling code here:
@@ -392,24 +398,20 @@ public class RegistroIngresoo extends javax.swing.JPanel {
         // TODO add your handling code here:
     }//GEN-LAST:event_Field_Lote_SalidaActionPerformed
 
+    private void txtcantcajasingresoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtcantcajasingresoActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_txtcantcajasingresoActionPerformed
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton Boton_Cancelar;
     private javax.swing.JButton Boton_Cancelar_Salida;
-    private javax.swing.JButton Boton_Guardar;
     private javax.swing.JButton Boton_Guardar_Salida;
     private javax.swing.JTabbedPane Boton_Ingreso_Salida;
-    private javax.swing.JComboBox<String> ComboBox_Ingredientes;
     private javax.swing.JComboBox<String> ComboBox_Ingredientes_Salida;
-    private javax.swing.JTextField Field_CantidadCajas;
     private javax.swing.JTextField Field_CantidadCajas_Salida;
-    private javax.swing.JTextField Field_FechaCaducidad;
-    private javax.swing.JTextField Field_FechaIngreso;
-    private javax.swing.JTextField Field_Lote;
     private javax.swing.JTextField Field_Lote_Salida;
     private javax.swing.JPanel Panel_RegistroIngreso;
     private javax.swing.JPanel Panel_RegistroSalida;
-    private javax.swing.JTable Tabla_Productos;
     private javax.swing.JTable Tabla_Productos_Salida;
     private javax.swing.JLabel Text_CantidadCajas;
     private javax.swing.JLabel Text_CantidadCajas1;
@@ -421,9 +423,17 @@ public class RegistroIngresoo extends javax.swing.JPanel {
     private javax.swing.JLabel Text_Lote1;
     private javax.swing.JLabel Texto_RegistroIngreso;
     private javax.swing.JLabel Texto_RegistroIngreso1;
+    private javax.swing.JButton btncancelarprodingreso;
+    private javax.swing.JButton btnguardarprodingreso;
+    private javax.swing.JComboBox<String> cboingingreso;
     private javax.swing.JComboBox<String> jComboBox1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JScrollPane jScrollPane3;
+    private javax.swing.JTable tbprodingreso;
+    private javax.swing.JTextField txtcantcajasingreso;
+    private javax.swing.JTextField txtfechacaducidad;
+    private javax.swing.JTextField txtfechaingreso;
+    private javax.swing.JTextField txtloteingreso;
     // End of variables declaration//GEN-END:variables
 }
