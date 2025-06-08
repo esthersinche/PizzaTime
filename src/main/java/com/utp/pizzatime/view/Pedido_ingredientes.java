@@ -1,13 +1,25 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JPanel.java to edit this template
- */
 package com.utp.pizzatime.view;
+
+import com.utp.pizzatime.controller.SessionController;
+import com.utp.pizzatime.model.dao.PedidoDAO;
+import com.utp.pizzatime.model.dao.ProductoDAO;
+import com.utp.pizzatime.model.dao.impl.I_PedidoDAO;
+import com.utp.pizzatime.model.dao.impl.I_ProductoDAO;
+import com.utp.pizzatime.model.entity.DetallePedido;
+import com.utp.pizzatime.model.entity.Pedido;
+import com.utp.pizzatime.model.entity.Producto_modificar;
+import com.utp.pizzatime.model.entity.Producto_pedido;
 import java.awt.Color;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
+import java.sql.SQLException;
+import java.util.ArrayList;
+import java.util.Date;
+import java.util.List;
+import javax.swing.DefaultComboBoxModel;
 import javax.swing.JMenuItem;
+import javax.swing.JOptionPane;
 import javax.swing.JPopupMenu;
 import javax.swing.JTable;
 import javax.swing.SwingConstants;
@@ -23,71 +35,106 @@ public class Pedido_ingredientes extends javax.swing.JPanel {
     /**
      * Creates new form Pedido_ingredientes
      */
-    
     JPopupMenu popmenuanticlick; //para q al hacer anticlick en un row se pueda eliminar
     JMenuItem elimitem;
-    
+    private List<Producto_pedido> listaProductos;      // para combo y carrito
+    private List<DetallePedido> listaDetalles = new ArrayList<>(); // carrito “persistible”
+
     public Pedido_ingredientes() {
         initComponents();
-        
+
         table_head_color(tbped_ing, tbstockactualpeding);
         popmenuanticlick = new JPopupMenu();
         elimitem = new JMenuItem("Eliminar");
         elimitem.addActionListener(e -> elim_row_peding());
-        popmenuanticlick.add(elimitem); 
-        
+        popmenuanticlick.add(elimitem);
+
         MouseListener popuplistens = new PopupListener();//es un obj PopupListener, solo funciona pq no tiene constructor, solo se ve interfaz generica
-        tbped_ing.addMouseListener(popuplistens);  
-        
-        
+        tbped_ing.addMouseListener(popuplistens);
+
+        initProductos();
+
         //JTableHeader tableheader= tbped_ing.getTableHeader();
     }
-    
-    class PopupListener extends MouseAdapter{//clase q reescribe los eventos para q se ejecute el metodo chiquito ese
-        @Override
-        public void mousePressed(MouseEvent e){
-            
-            plswork(e);          
+
+    private void initProductos() {
+        try {
+            // Asumiendo que tienes un ProductoDAO con findAll()
+            ProductoDAO dao = new I_ProductoDAO();
+            List<Producto_modificar> productos = dao.listarTodos();
+
+            // 1) Llenar el combo
+            listaProductos = new ArrayList<>();
+            DefaultComboBoxModel<String> modeloCombo = new DefaultComboBoxModel<>();
+            for (Producto_modificar p : productos) {
+                modeloCombo.addElement(p.getNOMBRE_PRO());
+                // creamos un wrapper Producto_pedido para el carrito
+                listaProductos.add(new Producto_pedido(
+                        p.getID_PRO(), p.getNOMBRE_PRO(), p.getPRECIO()
+                ));
+            }
+            cbonomingre.setModel(modeloCombo);
+
+            // 2) Llenar la tabla de stock
+            DefaultTableModel stockModel = (DefaultTableModel) tbstockactualpeding.getModel();
+            stockModel.setRowCount(0);
+            for (Producto_modificar p : productos) {
+                stockModel.addRow(new Object[]{
+                    p.getID_PRO(),
+                    p.getNOMBRE_PRO(),
+                    p.getSTOCK_CAJAS(),
+                    p.getSTOCK_ACTUAL()
+                });
+            }
+        } catch (SQLException ex) {
+            JOptionPane.showMessageDialog(this,
+                    "Error al cargar productos:\n" + ex.getMessage(),
+                    "Error", JOptionPane.ERROR_MESSAGE);
         }
-        
+    }
+
+    class PopupListener extends MouseAdapter {//clase q reescribe los eventos para q se ejecute el metodo chiquito ese
+
         @Override
-        public void mouseReleased(MouseEvent e){
-            
-            plswork(e);    
+        public void mousePressed(MouseEvent e) {
+
+            plswork(e);
         }
-        
-        public void plswork(MouseEvent e){
+
+        @Override
+        public void mouseReleased(MouseEvent e) {
+
+            plswork(e);
+        }
+
+        public void plswork(MouseEvent e) {
             if (e.isPopupTrigger()) {
                 popmenuanticlick.show(e.getComponent(), e.getX(), e.getY());//enseña el menu en donde esta el mouse
-                
+
             }
-            
+
         }
-        
+
     }
-    
-    private void table_head_color(JTable tbped_ing, JTable tbstockactualpeding){
+
+    private void table_head_color(JTable tbped_ing, JTable tbstockactualpeding) {
         DefaultTableCellRenderer header_ren = new DefaultTableCellRenderer();//deja personalizar, pinta celdas en una Jtable
 
-        header_ren.setBackground(new Color(0,109,86));//color del bg
+        header_ren.setBackground(new Color(0, 109, 86));//color del bg
         header_ren.setForeground(Color.LIGHT_GRAY);//color del texto
         header_ren.setHorizontalAlignment(SwingConstants.CENTER);//lo pone en el centro
-        
+
         tbped_ing.getTableHeader().setDefaultRenderer(header_ren);//agarra el header y le pone la cosa personalizada
         tbstockactualpeding.getTableHeader().setDefaultRenderer(header_ren);
-}
-    
-    private void elim_row_peding(){
-        DefaultTableModel tb_model_peding = (DefaultTableModel) tbped_ing.getModel();
-        int row= tbped_ing.getSelectedRow();
-        
-        tb_model_peding.removeRow(row);//ya q no guarda hasta q se presiona el boton de pedir
-        
     }
-    
-    
-    
-    
+
+    private void elim_row_peding() {
+        DefaultTableModel tb_model_peding = (DefaultTableModel) tbped_ing.getModel();
+        int row = tbped_ing.getSelectedRow();
+
+        tb_model_peding.removeRow(row);//ya q no guarda hasta q se presiona el boton de pedir
+
+    }
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -139,7 +186,6 @@ public class Pedido_ingredientes extends javax.swing.JPanel {
         });
 
         txtcantcajas.setForeground(new java.awt.Color(110, 104, 104));
-        txtcantcajas.setText("jTextField1");
         txtcantcajas.setBorder(javax.swing.BorderFactory.createEtchedBorder(new java.awt.Color(204, 204, 204), new java.awt.Color(204, 204, 204)));
 
         btnaddingadmin.setBackground(new java.awt.Color(204, 204, 204));
@@ -158,9 +204,6 @@ public class Pedido_ingredientes extends javax.swing.JPanel {
         tbped_ing.setForeground(new java.awt.Color(0, 109, 86));
         tbped_ing.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
                 {null, null, null, null}
             },
             new String [] {
@@ -180,7 +223,6 @@ public class Pedido_ingredientes extends javax.swing.JPanel {
         tbped_ing.setSelectionBackground(new java.awt.Color(0, 109, 86));
         tbped_ing.setSelectionForeground(new java.awt.Color(110, 104, 104));
         tbped_ing.setShowGrid(false);
-        tbped_ing.setShowHorizontalLines(true);
         jScrollPane1.setViewportView(tbped_ing);
 
         jLabel4.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
@@ -205,18 +247,20 @@ public class Pedido_ingredientes extends javax.swing.JPanel {
         btncancelingadmin.setFont(new java.awt.Font("Tahoma", 3, 14)); // NOI18N
         btncancelingadmin.setText("Cancelar");
         btncancelingadmin.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED, new java.awt.Color(204, 204, 204), new java.awt.Color(204, 204, 204), null, null));
+        btncancelingadmin.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btncancelingadminActionPerformed(evt);
+            }
+        });
 
         tbstockactualpeding.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
         tbstockactualpeding.setForeground(new java.awt.Color(0, 109, 86));
         tbstockactualpeding.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
                 {null, null, null, null}
             },
             new String [] {
-                "ID", "Ingrediente", "Stock_cajas", "Stock_total"
+                "ID", "ingrediente", "Stock Cajas", "Stock Un"
             }
         ));
         tbstockactualpeding.setGridColor(new java.awt.Color(0, 109, 86));
@@ -286,32 +330,111 @@ public class Pedido_ingredientes extends javax.swing.JPanel {
                     .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 232, Short.MAX_VALUE)
                     .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE))
                 .addGap(18, 18, 18)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jLabel4)
-                    .addComponent(btncancelingadmin, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(btnpediringadmin, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(txttotalpedido_ing))
+                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                        .addComponent(btncancelingadmin, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(btnpediringadmin, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(txttotalpedido_ing)))
                 .addContainerGap(32, Short.MAX_VALUE))
         );
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnaddingadminActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnaddingadminActionPerformed
-        // TODO add your handling code here:
-        String nom_ing= (String)cbonomingre.getSelectedItem();//convierte a string el item seleccionado
-        int cant_caj_ing= Integer.parseInt(txtcantcajas.getText());
-        
-        
+        String nombre = (String) cbonomingre.getSelectedItem();
+        int cantidad;
+        try {
+            cantidad = Integer.parseInt(txtcantcajas.getText().trim());
+        } catch (NumberFormatException e) {
+            JOptionPane.showMessageDialog(this,
+                    "Cantidad inválida",
+                    "Error", JOptionPane.ERROR_MESSAGE);
+            return;
+        }
+
+        // Encuentra el producto en listaProductos
+        Producto_pedido prod = listaProductos.stream()
+                .filter(p -> p.getNOMBRE_PRO().equals(nombre))
+                .findFirst().orElse(null);
+        if (prod == null) {
+            return;
+        }
+
+        // 1) Añade fila al carrito (tbped_ing)
+        DefaultTableModel cartModel = (DefaultTableModel) tbped_ing.getModel();
+        cartModel.addRow(new Object[]{
+            prod.getID_PRO(),
+            prod.getNOMBRE_PRO(),
+            cantidad,
+            prod.getPRECIO()
+        });
+
+        // 2) Crea el DetallePedido con idDet e idPed a null
+        DetallePedido det = new DetallePedido(
+                null, // idDet null para que el DAO lo genere
+                null, // idPed null para que el DAO lo genere
+                prod.getID_PRO(),
+                prod.getNOMBRE_PRO(),
+                prod.getPRECIO(),
+                cantidad
+        );
+        listaDetalles.add(det);
+
+        // 3) Actualiza total en pantalla
+        actualizarTotal();
+
+
     }//GEN-LAST:event_btnaddingadminActionPerformed
 
     private void btnpediringadminActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnpediringadminActionPerformed
-        // TODO add your handling code here:
-        /*Tendra que agarrar todos los rows del jtable en un loop y meterlos con shift a una lista para q esa lista vaya al bd*/
+        if (listaDetalles.isEmpty()) {
+            JOptionPane.showMessageDialog(this,
+                    "No hay ingredientes en el pedido",
+                    "Atención", JOptionPane.WARNING_MESSAGE);
+            return;
+        }
+
+        try {
+            // No generes aquí idPed: el DAO lo hará usando nextPedidoId()
+            int dniEmp = SessionController.getCurrentDni();  // obtén el dni logueado
+            Pedido pedido = new Pedido(null, dniEmp, new Date());
+            pedido.setDetalles(new ArrayList<>(listaDetalles));
+
+            // Persiste en BD; el DAO asigna idPed e idDet internamente
+            PedidoDAO dao = new I_PedidoDAO();
+            dao.insertPedidoConDetalles(pedido);
+
+            JOptionPane.showMessageDialog(this,
+                    "Pedido realizado con éxito",
+                    "OK", JOptionPane.INFORMATION_MESSAGE);
+
+            // Limpia todo
+            listaDetalles.clear();
+            ((DefaultTableModel) tbped_ing.getModel()).setRowCount(0);
+            actualizarTotal();
+
+        } catch (SQLException ex) {
+            JOptionPane.showMessageDialog(this,
+                    "Error al guardar pedido:\n" + ex.getMessage(),
+                    "Error", JOptionPane.ERROR_MESSAGE);
+        }
     }//GEN-LAST:event_btnpediringadminActionPerformed
 
     private void cbonomingreActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cbonomingreActionPerformed
-        // TODO add your handling code here:
+
     }//GEN-LAST:event_cbonomingreActionPerformed
 
+    private void btncancelingadminActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btncancelingadminActionPerformed
+        listaDetalles.clear();
+        ((DefaultTableModel) tbped_ing.getModel()).setRowCount(0);
+        actualizarTotal();
+    }//GEN-LAST:event_btncancelingadminActionPerformed
+    private void actualizarTotal() {
+        double suma = listaDetalles.stream()
+                .mapToDouble(d -> d.getPRECIO() * d.getCantidadCajas())
+                .sum();
+        txttotalpedido_ing.setText(String.format("%.2f", suma));
+    }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnaddingadmin;

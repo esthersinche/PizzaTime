@@ -25,6 +25,7 @@ public class LoginController {
         log.debug("Intentando login para DNI={}", dni);
         Empleado emp = empleadoDao.findByDniAndPass(dni, pass);
         if (emp != null) {
+            SessionController.setCurrentUser(emp);
             log.info("Login OK para DNI={}, rol={}", dni, emp.getRol());
         } else {
             log.warn("Login FALLIDO para DNI={}", dni);

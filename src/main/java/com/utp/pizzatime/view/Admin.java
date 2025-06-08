@@ -12,6 +12,7 @@ public class Admin extends javax.swing.JFrame {
     private Pedido_ingredientes pedido_ing= new Pedido_ingredientes();
     private Gestion_usu gest_usu= new Gestion_usu();
     private GestionarProductos gest_prod= new GestionarProductos();
+    private Reportes reportes =  new Reportes();
     
     
     /**
@@ -27,6 +28,7 @@ public class Admin extends javax.swing.JFrame {
         panelAdm.add(pedido_ing, "pedido_ingredientes");
         panelAdm.add(gest_usu, "gestion_usu");
         panelAdm.add(gest_prod, "gestion_prod");
+        panelAdm.add(reportes, "reportes");
         
     }
 
@@ -84,6 +86,11 @@ public class Admin extends javax.swing.JFrame {
         btnReportes.setForeground(new java.awt.Color(255, 255, 255));
         btnReportes.setText("Generar Reportes");
         btnReportes.setBorder(javax.swing.BorderFactory.createEmptyBorder(1, 1, 1, 1));
+        btnReportes.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnReportesActionPerformed(evt);
+            }
+        });
 
         btnPedidos.setBackground(new java.awt.Color(0, 109, 86));
         btnPedidos.setFont(new java.awt.Font("Segoe UI Variable", 1, 14)); // NOI18N
@@ -213,6 +220,10 @@ public class Admin extends javax.swing.JFrame {
         // TODO add your handling code here:
         card.show(panelAdm, "gestion_prod");
     }//GEN-LAST:event_btnRegistrarIngredientesActionPerformed
+
+    private void btnReportesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnReportesActionPerformed
+        card.show(panelAdm, "reportes");
+    }//GEN-LAST:event_btnReportesActionPerformed
 
     /**
      * @param args the command line arguments
