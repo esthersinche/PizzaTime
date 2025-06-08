@@ -7,14 +7,11 @@ import java.io.IOException;
 import org.apache.poi.ss.usermodel.*;
 import org.apache.poi.xssf.usermodel.XSSFWorkbook;
 
-
 public class Reportes extends javax.swing.JPanel {
-
 
     public Reportes() {
         initComponents();
     }
-
 
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
@@ -102,63 +99,63 @@ public class Reportes extends javax.swing.JPanel {
     }// </editor-fold>//GEN-END:initComponents
 
     private void Btn_excelimpoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_Btn_excelimpoActionPerformed
-       
-         // Crear un JFileChooser para que el usuario elija dónde guardar el archivo
-    JFileChooser fileChooser = new JFileChooser();
-    fileChooser.setDialogTitle("Guardar como");
 
-    // Nombre por defecto del archivo
-    fileChooser.setSelectedFile(new java.io.File("reporte.xlsx"));
+        // Crear un JFileChooser para que el usuario elija dónde guardar el archivo
+        JFileChooser fileChooser = new JFileChooser();
+        fileChooser.setDialogTitle("Guardar como");
 
-    // Mostrar el cuadro de diálogo de guardar y capturar la opción del usuario
-    int userSelection = fileChooser.showSaveDialog(this);
+        // Nombre por defecto del archivo
+        fileChooser.setSelectedFile(new java.io.File("reporte.xlsx"));
 
-    // Si el usuario eligió una ruta y presionó "Guardar"
-    if (userSelection == JFileChooser.APPROVE_OPTION) {
-        // Obtener el archivo seleccionado por el usuario
-        java.io.File fileToSave = fileChooser.getSelectedFile();
-        String filePath = fileToSave.getAbsolutePath();
+        // Mostrar el cuadro de diálogo de guardar y capturar la opción del usuario
+        int userSelection = fileChooser.showSaveDialog(this);
 
-        // Asegurarse de que el archivo tenga extensión .xlsx
-        if (!filePath.toLowerCase().endsWith(".xlsx")) {
-            filePath += ".xlsx";
-        }
+        // Si el usuario eligió una ruta y presionó "Guardar"
+        if (userSelection == JFileChooser.APPROVE_OPTION) {
+            // Obtener el archivo seleccionado por el usuario
+            java.io.File fileToSave = fileChooser.getSelectedFile();
+            String filePath = fileToSave.getAbsolutePath();
 
-        // Crear un nuevo libro de Excel (.xlsx)
-        try (Workbook workbook = new XSSFWorkbook()) {
-            // Crear una hoja dentro del libro
-            Sheet sheet = workbook.createSheet("Reporte");
-
-            // Obtener el modelo de datos de la JTable
-            TableModel model = TableRepor.getModel();
-
-            // Crear la primera fila del archivo Excel para los nombres de las columnas
-            Row header = sheet.createRow(0);
-            for (int i = 0; i < model.getColumnCount(); i++) {
-                header.createCell(i).setCellValue(model.getColumnName(i)); // Nombre de la columna
+            // Asegurarse de que el archivo tenga extensión .xlsx
+            if (!filePath.toLowerCase().endsWith(".xlsx")) {
+                filePath += ".xlsx";
             }
 
-            // Escribir los datos de cada fila de la JTable en el archivo Excel
-            for (int i = 0; i < model.getRowCount(); i++) {
-                Row row = sheet.createRow(i + 1); // +1 para dejar la primera fila para los encabezados
-                for (int j = 0; j < model.getColumnCount(); j++) {
-                    Object value = model.getValueAt(i, j); // Obtener valor de la celda
-                    row.createCell(j).setCellValue(value != null ? value.toString() : ""); // Escribir en Excel
+            // Crear un nuevo libro de Excel (.xlsx)
+            try (Workbook workbook = new XSSFWorkbook()) {
+                // Crear una hoja dentro del libro
+                Sheet sheet = workbook.createSheet("Reporte");
+
+                // Obtener el modelo de datos de la JTable
+                TableModel model = TableRepor.getModel();
+
+                // Crear la primera fila del archivo Excel para los nombres de las columnas
+                Row header = sheet.createRow(0);
+                for (int i = 0; i < model.getColumnCount(); i++) {
+                    header.createCell(i).setCellValue(model.getColumnName(i)); // Nombre de la columna
                 }
-            }
 
-            // Guardar el archivo en la ruta seleccionada por el usuario
-            try (FileOutputStream out = new FileOutputStream(filePath)) {
-                workbook.write(out); // Escribir el contenido del libro al archivo
-                // Mostrar mensaje de éxito
-                JOptionPane.showMessageDialog(this, "Archivo guardado en:\n" + filePath);
-            }
+                // Escribir los datos de cada fila de la JTable en el archivo Excel
+                for (int i = 0; i < model.getRowCount(); i++) {
+                    Row row = sheet.createRow(i + 1); // +1 para dejar la primera fila para los encabezados
+                    for (int j = 0; j < model.getColumnCount(); j++) {
+                        Object value = model.getValueAt(i, j); // Obtener valor de la celda
+                        row.createCell(j).setCellValue(value != null ? value.toString() : ""); // Escribir en Excel
+                    }
+                }
 
-        } catch (IOException e) {
-            // Si ocurre un error al guardar, mostrar mensaje de error
-            JOptionPane.showMessageDialog(this, "Error al guardar el archivo:\n" + e.getMessage());
+                // Guardar el archivo en la ruta seleccionada por el usuario
+                try (FileOutputStream out = new FileOutputStream(filePath)) {
+                    workbook.write(out); // Escribir el contenido del libro al archivo
+                    // Mostrar mensaje de éxito
+                    JOptionPane.showMessageDialog(this, "Archivo guardado en:\n" + filePath);
+                }
+
+            } catch (IOException e) {
+                // Si ocurre un error al guardar, mostrar mensaje de error
+                JOptionPane.showMessageDialog(this, "Error al guardar el archivo:\n" + e.getMessage());
+            }
         }
-    }
 
     }//GEN-LAST:event_Btn_excelimpoActionPerformed
 
