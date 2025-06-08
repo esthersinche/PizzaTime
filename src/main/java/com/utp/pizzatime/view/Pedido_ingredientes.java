@@ -30,7 +30,7 @@ public class Pedido_ingredientes extends javax.swing.JPanel {
     public Pedido_ingredientes() {
         initComponents();
         
-        table_head_color(tbped_ing);
+        table_head_color(tbped_ing, tbstockactualpeding);
         popmenuanticlick = new JPopupMenu();
         elimitem = new JMenuItem("Eliminar");
         elimitem.addActionListener(e -> elim_row_peding());
@@ -66,7 +66,7 @@ public class Pedido_ingredientes extends javax.swing.JPanel {
         
     }
     
-    private void table_head_color(JTable tbped_ing){
+    private void table_head_color(JTable tbped_ing, JTable tbstockactualpeding){
         DefaultTableCellRenderer header_ren = new DefaultTableCellRenderer();//deja personalizar, pinta celdas en una Jtable
 
         header_ren.setBackground(new Color(0,109,86));//color del bg
@@ -74,6 +74,7 @@ public class Pedido_ingredientes extends javax.swing.JPanel {
         header_ren.setHorizontalAlignment(SwingConstants.CENTER);//lo pone en el centro
         
         tbped_ing.getTableHeader().setDefaultRenderer(header_ren);//agarra el header y le pone la cosa personalizada
+        tbstockactualpeding.getTableHeader().setDefaultRenderer(header_ren);
 }
     
     private void elim_row_peding(){
@@ -206,6 +207,7 @@ public class Pedido_ingredientes extends javax.swing.JPanel {
         btncancelingadmin.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED, new java.awt.Color(204, 204, 204), new java.awt.Color(204, 204, 204), null, null));
 
         tbstockactualpeding.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
+        tbstockactualpeding.setForeground(new java.awt.Color(0, 109, 86));
         tbstockactualpeding.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {null, null, null, null},
@@ -217,6 +219,7 @@ public class Pedido_ingredientes extends javax.swing.JPanel {
                 "ID", "Ingrediente", "Stock_cajas", "Stock_total"
             }
         ));
+        tbstockactualpeding.setGridColor(new java.awt.Color(0, 109, 86));
         tbstockactualpeding.setMinimumSize(new java.awt.Dimension(60, 100));
         tbstockactualpeding.setPreferredSize(new java.awt.Dimension(300, 100));
         jScrollPane2.setViewportView(tbstockactualpeding);
