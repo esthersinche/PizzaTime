@@ -58,11 +58,11 @@
                               <Group type="102" alignment="0" attributes="0">
                                   <Component id="Text_CantidadCajas1" min="-2" max="-2" attributes="0"/>
                                   <EmptySpace type="unrelated" max="-2" attributes="0"/>
-                                  <Component id="Field_CantidadCajas_Salida" min="-2" max="-2" attributes="0"/>
+                                  <Component id="txtcantcajasalida" min="-2" max="-2" attributes="0"/>
                                   <EmptySpace type="unrelated" max="-2" attributes="0"/>
                                   <Component id="Text_Lote1" min="-2" max="-2" attributes="0"/>
                                   <EmptySpace type="unrelated" max="-2" attributes="0"/>
-                                  <Component id="Field_Lote_Salida" min="-2" max="-2" attributes="0"/>
+                                  <Component id="txtlotesalida" min="-2" max="-2" attributes="0"/>
                               </Group>
                               <Group type="102" alignment="0" attributes="0">
                                   <Group type="103" groupAlignment="0" attributes="0">
@@ -71,17 +71,17 @@
                                   </Group>
                                   <EmptySpace min="-2" pref="35" max="-2" attributes="0"/>
                                   <Group type="103" groupAlignment="0" max="-2" attributes="0">
-                                      <Component id="ComboBox_Ingredientes_Salida" alignment="0" pref="245" max="32767" attributes="0"/>
-                                      <Component id="jComboBox1" alignment="0" max="32767" attributes="0"/>
+                                      <Component id="cboingsalida" alignment="0" pref="245" max="32767" attributes="0"/>
+                                      <Component id="cbomotivosalidaing" alignment="0" max="32767" attributes="0"/>
                                   </Group>
                                   <EmptySpace type="separate" max="-2" attributes="0"/>
-                                  <Component id="Boton_Guardar_Salida" min="-2" pref="92" max="-2" attributes="0"/>
+                                  <Component id="btnguardarsalida" min="-2" pref="92" max="-2" attributes="0"/>
                               </Group>
                           </Group>
                       </Group>
                       <Group type="102" alignment="0" attributes="0">
                           <EmptySpace min="-2" pref="216" max="-2" attributes="0"/>
-                          <Component id="Boton_Cancelar_Salida" min="-2" pref="92" max="-2" attributes="0"/>
+                          <Component id="btncancelarsalida" min="-2" pref="92" max="-2" attributes="0"/>
                       </Group>
                       <Group type="102" alignment="0" attributes="0">
                           <EmptySpace min="-2" pref="28" max="-2" attributes="0"/>
@@ -102,31 +102,31 @@
                           <EmptySpace min="-2" pref="15" max="-2" attributes="0"/>
                           <Group type="103" groupAlignment="3" attributes="0">
                               <Component id="Text_Ingrediente1" alignment="3" min="-2" max="-2" attributes="0"/>
-                              <Component id="ComboBox_Ingredientes_Salida" alignment="3" min="-2" max="-2" attributes="0"/>
+                              <Component id="cboingsalida" alignment="3" min="-2" max="-2" attributes="0"/>
                           </Group>
                           <EmptySpace type="separate" max="-2" attributes="0"/>
                           <Group type="103" groupAlignment="3" attributes="0">
-                              <Component id="jComboBox1" alignment="3" min="-2" max="-2" attributes="0"/>
+                              <Component id="cbomotivosalidaing" alignment="3" min="-2" max="-2" attributes="0"/>
                               <Component id="jLabel1" alignment="3" min="-2" max="-2" attributes="0"/>
                           </Group>
                           <EmptySpace min="-2" pref="20" max="-2" attributes="0"/>
                       </Group>
                       <Group type="102" alignment="1" attributes="0">
                           <EmptySpace max="-2" attributes="0"/>
-                          <Component id="Boton_Guardar_Salida" min="-2" pref="30" max="-2" attributes="0"/>
+                          <Component id="btnguardarsalida" min="-2" pref="30" max="-2" attributes="0"/>
                           <EmptySpace min="-2" pref="36" max="-2" attributes="0"/>
                       </Group>
                   </Group>
                   <Group type="103" groupAlignment="3" attributes="0">
                       <Component id="Text_CantidadCajas1" alignment="3" min="-2" max="-2" attributes="0"/>
-                      <Component id="Field_CantidadCajas_Salida" alignment="3" min="-2" max="-2" attributes="0"/>
+                      <Component id="txtcantcajasalida" alignment="3" min="-2" max="-2" attributes="0"/>
                       <Component id="Text_Lote1" alignment="3" min="-2" max="-2" attributes="0"/>
-                      <Component id="Field_Lote_Salida" alignment="3" min="-2" max="-2" attributes="0"/>
+                      <Component id="txtlotesalida" alignment="3" min="-2" max="-2" attributes="0"/>
                   </Group>
                   <EmptySpace type="unrelated" max="-2" attributes="0"/>
                   <Component id="jScrollPane3" pref="254" max="32767" attributes="0"/>
                   <EmptySpace type="separate" max="-2" attributes="0"/>
-                  <Component id="Boton_Cancelar_Salida" min="-2" pref="29" max="-2" attributes="0"/>
+                  <Component id="btncancelarsalida" min="-2" pref="29" max="-2" attributes="0"/>
                   <EmptySpace max="-2" attributes="0"/>
               </Group>
           </Group>
@@ -140,7 +140,7 @@
 
           <Layout class="org.netbeans.modules.form.compat2.layouts.support.JScrollPaneSupportLayout"/>
           <SubComponents>
-            <Component class="javax.swing.JTable" name="Tabla_Productos_Salida">
+            <Component class="javax.swing.JTable" name="tbprodsalida">
               <Properties>
                 <Property name="model" type="javax.swing.table.TableModel" editor="org.netbeans.modules.form.editors2.TableModelEditor">
                   <Table columnCount="4" rowCount="3">
@@ -157,7 +157,7 @@
             </Component>
           </SubComponents>
         </Container>
-        <Component class="javax.swing.JButton" name="Boton_Cancelar_Salida">
+        <Component class="javax.swing.JButton" name="btncancelarsalida">
           <Properties>
             <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
               <Color blue="56" green="6d" red="0" type="rgb"/>
@@ -168,10 +168,10 @@
             <Property name="text" type="java.lang.String" value="Cancelar"/>
           </Properties>
           <Events>
-            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="Boton_Cancelar_SalidaActionPerformed"/>
+            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btncancelarsalidaActionPerformed"/>
           </Events>
         </Component>
-        <Component class="javax.swing.JButton" name="Boton_Guardar_Salida">
+        <Component class="javax.swing.JButton" name="btnguardarsalida">
           <Properties>
             <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
               <Color blue="56" green="6d" red="0" type="rgb"/>
@@ -182,7 +182,7 @@
             <Property name="text" type="java.lang.String" value="Guardar"/>
           </Properties>
           <Events>
-            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="Boton_Guardar_SalidaActionPerformed"/>
+            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnguardarsalidaActionPerformed"/>
           </Events>
         </Component>
         <Component class="javax.swing.JLabel" name="Text_Ingrediente1">
@@ -207,7 +207,7 @@
             <Property name="text" type="java.lang.String" value="Registro de Salida"/>
           </Properties>
         </Component>
-        <Component class="javax.swing.JComboBox" name="ComboBox_Ingredientes_Salida">
+        <Component class="javax.swing.JComboBox" name="cboingsalida">
           <Properties>
             <Property name="model" type="javax.swing.ComboBoxModel" editor="org.netbeans.modules.form.editors2.ComboBoxModelEditor">
               <StringArray count="4">
@@ -219,7 +219,7 @@
             </Property>
           </Properties>
           <Events>
-            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="ComboBox_Ingredientes_SalidaActionPerformed"/>
+            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="cboingsalidaActionPerformed"/>
           </Events>
           <AuxValues>
             <AuxValue name="JavaCodeGenerator_TypeParameters" type="java.lang.String" value="&lt;String&gt;"/>
@@ -233,7 +233,7 @@
             <Property name="text" type="java.lang.String" value="Cantidad Cajas"/>
           </Properties>
         </Component>
-        <Component class="javax.swing.JTextField" name="Field_CantidadCajas_Salida">
+        <Component class="javax.swing.JTextField" name="txtcantcajasalida">
         </Component>
         <Component class="javax.swing.JLabel" name="Text_Lote1">
           <Properties>
@@ -243,12 +243,12 @@
             <Property name="text" type="java.lang.String" value="Lote"/>
           </Properties>
         </Component>
-        <Component class="javax.swing.JTextField" name="Field_Lote_Salida">
+        <Component class="javax.swing.JTextField" name="txtlotesalida">
           <Events>
-            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="Field_Lote_SalidaActionPerformed"/>
+            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="txtlotesalidaActionPerformed"/>
           </Events>
         </Component>
-        <Component class="javax.swing.JComboBox" name="jComboBox1">
+        <Component class="javax.swing.JComboBox" name="cbomotivosalidaing">
           <Properties>
             <Property name="model" type="javax.swing.ComboBoxModel" editor="org.netbeans.modules.form.editors2.ComboBoxModelEditor">
               <StringArray count="4">

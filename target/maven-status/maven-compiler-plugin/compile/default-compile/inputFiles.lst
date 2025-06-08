@@ -1,7 +1,11 @@
 C:\Users\Laura\Documents\GitHub\PizzaTime\src\main\java\com\utp\pizzatime\controller\LoginController.java
 C:\Users\Laura\Documents\GitHub\PizzaTime\src\main\java\com\utp\pizzatime\model\dao\EmpleadoDAO.java
-C:\Users\Laura\Documents\GitHub\PizzaTime\src\main\java\com\utp\pizzatime\model\dao\impl\EmpleadoDAOI.java
+C:\Users\Laura\Documents\GitHub\PizzaTime\src\main\java\com\utp\pizzatime\model\dao\impl\I_EmpleadoDAO.java
+C:\Users\Laura\Documents\GitHub\PizzaTime\src\main\java\com\utp\pizzatime\model\dao\impl\I_ProductoDAO.java
+C:\Users\Laura\Documents\GitHub\PizzaTime\src\main\java\com\utp\pizzatime\model\dao\PedidoDAO.java
+C:\Users\Laura\Documents\GitHub\PizzaTime\src\main\java\com\utp\pizzatime\model\dao\ProductoDAO.java
 C:\Users\Laura\Documents\GitHub\PizzaTime\src\main\java\com\utp\pizzatime\model\entity\Empleado.java
+C:\Users\Laura\Documents\GitHub\PizzaTime\src\main\java\com\utp\pizzatime\model\entity\Producto.java
 C:\Users\Laura\Documents\GitHub\PizzaTime\src\main\java\com\utp\pizzatime\model\entity\Producto_modificar.java
 C:\Users\Laura\Documents\GitHub\PizzaTime\src\main\java\com\utp\pizzatime\model\entity\Producto_pedido.java
 C:\Users\Laura\Documents\GitHub\PizzaTime\src\main\java\com\utp\pizzatime\PizzaTime.java
@@ -11,6 +15,7 @@ C:\Users\Laura\Documents\GitHub\PizzaTime\src\main\java\com\utp\pizzatime\view\A
 C:\Users\Laura\Documents\GitHub\PizzaTime\src\main\java\com\utp\pizzatime\view\ConsultarStock.java
 C:\Users\Laura\Documents\GitHub\PizzaTime\src\main\java\com\utp\pizzatime\view\Employee.java
 C:\Users\Laura\Documents\GitHub\PizzaTime\src\main\java\com\utp\pizzatime\view\Gestion_usu.java
+C:\Users\Laura\Documents\GitHub\PizzaTime\src\main\java\com\utp\pizzatime\view\GestionarProductos.java
 C:\Users\Laura\Documents\GitHub\PizzaTime\src\main\java\com\utp\pizzatime\view\Login.java
 C:\Users\Laura\Documents\GitHub\PizzaTime\src\main\java\com\utp\pizzatime\view\Pedido_ingredientes.java
 C:\Users\Laura\Documents\GitHub\PizzaTime\src\main\java\com\utp\pizzatime\view\RegistroIngresoo.java

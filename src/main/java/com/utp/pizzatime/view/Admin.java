@@ -11,6 +11,7 @@ public class Admin extends javax.swing.JFrame {
     private ConsultarStock consultar =  new ConsultarStock(); //instancia de los paneles del primer boton, se hace así por cada panel por botón
     private Pedido_ingredientes pedido_ing= new Pedido_ingredientes();
     private Gestion_usu gest_usu= new Gestion_usu();
+    private GestionarProductos gest_prod= new GestionarProductos();
     
     
     /**
@@ -25,6 +26,7 @@ public class Admin extends javax.swing.JFrame {
         panelAdm.add(consultar,"consultarStock");
         panelAdm.add(pedido_ing, "pedido_ingredientes");
         panelAdm.add(gest_usu, "gestion_usu");
+        panelAdm.add(gest_prod, "gestion_prod");
         
     }
 
@@ -99,6 +101,11 @@ public class Admin extends javax.swing.JFrame {
         btnRegistrarIngredientes.setForeground(new java.awt.Color(255, 255, 255));
         btnRegistrarIngredientes.setText("Registrar Ingredientes");
         btnRegistrarIngredientes.setBorder(javax.swing.BorderFactory.createEmptyBorder(1, 1, 1, 1));
+        btnRegistrarIngredientes.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnRegistrarIngredientesActionPerformed(evt);
+            }
+        });
 
         btnlogout.setBackground(new java.awt.Color(222, 42, 39));
         btnlogout.setFont(new java.awt.Font("Corbel", 1, 18)); // NOI18N
@@ -128,7 +135,7 @@ public class Admin extends javax.swing.JFrame {
                     .addGroup(jPanel2Layout.createSequentialGroup()
                         .addGap(50, 50, 50)
                         .addComponent(btnlogout, javax.swing.GroupLayout.PREFERRED_SIZE, 140, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addContainerGap(39, Short.MAX_VALUE))
+                .addContainerGap(19, Short.MAX_VALUE))
         );
         jPanel2Layout.setVerticalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -148,7 +155,7 @@ public class Admin extends javax.swing.JFrame {
                 .addGap(43, 43, 43))
         );
 
-        jPanel1.add(jPanel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 260, 600));
+        jPanel1.add(jPanel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 240, 600));
 
         jLabel1.setFont(new java.awt.Font("Tahoma", 1, 24)); // NOI18N
         jLabel1.setForeground(new java.awt.Color(255, 255, 255));
@@ -159,14 +166,14 @@ public class Admin extends javax.swing.JFrame {
         panelAdm.setLayout(panelAdmLayout);
         panelAdmLayout.setHorizontalGroup(
             panelAdmLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 770, Short.MAX_VALUE)
+            .addGap(0, 790, Short.MAX_VALUE)
         );
         panelAdmLayout.setVerticalGroup(
             panelAdmLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGap(0, 520, Short.MAX_VALUE)
         );
 
-        jPanel1.add(panelAdm, new org.netbeans.lib.awtextra.AbsoluteConstraints(260, 80, 770, 520));
+        jPanel1.add(panelAdm, new org.netbeans.lib.awtextra.AbsoluteConstraints(240, 80, 790, 520));
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -201,6 +208,11 @@ public class Admin extends javax.swing.JFrame {
         // TODO add your handling code here:
         card.show(panelAdm, "gestion_usu");
     }//GEN-LAST:event_btnUsuariosActionPerformed
+
+    private void btnRegistrarIngredientesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRegistrarIngredientesActionPerformed
+        // TODO add your handling code here:
+        card.show(panelAdm, "gestion_prod");
+    }//GEN-LAST:event_btnRegistrarIngredientesActionPerformed
 
     /**
      * @param args the command line arguments
