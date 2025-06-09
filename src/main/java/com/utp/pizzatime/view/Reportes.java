@@ -1,11 +1,17 @@
 package com.utp.pizzatime.view;
 
 import javax.swing.*;
+import javax.swing.table.DefaultTableModel;
 import javax.swing.table.TableModel;
 import java.io.FileOutputStream;
 import java.io.IOException;
+import java.sql.*;
 import org.apache.poi.ss.usermodel.*;
 import org.apache.poi.xssf.usermodel.XSSFWorkbook;
+import com.utp.pizzatime.util.SQLConexion;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
+
 
 public class Reportes extends javax.swing.JPanel {
 
@@ -22,6 +28,7 @@ public class Reportes extends javax.swing.JPanel {
         Btn_excelimpo = new javax.swing.JToggleButton();
         jScrollPane2 = new javax.swing.JScrollPane();
         TableRepor = new javax.swing.JTable();
+        Button_Repo = new javax.swing.JButton();
 
         jTable1.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -45,27 +52,24 @@ public class Reportes extends javax.swing.JPanel {
 
         TableRepor.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {"flour", "2", "2123SA"},
-                {"tomate souce", "3", "23DS34"},
-                {"chesse", "4", "213DSF456"},
-                {null, null, null},
-                {null, null, null},
-                {null, null, null},
-                {null, null, null},
-                {null, null, null},
-                {null, null, null},
-                {null, null, null},
-                {null, null, null},
-                {null, null, null},
-                {null, null, null},
-                {null, null, null}
+                {null, null, null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null, null, null}
             },
             new String [] {
-                "Producto", "Cantidad", "Lote"
+                "ID_Producto", "Producto", "Medida", "Stock_Actual", "Stock_Cajas", "Stock_Min", "Stock_Max", "ID_Proveedor", "Precio", "Descripcion"
             }
         ) {
             Class[] types = new Class [] {
-                java.lang.String.class, java.lang.String.class, java.lang.String.class
+                java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class
             };
 
             public Class getColumnClass(int columnIndex) {
@@ -74,26 +78,36 @@ public class Reportes extends javax.swing.JPanel {
         });
         jScrollPane2.setViewportView(TableRepor);
 
+        Button_Repo.setText("Generar Reporte");
+        Button_Repo.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                Button_RepoActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(layout.createSequentialGroup()
+                .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 633, Short.MAX_VALUE)
+                .addContainerGap())
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addGap(27, 27, 27)
-                .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 32, Short.MAX_VALUE)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(Btn_excelimpo)
-                .addGap(24, 24, 24))
+                .addGap(18, 18, 18)
+                .addComponent(Button_Repo)
+                .addGap(15, 15, 15))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addGap(108, 108, 108)
-                .addComponent(Btn_excelimpo)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addContainerGap(22, Short.MAX_VALUE)
-                .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(146, Short.MAX_VALUE)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(Button_Repo)
+                    .addComponent(Btn_excelimpo))
+                .addGap(18, 18, 18)
+                .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 262, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap())
         );
     }// </editor-fold>//GEN-END:initComponents
@@ -104,8 +118,13 @@ public class Reportes extends javax.swing.JPanel {
         JFileChooser fileChooser = new JFileChooser();
         fileChooser.setDialogTitle("Guardar como");
 
-        // Nombre por defecto del archivo
-        fileChooser.setSelectedFile(new java.io.File("reporte.xlsx"));
+        // Obtener fecha y hora actual con formato
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd_HH-mm-ss");
+        String timestamp = LocalDateTime.now().format(formatter);
+        String fileName = "Stock_PapaJhons_" + timestamp + ".xlsx";
+
+        fileChooser.setSelectedFile(new java.io.File(fileName));
+
 
         // Mostrar el cuadro de diálogo de guardar y capturar la opción del usuario
         int userSelection = fileChooser.showSaveDialog(this);
@@ -159,9 +178,48 @@ public class Reportes extends javax.swing.JPanel {
 
     }//GEN-LAST:event_Btn_excelimpoActionPerformed
 
+    private void Button_RepoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_Button_RepoActionPerformed
+        
+        // MÉTODO: Carga los datos del producto desde la base de datos y los muestra en el JTable
+        DefaultTableModel model = (DefaultTableModel) TableRepor.getModel();
+        model.setRowCount(0); // Limpiar los datos anteriores antes de agregar nuevos
+
+        String sql = "SELECT * FROM PRODUCTO"; // Consulta SQL para obtener todos los productos
+
+        try (
+            Connection conn = new SQLConexion().establecerConexion(); // Establecer conexión a la BD
+            PreparedStatement ps = conn.prepareStatement(sql); // Preparar la consulta
+            ResultSet rs = ps.executeQuery() // Ejecutar la consulta
+        ) {
+
+            // Iterar sobre cada resultado y agregarlo a la tabla
+            while (rs.next()) {
+                Object[] fila = new Object[]{
+                    rs.getString("ID_PRO"),
+                    rs.getString("NOMBRE_PRO"),
+                    rs.getInt("MEDIDA"),
+                    rs.getInt("STOCK_ACTUAL"),
+                    rs.getInt("STOCK_CAJAS"),
+                    rs.getInt("STOCK_MIN"),
+                    rs.getInt("STOCK_MAX"),
+                    rs.getString("ID_PROV"),
+                    rs.getDouble("PRECIO"),
+                    rs.getString("DESCRIPCION")
+                };
+                model.addRow(fila); // Añadir fila al JTable
+            }
+
+        } catch (SQLException e) {
+            // Mostrar error si la consulta o conexión fallan
+            JOptionPane.showMessageDialog(this, "Error al cargar los datos: " + e.getMessage());
+        }
+        
+    }//GEN-LAST:event_Button_RepoActionPerformed
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JToggleButton Btn_excelimpo;
+    private javax.swing.JButton Button_Repo;
     private javax.swing.JTable TableRepor;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;

@@ -8,6 +8,7 @@ com\utp\pizzatime\vista\RegistroIngresoo$2.class
 com\utp\pizzatime\view\Admin$4.class
 com\utp\pizzatime\service\P_ReportGeneratorService.class
 com\utp\pizzatime\view\RegistroSalidaUser$2.class
+com\utp\pizzatime\view\Reportes$3.class
 com\utp\pizzatime\view\Pedido_ingredientes.class
 com\utp\pizzatime\view\Employee$4.class
 com\utp\pizzatime\view\Gestion_usu.class
