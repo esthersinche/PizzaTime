@@ -8,11 +8,12 @@ import java.awt.CardLayout;
 
 public class Admin extends javax.swing.JFrame {
     private CardLayout card; //se crea para inicializarse luego
-    private ConsultarStock consultar =  new ConsultarStock(); //instancia de los paneles del primer boton, se hace así por cada panel por botón
-    private Pedido_ingredientes pedido_ing= new Pedido_ingredientes();
-    private Gestion_usu gest_usu= new Gestion_usu();
+    private Pedido_ingredientes pedido_ing= new Pedido_ingredientes();//instancia de los paneles del primer boton, se hace así por cada panel por botón
+    private Gestion_usu gest_usu= new Gestion_usu(); //AUN NO TOCAR
     private GestionarProductos gest_prod= new GestionarProductos();
     private Reportes reportes =  new Reportes();
+    private ReingresoProd repro = new ReingresoProd();
+    private RegistroIngresoo reg_in = new RegistroIngresoo();
     
     
     /**
@@ -24,11 +25,12 @@ public class Admin extends javax.swing.JFrame {
         panelAdm.setLayout(card);
         
         //tarjetas (aqui coloquen las tarjetas de los nuevos paneles que creen)
-        panelAdm.add(consultar,"consultarStock");
         panelAdm.add(pedido_ing, "pedido_ingredientes");
         panelAdm.add(gest_usu, "gestion_usu");
         panelAdm.add(gest_prod, "gestion_prod");
         panelAdm.add(reportes, "reportes");
+        panelAdm.add(repro, "repro");
+        panelAdm.add(reg_in, "reg_in");
         
     }
 
@@ -43,11 +45,11 @@ public class Admin extends javax.swing.JFrame {
 
         jPanel1 = new javax.swing.JPanel();
         jPanel2 = new javax.swing.JPanel();
-        btnConsultarStock = new javax.swing.JButton();
-        btnUsuarios = new javax.swing.JButton();
+        btnReingreso = new javax.swing.JButton();
+        btnIngredientes = new javax.swing.JButton();
         btnReportes = new javax.swing.JButton();
         btnPedidos = new javax.swing.JButton();
-        btnRegistrarIngredientes = new javax.swing.JButton();
+        btnRegistrarMovimiento = new javax.swing.JButton();
         btnlogout = new javax.swing.JButton();
         jLabel1 = new javax.swing.JLabel();
         panelAdm = new javax.swing.JPanel();
@@ -59,25 +61,25 @@ public class Admin extends javax.swing.JFrame {
 
         jPanel2.setBackground(new java.awt.Color(255, 255, 255));
 
-        btnConsultarStock.setBackground(new java.awt.Color(0, 109, 86));
-        btnConsultarStock.setFont(new java.awt.Font("Segoe UI Variable", 1, 14)); // NOI18N
-        btnConsultarStock.setForeground(new java.awt.Color(255, 255, 255));
-        btnConsultarStock.setText("Consultar Stock");
-        btnConsultarStock.setBorder(javax.swing.BorderFactory.createEmptyBorder(1, 1, 1, 1));
-        btnConsultarStock.addActionListener(new java.awt.event.ActionListener() {
+        btnReingreso.setBackground(new java.awt.Color(0, 109, 86));
+        btnReingreso.setFont(new java.awt.Font("Segoe UI Variable", 1, 14)); // NOI18N
+        btnReingreso.setForeground(new java.awt.Color(255, 255, 255));
+        btnReingreso.setText("Reingreso de Ingredientes");
+        btnReingreso.setBorder(javax.swing.BorderFactory.createEmptyBorder(1, 1, 1, 1));
+        btnReingreso.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnConsultarStockActionPerformed(evt);
+                btnReingresoActionPerformed(evt);
             }
         });
 
-        btnUsuarios.setBackground(new java.awt.Color(0, 109, 86));
-        btnUsuarios.setFont(new java.awt.Font("Segoe UI Variable", 1, 14)); // NOI18N
-        btnUsuarios.setForeground(new java.awt.Color(255, 255, 255));
-        btnUsuarios.setText("Gestionar Usuarios");
-        btnUsuarios.setBorder(javax.swing.BorderFactory.createEmptyBorder(1, 1, 1, 1));
-        btnUsuarios.addActionListener(new java.awt.event.ActionListener() {
+        btnIngredientes.setBackground(new java.awt.Color(0, 109, 86));
+        btnIngredientes.setFont(new java.awt.Font("Segoe UI Variable", 1, 14)); // NOI18N
+        btnIngredientes.setForeground(new java.awt.Color(255, 255, 255));
+        btnIngredientes.setText("Gestionar Ingredientes");
+        btnIngredientes.setBorder(javax.swing.BorderFactory.createEmptyBorder(1, 1, 1, 1));
+        btnIngredientes.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnUsuariosActionPerformed(evt);
+                btnIngredientesActionPerformed(evt);
             }
         });
 
@@ -103,14 +105,14 @@ public class Admin extends javax.swing.JFrame {
             }
         });
 
-        btnRegistrarIngredientes.setBackground(new java.awt.Color(0, 109, 86));
-        btnRegistrarIngredientes.setFont(new java.awt.Font("Segoe UI Variable", 1, 14)); // NOI18N
-        btnRegistrarIngredientes.setForeground(new java.awt.Color(255, 255, 255));
-        btnRegistrarIngredientes.setText("Registrar Ingredientes");
-        btnRegistrarIngredientes.setBorder(javax.swing.BorderFactory.createEmptyBorder(1, 1, 1, 1));
-        btnRegistrarIngredientes.addActionListener(new java.awt.event.ActionListener() {
+        btnRegistrarMovimiento.setBackground(new java.awt.Color(0, 109, 86));
+        btnRegistrarMovimiento.setFont(new java.awt.Font("Segoe UI Variable", 1, 14)); // NOI18N
+        btnRegistrarMovimiento.setForeground(new java.awt.Color(255, 255, 255));
+        btnRegistrarMovimiento.setText("Registrar Movimiento");
+        btnRegistrarMovimiento.setBorder(javax.swing.BorderFactory.createEmptyBorder(1, 1, 1, 1));
+        btnRegistrarMovimiento.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnRegistrarIngredientesActionPerformed(evt);
+                btnRegistrarMovimientoActionPerformed(evt);
             }
         });
 
@@ -132,32 +134,32 @@ public class Admin extends javax.swing.JFrame {
             .addGroup(jPanel2Layout.createSequentialGroup()
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel2Layout.createSequentialGroup()
-                        .addGap(21, 21, 21)
-                        .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addComponent(btnRegistrarIngredientes, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(btnPedidos, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(btnReportes, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(btnUsuarios, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(btnConsultarStock, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                    .addGroup(jPanel2Layout.createSequentialGroup()
                         .addGap(50, 50, 50)
-                        .addComponent(btnlogout, javax.swing.GroupLayout.PREFERRED_SIZE, 140, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addContainerGap(19, Short.MAX_VALUE))
+                        .addComponent(btnlogout, javax.swing.GroupLayout.PREFERRED_SIZE, 140, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(jPanel2Layout.createSequentialGroup()
+                        .addGap(20, 20, 20)
+                        .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addComponent(btnRegistrarMovimiento, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(btnPedidos, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(btnIngredientes, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(btnReingreso, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(btnReportes, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                .addContainerGap(20, Short.MAX_VALUE))
         );
         jPanel2Layout.setVerticalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel2Layout.createSequentialGroup()
-                .addGap(83, 83, 83)
-                .addComponent(btnConsultarStock, javax.swing.GroupLayout.PREFERRED_SIZE, 60, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 18, 18)
+                .addGap(82, 82, 82)
                 .addComponent(btnPedidos, javax.swing.GroupLayout.PREFERRED_SIZE, 60, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
-                .addComponent(btnUsuarios, javax.swing.GroupLayout.PREFERRED_SIZE, 60, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(btnIngredientes, javax.swing.GroupLayout.PREFERRED_SIZE, 60, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(18, 18, 18)
+                .addComponent(btnRegistrarMovimiento, javax.swing.GroupLayout.PREFERRED_SIZE, 60, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(18, 18, 18)
+                .addComponent(btnReingreso, javax.swing.GroupLayout.PREFERRED_SIZE, 60, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
                 .addComponent(btnReportes, javax.swing.GroupLayout.PREFERRED_SIZE, 60, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 18, 18)
-                .addComponent(btnRegistrarIngredientes, javax.swing.GroupLayout.PREFERRED_SIZE, 60, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 56, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 57, Short.MAX_VALUE)
                 .addComponent(btnlogout, javax.swing.GroupLayout.PREFERRED_SIZE, 46, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(43, 43, 43))
         );
@@ -196,9 +198,9 @@ public class Admin extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void btnConsultarStockActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnConsultarStockActionPerformed
-        card.show(panelAdm, "consultarStock");
-    }//GEN-LAST:event_btnConsultarStockActionPerformed
+    private void btnReingresoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnReingresoActionPerformed
+        card.show(panelAdm, "repro");
+    }//GEN-LAST:event_btnReingresoActionPerformed
 
     private void btnlogoutActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnlogoutActionPerformed
         Login login = new Login();
@@ -211,15 +213,15 @@ public class Admin extends javax.swing.JFrame {
         card.show(panelAdm, "pedido_ingredientes");
     }//GEN-LAST:event_btnPedidosActionPerformed
 
-    private void btnUsuariosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnUsuariosActionPerformed
-        // TODO add your handling code here:
-        card.show(panelAdm, "gestion_usu");
-    }//GEN-LAST:event_btnUsuariosActionPerformed
-
-    private void btnRegistrarIngredientesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRegistrarIngredientesActionPerformed
+    private void btnIngredientesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnIngredientesActionPerformed
         // TODO add your handling code here:
         card.show(panelAdm, "gestion_prod");
-    }//GEN-LAST:event_btnRegistrarIngredientesActionPerformed
+    }//GEN-LAST:event_btnIngredientesActionPerformed
+
+    private void btnRegistrarMovimientoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRegistrarMovimientoActionPerformed
+        // TODO add your handling code here:
+        card.show(panelAdm, "reg_in");
+    }//GEN-LAST:event_btnRegistrarMovimientoActionPerformed
 
     private void btnReportesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnReportesActionPerformed
         card.show(panelAdm, "reportes");
@@ -261,11 +263,11 @@ public class Admin extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton btnConsultarStock;
+    private javax.swing.JButton btnIngredientes;
     private javax.swing.JButton btnPedidos;
-    private javax.swing.JButton btnRegistrarIngredientes;
+    private javax.swing.JButton btnRegistrarMovimiento;
+    private javax.swing.JButton btnReingreso;
     private javax.swing.JButton btnReportes;
-    private javax.swing.JButton btnUsuarios;
     private javax.swing.JButton btnlogout;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JPanel jPanel1;

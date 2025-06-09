@@ -62,38 +62,38 @@
                   <Group type="102" attributes="0">
                       <Group type="103" groupAlignment="0" attributes="0">
                           <Group type="102" attributes="0">
-                              <EmptySpace min="-2" pref="21" max="-2" attributes="0"/>
-                              <Group type="103" groupAlignment="1" attributes="0">
-                                  <Component id="btnRegistrarIngredientes" min="-2" pref="200" max="-2" attributes="0"/>
-                                  <Component id="btnPedidos" min="-2" pref="200" max="-2" attributes="0"/>
-                                  <Component id="btnReportes" min="-2" pref="200" max="-2" attributes="0"/>
-                                  <Component id="btnUsuarios" min="-2" pref="200" max="-2" attributes="0"/>
-                                  <Component id="btnConsultarStock" min="-2" pref="200" max="-2" attributes="0"/>
-                              </Group>
-                          </Group>
-                          <Group type="102" alignment="0" attributes="0">
                               <EmptySpace min="-2" pref="50" max="-2" attributes="0"/>
                               <Component id="btnlogout" min="-2" pref="140" max="-2" attributes="0"/>
                           </Group>
+                          <Group type="102" attributes="0">
+                              <EmptySpace min="-2" pref="20" max="-2" attributes="0"/>
+                              <Group type="103" groupAlignment="1" attributes="0">
+                                  <Component id="btnRegistrarMovimiento" min="-2" pref="200" max="-2" attributes="0"/>
+                                  <Component id="btnPedidos" min="-2" pref="200" max="-2" attributes="0"/>
+                                  <Component id="btnIngredientes" min="-2" pref="200" max="-2" attributes="0"/>
+                                  <Component id="btnReingreso" alignment="1" min="-2" pref="200" max="-2" attributes="0"/>
+                                  <Component id="btnReportes" alignment="1" min="-2" pref="200" max="-2" attributes="0"/>
+                              </Group>
+                          </Group>
                       </Group>
-                      <EmptySpace pref="19" max="32767" attributes="0"/>
+                      <EmptySpace pref="20" max="32767" attributes="0"/>
                   </Group>
               </Group>
             </DimensionLayout>
             <DimensionLayout dim="1">
               <Group type="103" groupAlignment="0" attributes="0">
                   <Group type="102" alignment="0" attributes="0">
-                      <EmptySpace min="-2" pref="83" max="-2" attributes="0"/>
-                      <Component id="btnConsultarStock" min="-2" pref="60" max="-2" attributes="0"/>
-                      <EmptySpace type="separate" max="-2" attributes="0"/>
+                      <EmptySpace min="-2" pref="82" max="-2" attributes="0"/>
                       <Component id="btnPedidos" min="-2" pref="60" max="-2" attributes="0"/>
                       <EmptySpace type="separate" max="-2" attributes="0"/>
-                      <Component id="btnUsuarios" min="-2" pref="60" max="-2" attributes="0"/>
-                      <EmptySpace min="-2" pref="18" max="-2" attributes="0"/>
-                      <Component id="btnReportes" min="-2" pref="60" max="-2" attributes="0"/>
+                      <Component id="btnIngredientes" min="-2" pref="60" max="-2" attributes="0"/>
                       <EmptySpace type="separate" max="-2" attributes="0"/>
-                      <Component id="btnRegistrarIngredientes" min="-2" pref="60" max="-2" attributes="0"/>
-                      <EmptySpace pref="56" max="32767" attributes="0"/>
+                      <Component id="btnRegistrarMovimiento" min="-2" pref="60" max="-2" attributes="0"/>
+                      <EmptySpace type="separate" max="-2" attributes="0"/>
+                      <Component id="btnReingreso" min="-2" pref="60" max="-2" attributes="0"/>
+                      <EmptySpace type="separate" max="-2" attributes="0"/>
+                      <Component id="btnReportes" min="-2" pref="60" max="-2" attributes="0"/>
+                      <EmptySpace pref="57" max="32767" attributes="0"/>
                       <Component id="btnlogout" min="-2" pref="46" max="-2" attributes="0"/>
                       <EmptySpace min="-2" pref="43" max="-2" attributes="0"/>
                   </Group>
@@ -101,7 +101,7 @@
             </DimensionLayout>
           </Layout>
           <SubComponents>
-            <Component class="javax.swing.JButton" name="btnConsultarStock">
+            <Component class="javax.swing.JButton" name="btnReingreso">
               <Properties>
                 <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
                   <Color blue="56" green="6d" red="0" type="rgb"/>
@@ -112,7 +112,7 @@
                 <Property name="foreground" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
                   <Color blue="ff" green="ff" red="ff" type="rgb"/>
                 </Property>
-                <Property name="text" type="java.lang.String" value="Consultar Stock"/>
+                <Property name="text" type="java.lang.String" value="Reingreso de Ingredientes"/>
                 <Property name="border" type="javax.swing.border.Border" editor="org.netbeans.modules.form.editors2.BorderEditor">
                   <Border info="org.netbeans.modules.form.compat2.border.EmptyBorderInfo">
                     <EmptyBorder/>
@@ -120,10 +120,10 @@
                 </Property>
               </Properties>
               <Events>
-                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnConsultarStockActionPerformed"/>
+                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnReingresoActionPerformed"/>
               </Events>
             </Component>
-            <Component class="javax.swing.JButton" name="btnUsuarios">
+            <Component class="javax.swing.JButton" name="btnIngredientes">
               <Properties>
                 <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
                   <Color blue="56" green="6d" red="0" type="rgb"/>
@@ -134,7 +134,7 @@
                 <Property name="foreground" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
                   <Color blue="ff" green="ff" red="ff" type="rgb"/>
                 </Property>
-                <Property name="text" type="java.lang.String" value="Gestionar Usuarios"/>
+                <Property name="text" type="java.lang.String" value="Gestionar Ingredientes"/>
                 <Property name="border" type="javax.swing.border.Border" editor="org.netbeans.modules.form.editors2.BorderEditor">
                   <Border info="org.netbeans.modules.form.compat2.border.EmptyBorderInfo">
                     <EmptyBorder/>
@@ -142,7 +142,7 @@
                 </Property>
               </Properties>
               <Events>
-                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnUsuariosActionPerformed"/>
+                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnIngredientesActionPerformed"/>
               </Events>
             </Component>
             <Component class="javax.swing.JButton" name="btnReportes">
@@ -189,7 +189,7 @@
                 <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnPedidosActionPerformed"/>
               </Events>
             </Component>
-            <Component class="javax.swing.JButton" name="btnRegistrarIngredientes">
+            <Component class="javax.swing.JButton" name="btnRegistrarMovimiento">
               <Properties>
                 <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
                   <Color blue="56" green="6d" red="0" type="rgb"/>
@@ -200,7 +200,7 @@
                 <Property name="foreground" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
                   <Color blue="ff" green="ff" red="ff" type="rgb"/>
                 </Property>
-                <Property name="text" type="java.lang.String" value="Registrar Ingredientes"/>
+                <Property name="text" type="java.lang.String" value="Registrar Movimiento"/>
                 <Property name="border" type="javax.swing.border.Border" editor="org.netbeans.modules.form.editors2.BorderEditor">
                   <Border info="org.netbeans.modules.form.compat2.border.EmptyBorderInfo">
                     <EmptyBorder/>
@@ -208,7 +208,7 @@
                 </Property>
               </Properties>
               <Events>
-                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnRegistrarIngredientesActionPerformed"/>
+                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnRegistrarMovimientoActionPerformed"/>
               </Events>
             </Component>
             <Component class="javax.swing.JButton" name="btnlogout">
