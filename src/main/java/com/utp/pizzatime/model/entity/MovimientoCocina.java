@@ -7,44 +7,44 @@ package com.utp.pizzatime.model.entity;
  */
 public class MovimientoCocina {
 
-    private String id_dis;
-    private int dni_emp;
-    private int cantidad_unit;
-    private int cantidad_cajas;
+    private String idDis;
+    private int dniEmp;
+    private int cantidadUnit;
+    private int cantidadCajas;
     private String lote;
 
     // Getters y Setters
 
     public String getId_dis() {
-        return id_dis;
+        return idDis;
     }
 
     public void setId_dis(String id_dis) {
-        this.id_dis = id_dis;
+        this.idDis = id_dis;
     }
 
     public int getDni_emp() {
-        return dni_emp;
+        return dniEmp;
     }
 
     public void setDni_emp(int dni_emp) {
-        this.dni_emp = dni_emp;
+        this.dniEmp = dni_emp;
     }
 
     public int getCantidad_unit() {
-        return cantidad_unit;
+        return cantidadUnit;
     }
 
     public void setCantidad_unit(int cantidad_unit) {
-        this.cantidad_unit = cantidad_unit;
+        this.cantidadUnit = cantidad_unit;
     }
 
     public int getCantidad_cajas() {
-        return cantidad_cajas;
+        return cantidadCajas;
     }
 
     public void setCantidad_cajas(int cantidad_cajas) {
-        this.cantidad_cajas = cantidad_cajas;
+        this.cantidadCajas = cantidad_cajas;
     }
 
     public String getLote() {

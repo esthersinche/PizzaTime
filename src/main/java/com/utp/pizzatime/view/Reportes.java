@@ -36,6 +36,8 @@ public class Reportes extends javax.swing.JPanel {
         ));
         jScrollPane1.setViewportView(jTable1);
 
+        setBackground(new java.awt.Color(255, 255, 255));
+
         Btn_excelimpo.setText("Exportar Excel");
         Btn_excelimpo.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
