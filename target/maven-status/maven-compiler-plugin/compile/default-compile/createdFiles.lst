@@ -64,6 +64,7 @@ com\utp\pizzatime\view\Pedido_ingredientes$2.class
 com\utp\pizzatime\view\Pedido_ingredientes$5.class
 com\utp\pizzatime\controller\LoginController.class
 com\utp\pizzatime\util\Pruebaconexion.class
+com\utp\pizzatime\view\RegistroIngresoo$10.class
 com\utp\pizzatime\PizzaTime.class
 com\utp\pizzatime\view\Admin$7.class
 com\utp\pizzatime\model\dao\impl\I_DisponibleDAO.class

@@ -7,44 +7,52 @@ package com.utp.pizzatime.model.entity;
  */
 public class MovimientoCocina {
 
-    private String idDis;
-    private int dniEmp;
-    private int cantidadUnit;
-    private int cantidadCajas;
-    private String lote;
-
-    // Getters y Setters
+        private String id_dis;
+        private String tipo;
+        private int dni_emp;
+        private int cantidad_unit;
+        private int cantidad_cajas;
+        private String lote;
+        private String motivo;
 
     public String getId_dis() {
-        return idDis;
+        return id_dis;
     }
 
     public void setId_dis(String id_dis) {
-        this.idDis = id_dis;
+        this.id_dis = id_dis;
+    }
+
+    public String getTipo() {
+        return tipo;
+    }
+
+    public void setTipo(String tipo) {
+        this.tipo = tipo;
     }
 
     public int getDni_emp() {
-        return dniEmp;
+        return dni_emp;
     }
 
     public void setDni_emp(int dni_emp) {
-        this.dniEmp = dni_emp;
+        this.dni_emp = dni_emp;
     }
 
     public int getCantidad_unit() {
-        return cantidadUnit;
+        return cantidad_unit;
     }
 
     public void setCantidad_unit(int cantidad_unit) {
-        this.cantidadUnit = cantidad_unit;
+        this.cantidad_unit = cantidad_unit;
     }
 
     public int getCantidad_cajas() {
-        return cantidadCajas;
+        return cantidad_cajas;
     }
 
     public void setCantidad_cajas(int cantidad_cajas) {
-        this.cantidadCajas = cantidad_cajas;
+        this.cantidad_cajas = cantidad_cajas;
     }
 
     public String getLote() {
@@ -54,4 +62,14 @@ public class MovimientoCocina {
     public void setLote(String lote) {
         this.lote = lote;
     }
+
+    public String getMotivo() {
+        return motivo;
+    }
+
+    public void setMotivo(String motivo) {
+        this.motivo = motivo;
+    }
+    
+        
 }

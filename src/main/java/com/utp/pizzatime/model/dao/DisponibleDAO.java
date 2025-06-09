@@ -11,4 +11,8 @@ import java.util.List;
 public interface DisponibleDAO {
     void insertarDisp(Disponible d) throws SQLException;
     List<Disponible> listarTodosDisp() throws SQLException;
+    
+    Disponible obtenerDisponibleFIFO(String nombreProducto, int cantidadMinima) throws SQLException;
+    String obtenerIdDisponiblePorIngredienteYLote(String nombreProducto, String lote) throws SQLException;
+
 }

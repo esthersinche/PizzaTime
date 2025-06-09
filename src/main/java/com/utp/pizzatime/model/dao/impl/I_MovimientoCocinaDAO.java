@@ -44,6 +44,24 @@ public class I_MovimientoCocinaDAO implements MovimientoCocinaDAO {
         // Si no hay ninguno, arrancamos en MOV00001
         return "MOV00001";
     }
+    
+    /**
+     * Genera un nuevo ID con prefijo MER y cinco dígitos secuenciales.
+     */
+    private String generarNuevoIDMerma(Connection conn) throws SQLException {
+        String sql = "SELECT MAX(ID_MOV) AS max_id FROM MOVIMIENTO_COCINA WHERE ID_MOV LIKE 'MER%'";
+        try (Statement st = conn.createStatement(); ResultSet rs = st.executeQuery(sql)) {
+
+            if (rs.next() && rs.getString("max_id") != null) {
+                String ultimo = rs.getString("max_id");      // e.g. "MER00042"
+                int num = Integer.parseInt(ultimo.substring(3));
+                return String.format("MER%05d", num + 1);
+            }
+        }
+        // Si no hay ninguno, arrancamos en MER00001
+        return "MER00001";
+    }
+
 
     @Override
     public void registrarMovimientoCocina(MovimientoCocina m) throws SQLException {
@@ -75,11 +93,12 @@ public class I_MovimientoCocinaDAO implements MovimientoCocinaDAO {
     //registrarMovimientoMerma() movimiento x unidades
     @Override
     public void registrarMovimientoMerma(MovimientoCocina m) throws SQLException {
-        log.debug("registrarMovimientoMerma: idDis={}, unidades={}", m.getId_dis(), m.getCantidad_unit());
+        log.debug("registrarMovimientoMerma: idDis={}, unidades={}, motivo={}", m.getId_dis(), m.getCantidad_unit(), m.getMotivo());
+
         try (Connection conn = sqlCon.establecerConexion(); PreparedStatement ps = conn.prepareStatement(SQL_INSERT)) {
 
-            String id = generarNuevoID(conn);
-            ps.setString(1, id);
+            String nuevoID = generarNuevoIDMerma(conn);
+            ps.setString(1, nuevoID);
             ps.setString(2, m.getId_dis());
             ps.setString(3, "Merma");
             ps.setInt(4, m.getDni_emp());
@@ -87,18 +106,18 @@ public class I_MovimientoCocinaDAO implements MovimientoCocinaDAO {
             ps.setInt(6, 0);
             ps.setString(7, m.getLote());
             ps.setDate(8, new java.sql.Date(System.currentTimeMillis()));
-            ps.setString(9, "Producto Mermado");
+            ps.setString(9, m.getMotivo()); // 
 
             int filas = ps.executeUpdate();
             if (filas > 0) {
-                log.info("Movimiento de UNIDADES registrado: idMov={}, idDis={}, unidades={}",
-                        id, m.getId_dis(), m.getCantidad_unit());
+                log.info("Movimiento de MERMA registrado: idMov={}, idDis={}, unidades={}, motivo={}", nuevoID, m.getId_dis(), m.getCantidad_unit(), m.getMotivo());
             }
         } catch (SQLException ex) {
-            log.error("Error al registrar movimiento de UNIDADES para idDis={}", m.getId_dis(), ex);
+            log.error("Error al registrar movimiento MERMA para idDis={}", m.getId_dis(), ex);
             throw ex;
         }
     }
+
 
     //TODO filtro para reportes
     @Override

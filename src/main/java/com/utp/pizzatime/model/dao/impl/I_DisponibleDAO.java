@@ -58,4 +58,55 @@ public class I_DisponibleDAO implements DisponibleDAO {
         return lista;
     }
     
+        public Disponible obtenerDisponibleFIFO(String nombreProducto, int cantidadMinima) {
+        Disponible disp = null;
+        String sql = "SELECT TOP 1 d.ID_DIS, d.LOTE, d.CANTIDAD_CAJAS " +
+                     "FROM DISPONIBLE d JOIN PRODUCTO p ON d.ID_PRO = p.ID_PRO " +
+                     "WHERE p.NOMBRE_PRO = ? AND d.CANTIDAD_CAJAS >= ? " +
+                     "ORDER BY d.VENCIMIENTO ASC";
+
+        try (Connection c = sqlCon.establecerConexion();
+             PreparedStatement ps = c.prepareStatement(sql)) {
+
+            ps.setString(1, nombreProducto);
+            ps.setInt(2, cantidadMinima);
+
+            ResultSet rs = ps.executeQuery();
+            if (rs.next()) {
+                disp = new Disponible();
+                disp.setIdDis(rs.getString("ID_DIS"));
+                disp.setLote(rs.getString("LOTE"));
+                disp.setCantidadCajas(rs.getInt("CANTIDAD_CAJAS"));
+            }
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+
+        return disp;
+    }
+      // para agarrar id_dis por nombre yt lote 
+        public String obtenerIdDisponiblePorIngredienteYLote(String nombreProducto, String lote) {
+        String idDis = null;
+        String sql = "SELECT d.ID_DIS FROM DISPONIBLE d JOIN PRODUCTO p ON d.ID_PRO = p.ID_PRO " +
+                     "WHERE p.NOMBRE_PRO = ? AND d.LOTE = ?";
+
+        try (Connection c = sqlCon.establecerConexion();
+             PreparedStatement ps = c.prepareStatement(sql)) {
+
+            ps.setString(1, nombreProducto);
+            ps.setString(2, lote);
+
+            ResultSet rs = ps.executeQuery();
+            if (rs.next()) {
+                idDis = rs.getString("ID_DIS");
+            }
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+
+        return idDis;
+    }
+    
 }

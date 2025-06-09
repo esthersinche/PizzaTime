@@ -4,6 +4,20 @@
  */
 package com.utp.pizzatime.view;
 
+import com.utp.pizzatime.model.dao.DisponibleDAO;
+import com.utp.pizzatime.model.entity.Disponible;
+import com.utp.pizzatime.model.entity.MovimientoCocina;
+import com.utp.pizzatime.model.dao.impl.I_MovimientoCocinaDAO;
+import com.utp.pizzatime.util.SQLConexion;
+import com.utp.pizzatime.model.dao.impl.I_DisponibleDAO;
+
+import com.utp.pizzatime.util.SesionActiva;
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import javax.swing.JOptionPane;
+
 /**
  *
  * @author Dell
@@ -17,6 +31,12 @@ public class RegistroIngresoo extends javax.swing.JPanel {
      */
     public RegistroIngresoo() {
         initComponents();
+        cargarIngredientesSalida();
+        cargarTiposMovimiento();
+
+        // Seleccionar un valor válido antes de cargar motivos
+        ComboBoxTipo.setSelectedIndex(0);
+        cargarMotivosPorTipo(ComboBoxTipo.getSelectedItem().toString());
     }
 
     /**
@@ -54,11 +74,13 @@ public class RegistroIngresoo extends javax.swing.JPanel {
         Texto_RegistroIngreso1 = new javax.swing.JLabel();
         ComboBox_Ingredientes_Salida = new javax.swing.JComboBox<>();
         Text_CantidadCajas1 = new javax.swing.JLabel();
-        Field_CantidadCajas_Salida = new javax.swing.JTextField();
-        Text_Lote1 = new javax.swing.JLabel();
-        Field_Lote_Salida = new javax.swing.JTextField();
-        jComboBox1 = new javax.swing.JComboBox<>();
+        cantidadcou = new javax.swing.JTextField();
+        ComboBoxTipo = new javax.swing.JComboBox<>();
         jLabel1 = new javax.swing.JLabel();
+        jLabel2 = new javax.swing.JLabel();
+        ComboBoxMotivo = new javax.swing.JComboBox<>();
+        jLabel3 = new javax.swing.JLabel();
+        fielLote = new javax.swing.JTextField();
 
         setBackground(new java.awt.Color(255, 255, 255));
 
@@ -271,56 +293,70 @@ public class RegistroIngresoo extends javax.swing.JPanel {
         Text_CantidadCajas1.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         Text_CantidadCajas1.setText("Cantidad (Cajas o Unidades)");
 
-        Text_Lote1.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
-        Text_Lote1.setText("Lote");
-
-        Field_Lote_Salida.addActionListener(new java.awt.event.ActionListener() {
+        ComboBoxTipo.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+        ComboBoxTipo.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                Field_Lote_SalidaActionPerformed(evt);
+                ComboBoxTipoActionPerformed(evt);
             }
         });
 
-        jComboBox1.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+        jLabel1.setText("Tipo");
 
-        jLabel1.setText("Motivo");
+        jLabel2.setText("Motivo");
+
+        ComboBoxMotivo.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+
+        jLabel3.setText("Lote");
+
+        fielLote.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                fielLoteActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout Panel_RegistroSalidaLayout = new javax.swing.GroupLayout(Panel_RegistroSalida);
         Panel_RegistroSalida.setLayout(Panel_RegistroSalidaLayout);
         Panel_RegistroSalidaLayout.setHorizontalGroup(
             Panel_RegistroSalidaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(Panel_RegistroSalidaLayout.createSequentialGroup()
+                .addGap(333, 333, 333)
+                .addComponent(Boton_Cancelar_Salida, javax.swing.GroupLayout.PREFERRED_SIZE, 92, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+            .addGroup(Panel_RegistroSalidaLayout.createSequentialGroup()
                 .addGap(36, 36, 36)
                 .addGroup(Panel_RegistroSalidaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, Panel_RegistroSalidaLayout.createSequentialGroup()
                         .addGroup(Panel_RegistroSalidaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addComponent(jScrollPane3)
                             .addGroup(Panel_RegistroSalidaLayout.createSequentialGroup()
-                                .addGroup(Panel_RegistroSalidaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(Text_Ingrediente1)
-                                    .addComponent(jLabel1))
-                                .addGap(35, 35, 35)
-                                .addComponent(ComboBox_Ingredientes_Salida, javax.swing.GroupLayout.PREFERRED_SIZE, 423, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addComponent(jLabel1)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                .addComponent(ComboBoxTipo, javax.swing.GroupLayout.PREFERRED_SIZE, 137, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addComponent(Text_CantidadCajas1)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(cantidadcou, javax.swing.GroupLayout.PREFERRED_SIZE, 80, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(208, 208, 208))
+                            .addGroup(javax.swing.GroupLayout.Alignment.LEADING, Panel_RegistroSalidaLayout.createSequentialGroup()
+                                .addGroup(Panel_RegistroSalidaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                                    .addGroup(Panel_RegistroSalidaLayout.createSequentialGroup()
+                                        .addComponent(jLabel2)
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                        .addComponent(ComboBoxMotivo, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                        .addGap(61, 61, 61)
+                                        .addComponent(jLabel3)
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                        .addComponent(fielLote, javax.swing.GroupLayout.PREFERRED_SIZE, 144, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                    .addGroup(Panel_RegistroSalidaLayout.createSequentialGroup()
+                                        .addComponent(Text_Ingrediente1)
+                                        .addGap(35, 35, 35)
+                                        .addComponent(ComboBox_Ingredientes_Salida, javax.swing.GroupLayout.PREFERRED_SIZE, 423, javax.swing.GroupLayout.PREFERRED_SIZE)))
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 79, Short.MAX_VALUE)
-                                .addComponent(Boton_Guardar_Salida, javax.swing.GroupLayout.PREFERRED_SIZE, 92, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addComponent(jScrollPane3))
+                                .addComponent(Boton_Guardar_Salida, javax.swing.GroupLayout.PREFERRED_SIZE, 92, javax.swing.GroupLayout.PREFERRED_SIZE)))
                         .addGap(29, 29, 29))
                     .addGroup(Panel_RegistroSalidaLayout.createSequentialGroup()
-                        .addGroup(Panel_RegistroSalidaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addComponent(jComboBox1, javax.swing.GroupLayout.PREFERRED_SIZE, 291, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addGroup(Panel_RegistroSalidaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                .addComponent(Texto_RegistroIngreso1)
-                                .addGroup(Panel_RegistroSalidaLayout.createSequentialGroup()
-                                    .addComponent(Text_CantidadCajas1)
-                                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                    .addComponent(Field_CantidadCajas_Salida, javax.swing.GroupLayout.PREFERRED_SIZE, 80, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                    .addComponent(Text_Lote1)
-                                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                    .addComponent(Field_Lote_Salida, javax.swing.GroupLayout.PREFERRED_SIZE, 77, javax.swing.GroupLayout.PREFERRED_SIZE))))
-                        .addGap(0, 0, Short.MAX_VALUE))))
-            .addGroup(Panel_RegistroSalidaLayout.createSequentialGroup()
-                .addGap(333, 333, 333)
-                .addComponent(Boton_Cancelar_Salida, javax.swing.GroupLayout.PREFERRED_SIZE, 92, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                        .addComponent(Texto_RegistroIngreso1)
+                        .addGap(186, 522, Short.MAX_VALUE))))
         );
         Panel_RegistroSalidaLayout.setVerticalGroup(
             Panel_RegistroSalidaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -334,16 +370,18 @@ public class RegistroIngresoo extends javax.swing.JPanel {
                     .addComponent(Boton_Guardar_Salida, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
                 .addGroup(Panel_RegistroSalidaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jComboBox1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel1))
-                .addGap(20, 20, 20)
+                    .addComponent(ComboBoxTipo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel1)
+                    .addComponent(cantidadcou, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(Text_CantidadCajas1))
+                .addGap(18, 18, 18)
                 .addGroup(Panel_RegistroSalidaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(Text_CantidadCajas1)
-                    .addComponent(Field_CantidadCajas_Salida, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(Text_Lote1)
-                    .addComponent(Field_Lote_Salida, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(jScrollPane3, javax.swing.GroupLayout.DEFAULT_SIZE, 240, Short.MAX_VALUE)
+                    .addComponent(jLabel2)
+                    .addComponent(ComboBoxMotivo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(fielLote, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 22, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(15, 15, 15)
+                .addComponent(jScrollPane3, javax.swing.GroupLayout.DEFAULT_SIZE, 239, Short.MAX_VALUE)
                 .addGap(18, 18, 18)
                 .addComponent(Boton_Cancelar_Salida, javax.swing.GroupLayout.PREFERRED_SIZE, 29, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(12, 12, 12))
@@ -386,31 +424,168 @@ public class RegistroIngresoo extends javax.swing.JPanel {
     private void Boton_Cancelar_SalidaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_Boton_Cancelar_SalidaActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_Boton_Cancelar_SalidaActionPerformed
+    //combobox de ingredientes
+    private void cargarIngredientesSalida() {
+        try (Connection con = new SQLConexion().establecerConexion()) {
+            String sql = "SELECT NOMBRE_PRO FROM PRODUCTO";
+            PreparedStatement ps = con.prepareStatement(sql);
+            ResultSet rs = ps.executeQuery();
 
+            ComboBox_Ingredientes_Salida.removeAllItems();  // Limpiar primero
+
+            while (rs.next()) {
+                ComboBox_Ingredientes_Salida.addItem(rs.getString("NOMBRE_PRO"));
+            }
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(this, "Error al cargar ingredientes: " + e.getMessage());
+        }
+    }
+    //combobox de tipos solo cocina y merma
+        private void cargarTiposMovimiento() {
+        ComboBoxTipo.removeAllItems();
+        ComboBoxTipo.addItem("Cocina");
+        ComboBoxTipo.addItem("Merma");
+    }
+        //motivo segun tipo
+    private void cargarMotivosPorTipo(String tipo) {
+        ComboBoxMotivo.removeAllItems();
+        if ("Cocina".equals(tipo)) {
+            ComboBoxMotivo.addItem("Preparación de platos");
+        } else if ("Merma".equals(tipo)) {
+            ComboBoxMotivo.addItem("Producto vencido");
+            ComboBoxMotivo.addItem("Mercancía dañada");
+            ComboBoxMotivo.addItem("Mala rotación del producto");
+        }
+    }
+
+
+    
+    
+    public String obtenerIdDisponiblePorIngredienteYLote(String nombreProducto, String lote) {
+    String idDis = null;
+    String sql = "SELECT ID_DIS FROM DISPONIBLE "
+               + "WHERE ID_PRO = (SELECT ID_PRO FROM PRODUCTO WHERE NOMBRE_PRO = ?) "
+               + "AND LOTE = ?";
+
+    try (Connection con = new SQLConexion().establecerConexion();
+         PreparedStatement ps = con.prepareStatement(sql)) {
+
+        ps.setString(1, nombreProducto);
+        ps.setString(2, lote);
+
+        ResultSet rs = ps.executeQuery();
+        if (rs.next()) {
+            idDis = rs.getString("ID_DIS");
+        }
+
+    } catch (Exception e) {
+        e.printStackTrace();
+    }
+
+    return idDis;
+}
+
+    
+    
     private void Boton_Guardar_SalidaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_Boton_Guardar_SalidaActionPerformed
-        // TODO add your handling code here:
+            try {
+        String tipo = ComboBoxTipo.getSelectedItem().toString();
+        String motivo = ComboBoxMotivo.getSelectedItem().toString();
+        String ingredienteSeleccionado = ComboBox_Ingredientes_Salida.getSelectedItem().toString();
+        int cantidad = Integer.parseInt(cantidadcou.getText());
+
+        // DNI del empleado logueado
+        int dni = SesionActiva.empleadoLogueado.getDni_emp(); // Asegúrate que este acceso esté implementado
+
+        // Inicializamos variables a usar
+        String id_dis = null;
+        String lote = null;
+
+        // DAO y entidad
+        I_MovimientoCocinaDAO movimientoDao = new I_MovimientoCocinaDAO();
+        MovimientoCocina movimiento = new MovimientoCocina();
+
+        if ("Cocina".equals(tipo)) {
+            // Buscar ID_DIS y LOTE con FIFO (producto más próximo a vencer con stock suficiente)
+            DisponibleDAO disponibleDAO = new I_DisponibleDAO();
+            Disponible disp = disponibleDAO.obtenerDisponibleFIFO(ingredienteSeleccionado, cantidad);
+
+            if (disp == null) {
+                JOptionPane.showMessageDialog(this, "No hay stock disponible para este producto.");
+                return;
+            }
+
+            id_dis = disp.getIdDis();
+            lote = disp.getLote();  // obtenido automáticamente por FIFO
+
+            movimiento.setCantidad_cajas(cantidad);
+            movimiento.setCantidad_unit(1); // si fuera necesario
+            movimiento.setMotivo("Preparación de platos");
+
+        } else if ("Merma".equals(tipo)) {
+            // Merma: el usuario selecciona el lote manualmente
+            lote = fielLote.getText().trim();
+
+            if (lote.isEmpty()) {
+                JOptionPane.showMessageDialog(this, "Debe ingresar el lote para registrar una merma.");
+                return;
+            }
+
+            id_dis = obtenerIdDisponiblePorIngredienteYLote(ingredienteSeleccionado, lote);
+            movimiento.setCantidad_unit(cantidad);
+            movimiento.setCantidad_cajas(0);
+            movimiento.setMotivo(motivo);
+        }
+
+        // Valores comunes
+        movimiento.setId_dis(id_dis);
+        movimiento.setDni_emp(dni);
+        movimiento.setLote(lote);
+
+        if ("Cocina".equals(tipo)) {
+            movimientoDao.registrarMovimientoCocina(movimiento);
+            JOptionPane.showMessageDialog(this, "Salida registrada para cocina.");
+        } else {
+            movimientoDao.registrarMovimientoMerma(movimiento);
+            JOptionPane.showMessageDialog(this, "Salida registrada por merma.");
+        }
+
+    } catch (NumberFormatException ex) {
+        JOptionPane.showMessageDialog(this, "Ingrese una cantidad válida.");
+    } catch (SQLException ex) {
+        ex.printStackTrace();
+        JOptionPane.showMessageDialog(this, "Error al registrar movimiento: " + ex.getMessage());
+    }
     }//GEN-LAST:event_Boton_Guardar_SalidaActionPerformed
 
     private void ComboBox_Ingredientes_SalidaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ComboBox_Ingredientes_SalidaActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_ComboBox_Ingredientes_SalidaActionPerformed
 
-    private void Field_Lote_SalidaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_Field_Lote_SalidaActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_Field_Lote_SalidaActionPerformed
-
     private void txtcantcajasingresoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtcantcajasingresoActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_txtcantcajasingresoActionPerformed
+
+    private void fielLoteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_fielLoteActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_fielLoteActionPerformed
+
+    private void ComboBoxTipoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ComboBoxTipoActionPerformed
+        Object item = ComboBoxTipo.getSelectedItem();
+        if (item != null) {
+            String tipoSeleccionado = item.toString();
+            cargarMotivosPorTipo(tipoSeleccionado);
+        }
+    }//GEN-LAST:event_ComboBoxTipoActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton Boton_Cancelar_Salida;
     private javax.swing.JButton Boton_Guardar_Salida;
     private javax.swing.JTabbedPane Boton_Ingreso_Salida;
+    private javax.swing.JComboBox<String> ComboBoxMotivo;
+    private javax.swing.JComboBox<String> ComboBoxTipo;
     private javax.swing.JComboBox<String> ComboBox_Ingredientes_Salida;
-    private javax.swing.JTextField Field_CantidadCajas_Salida;
-    private javax.swing.JTextField Field_Lote_Salida;
     private javax.swing.JPanel Panel_RegistroIngreso;
     private javax.swing.JPanel Panel_RegistroSalida;
     private javax.swing.JTable Tabla_Productos_Salida;
@@ -421,15 +596,17 @@ public class RegistroIngresoo extends javax.swing.JPanel {
     private javax.swing.JLabel Text_Ingrediente;
     private javax.swing.JLabel Text_Ingrediente1;
     private javax.swing.JLabel Text_Lote;
-    private javax.swing.JLabel Text_Lote1;
     private javax.swing.JLabel Texto_RegistroIngreso;
     private javax.swing.JLabel Texto_RegistroIngreso1;
     private javax.swing.JButton btncancelarprodingreso;
     private javax.swing.JButton btnguardarprodingreso;
+    private javax.swing.JTextField cantidadcou;
     private javax.swing.JComboBox<String> cboingingreso;
     private com.toedter.calendar.JDateChooser dateChooserFechaCad;
-    private javax.swing.JComboBox<String> jComboBox1;
+    private javax.swing.JTextField fielLote;
     private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabel2;
+    private javax.swing.JLabel jLabel3;
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JScrollPane jScrollPane3;
     private javax.swing.JTable tbprodingreso;
