@@ -13,6 +13,7 @@ public class Employee extends javax.swing.JFrame {
     
     //instancia de los paneles del primer boton, se hace así por cada panel por botón
     private ConsultarStock consultar = new ConsultarStock(); 
+    private RegistroSalidaUser registroSalidaUser = new RegistroSalidaUser();
 
 
     /**
@@ -25,6 +26,8 @@ public class Employee extends javax.swing.JFrame {
 
         //tarjetas (aqui coloquen las tarjetas de los nuevos paneles que creen)
         panelEmp.add(consultar, "consultarStock");
+        panelEmp.add(registroSalidaUser, "RegistroSalidaUser");
+
     }
 
     /**
@@ -65,8 +68,13 @@ public class Employee extends javax.swing.JFrame {
         btnRegistrarIngredientes.setBackground(new java.awt.Color(0, 109, 86));
         btnRegistrarIngredientes.setFont(new java.awt.Font("Segoe UI Variable", 1, 14)); // NOI18N
         btnRegistrarIngredientes.setForeground(new java.awt.Color(255, 255, 255));
-        btnRegistrarIngredientes.setText("Registrar Ingredientes");
+        btnRegistrarIngredientes.setText("Registrar Salida");
         btnRegistrarIngredientes.setBorder(javax.swing.BorderFactory.createEmptyBorder(1, 1, 1, 1));
+        btnRegistrarIngredientes.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnRegistrarIngredientesActionPerformed(evt);
+            }
+        });
 
         btnlogout.setBackground(new java.awt.Color(222, 42, 39));
         btnlogout.setFont(new java.awt.Font("Corbel", 1, 18)); // NOI18N
@@ -150,6 +158,10 @@ public class Employee extends javax.swing.JFrame {
         login.setVisible(true);
         this.dispose();
     }//GEN-LAST:event_btnlogoutActionPerformed
+
+    private void btnRegistrarIngredientesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRegistrarIngredientesActionPerformed
+        card.show(panelEmp, "RegistroSalidaUser");
+    }//GEN-LAST:event_btnRegistrarIngredientesActionPerformed
 
     /**
      * @param args the command line arguments

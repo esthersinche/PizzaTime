@@ -14,10 +14,10 @@ public class SQLConexion {
     private Connection conn = null;
 
     private final String usuario = "sa";              // Tu usuario SQL Server
-    private final String contrasenia = "1234";  // Tu contraseña
-    private final String bd = "BDPIZZA";              // Nombre de tu base de datos
-    private final String ip = "localhost";            // IP o nombre del host
-    private final String puerto = "1433";             // Puerto por defecto de SQL Server
+    private final String contrasenia = "contrasena";  // Tu contraseña
+    private final String bd = "BDPIZZA";              
+    private final String ip = "localhost";            
+    private final String puerto = "1433";             
 
     private final String cadena = "jdbc:sqlserver://" 
         + ip + ":" + puerto + 

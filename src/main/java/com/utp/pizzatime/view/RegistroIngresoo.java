@@ -261,7 +261,7 @@ public class RegistroIngresoo extends javax.swing.JPanel {
         });
 
         Text_CantidadCajas1.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
-        Text_CantidadCajas1.setText("Cantidad Cajas");
+        Text_CantidadCajas1.setText("Cantidad (Cajas o Unidades)");
 
         Text_Lote1.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         Text_Lote1.setText("Lote");

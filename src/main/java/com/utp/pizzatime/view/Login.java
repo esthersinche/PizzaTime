@@ -3,6 +3,7 @@ package com.utp.pizzatime.view;
 import com.utp.pizzatime.controller.LoginController;
 import com.utp.pizzatime.model.dao.impl.I_EmpleadoDAO;
 import com.utp.pizzatime.model.entity.Empleado;
+import com.utp.pizzatime.util.SesionActiva;
 import java.sql.SQLException;
 import javax.swing.JOptionPane;
 
@@ -204,17 +205,17 @@ public class Login extends javax.swing.JFrame {
             Empleado emp = controller.intentarLogin(dni, passText);
 
             if (emp != null) {
+                // GUARDAR AL EMPLEADO LOGUEADO EN SESIÓN
+                SesionActiva.empleadoLogueado = emp;
+
                 // Según el rol, abrimos la ventana correspondiente
                 String rol = emp.getRol();  // viene de la entidad
                 if ("ADMINISTRATIVO".equalsIgnoreCase(rol)) {
-                    // Ventana de administrador
-                    Admin adminWin = new Admin();
-                    adminWin.setVisible(true);
+                    new Admin().setVisible(true);
                 } else {
-                    // Ventana de usuario normal
-                    Employee empWin = new Employee();
-                    empWin.setVisible(true);
+                    new Employee().setVisible(true);
                 }
+
                 this.dispose();  // cerramos el login
             } else {
                 JOptionPane.showMessageDialog(this,
@@ -229,6 +230,7 @@ public class Login extends javax.swing.JFrame {
                     "Error de conexión",
                     JOptionPane.ERROR_MESSAGE);
         }
+
     }//GEN-LAST:event_btnLoginActionPerformed
 
     /**
