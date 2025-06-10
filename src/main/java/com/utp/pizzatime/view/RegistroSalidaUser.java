@@ -7,9 +7,11 @@ import com.utp.pizzatime.model.dao.impl.I_MovimientoCocinaDAO;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
+import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 import javax.swing.JOptionPane;
+import javax.swing.table.DefaultTableModel;
 
 /**
  *
@@ -20,6 +22,7 @@ public class RegistroSalidaUser extends javax.swing.JPanel {
     public RegistroSalidaUser() {
         initComponents();
         cargarIngredientesDesdeBD();
+        cargarTablaSalida();
     }
 
     @SuppressWarnings("unchecked")
@@ -145,13 +148,13 @@ public class RegistroSalidaUser extends javax.swing.JPanel {
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addComponent(Panel_RegistroSalida, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(0, 228, Short.MAX_VALUE))
+                .addGap(0, 0, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addComponent(Panel_RegistroSalida, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(0, 58, Short.MAX_VALUE))
+                .addGap(0, 0, Short.MAX_VALUE))
         );
     }// </editor-fold>//GEN-END:initComponents
 
@@ -159,6 +162,38 @@ public class RegistroSalidaUser extends javax.swing.JPanel {
         // TODO add your handling code here:
     }//GEN-LAST:event_btncancelarsalidaActionPerformed
 
+    // Método para cargar los datos en la tabla después de una operación.
+    private void cargarTablaSalida() {
+        try (Connection con = new SQLConexion().establecerConexion()) {
+            // Modificada la consulta SQL para hacer un JOIN entre DISPONIBLE y PRODUCTO
+            String sql = "SELECT p.NOMBRE_PRO, d.CANTIDAD_CAJAS, d.FECHA_DIS, d.VENCIMIENTO "
+                       + "FROM DISPONIBLE d "
+                       + "JOIN PRODUCTO p ON d.ID_PRO = p.ID_PRO "
+                       + "WHERE d.CANTIDAD_CAJAS > 0"; 
+
+            PreparedStatement ps = con.prepareStatement(sql);
+            ResultSet rs = ps.executeQuery();
+
+            // Limpiar tabla antes de cargar los datos
+            DefaultTableModel model = (DefaultTableModel) tbprodsalida.getModel();
+            model.setRowCount(0); // Limpiar filas existentes
+
+            // Agregar los datos al modelo de la tabla
+            while (rs.next()) {
+                Object[] row = new Object[4];
+                row[0] = rs.getString("NOMBRE_PRO");  // Producto
+                row[1] = rs.getInt("CANTIDAD_CAJAS"); // Cantidad
+                row[2] = rs.getDate("FECHA_DIS");     // Fecha de Ingreso
+                row[3] = rs.getDate("VENCIMIENTO");   // Fecha de Caducidad
+                model.addRow(row); // Añadir una nueva fila
+            }
+        } catch (SQLException e) {
+            JOptionPane.showMessageDialog(this, "Error al cargar los datos de la tabla: " + e.getMessage());
+        }
+    }
+
+
+    
     private void btnguardarsalidaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnguardarsalidaActionPerformed
         try (Connection con = new SQLConexion().establecerConexion()) {
 
@@ -224,6 +259,8 @@ public class RegistroSalidaUser extends javax.swing.JPanel {
                     "OK", JOptionPane.INFORMATION_MESSAGE);
 
             // TODO: recargar tabla, limpiar campos...
+                    cargarTablaSalida();
+
         } catch (Exception e) {
             JOptionPane.showMessageDialog(this,
                     "Error al guardar salida: " + e.getMessage(),

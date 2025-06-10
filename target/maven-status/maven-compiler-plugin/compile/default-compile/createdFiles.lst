@@ -11,6 +11,7 @@ com\utp\pizzatime\view\RegistroSalidaUser$2.class
 com\utp\pizzatime\view\Reportes$3.class
 com\utp\pizzatime\view\Pedido_ingredientes.class
 com\utp\pizzatime\view\Employee$4.class
+com\utp\pizzatime\model\dao\ProveedorDAO.class
 com\utp\pizzatime\view\Gestion_usu.class
 com\utp\pizzatime\view\ConsultarStock.class
 com\utp\pizzatime\view\RegistroIngresoo$1.class
@@ -53,6 +54,7 @@ com\utp\pizzatime\view\Pedido_ingredientes$3.class
 com\utp\pizzatime\model\entity\MovimientoCocina.class
 com\utp\pizzatime\view\RegistroIngresoo$6.class
 com\utp\pizzatime\view\GestionarProductos.class
+com\utp\pizzatime\model\entity\Proveedor.class
 com\utp\pizzatime\view\Admin.class
 com\utp\pizzatime\view\Employee$2.class
 com\utp\pizzatime\view\RegistroIngresoo$2.class
@@ -73,6 +75,7 @@ com\utp\pizzatime\view\Admin$1.class
 com\utp\pizzatime\view\RegistroIngresoo$5.class
 com\utp\pizzatime\view\ReingresoProd$1.class
 com\utp\pizzatime\view\Login$1.class
+com\utp\pizzatime\view\Proveedor.class
 com\utp\pizzatime\model\dao\impl\I_MovimientoCocinaDAO.class
 com\utp\pizzatime\model\dao\ProductoDAO.class
 com\utp\pizzatime\view\Reportes$1.class

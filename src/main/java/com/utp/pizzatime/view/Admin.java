@@ -1,5 +1,12 @@
 package com.utp.pizzatime.view;
+import com.utp.pizzatime.util.ConfigJMXUtil;
 import java.awt.CardLayout;
+import java.lang.management.ManagementFactory;
+import javax.management.MBeanServer;
+import javax.management.NotificationListener;
+import javax.management.ObjectName;
+import javax.swing.JOptionPane;
+import javax.swing.SwingUtilities;
 
 /**
  *
@@ -32,7 +39,13 @@ public class Admin extends javax.swing.JFrame {
         panelAdm.add(repro, "repro");
         panelAdm.add(reg_in, "reg_in");
         
+        //apenas se loguee le dan las notifs
+        ConfigJMXUtil.configListenerJMX(this);
+        
+        
     }
+    
+    
 
     /**
      * This method is called from within the constructor to initialize the form.
