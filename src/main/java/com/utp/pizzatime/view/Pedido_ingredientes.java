@@ -9,6 +9,7 @@ import com.utp.pizzatime.model.entity.DetallePedido;
 import com.utp.pizzatime.model.entity.Pedido;
 import com.utp.pizzatime.model.entity.Producto_modificar;
 import com.utp.pizzatime.model.entity.Producto_pedido;
+import com.utp.pizzatime.service.FecVenService;
 import com.utp.pizzatime.service.P_ReportGeneratorService;
 import java.awt.Color;
 import java.awt.event.MouseAdapter;
@@ -43,6 +44,7 @@ public class Pedido_ingredientes extends javax.swing.JPanel {
     JMenuItem elimitem;
     private List<Producto_pedido> listaProductos;      // para combo y carrito
     private List<DetallePedido> listaDetalles = new ArrayList<>(); // carrito “persistible”
+    private FecVenService fecvenserv= new FecVenService();
 
     public Pedido_ingredientes() {
         initComponents();
@@ -57,6 +59,8 @@ public class Pedido_ingredientes extends javax.swing.JPanel {
         tbped_ing.addMouseListener(popuplistens);
 
         initProductos();
+   
+        fecvenserv.VeryNotifIng();
 
         //JTableHeader tableheader= tbped_ing.getTableHeader();
     }
@@ -134,9 +138,30 @@ public class Pedido_ingredientes extends javax.swing.JPanel {
 
     private void elim_row_peding() {
         DefaultTableModel tb_model_peding = (DefaultTableModel) tbped_ing.getModel();
-        int row = tbped_ing.getSelectedRow();
+        
+        try{
+            int row = tbped_ing.getSelectedRow();
+            //namas para ver index
+            System.out.println(row);
+            
+            tb_model_peding.removeRow(row);
+            listaDetalles.remove(row);
+            //for para ver la lista de listadetalles
+            for (DetallePedido dp : listaDetalles) {
+                System.out.println(dp.getNOMBRE_PRO());        
+            }     
+            
+            JOptionPane.showMessageDialog(this,
+                    "Eliminado con éxito.",
+                    "Éxito", JOptionPane.INFORMATION_MESSAGE);
+                       
+        }catch(IndexOutOfBoundsException e){
+            JOptionPane.showMessageDialog(this,
+                    "Debe seleccionar una fila.",
+                    "Warning", JOptionPane.WARNING_MESSAGE);
+            
+        }
 
-        tb_model_peding.removeRow(row);//ya q no guarda hasta q se presiona el boton de pedir
 
     }
 
@@ -208,7 +233,7 @@ public class Pedido_ingredientes extends javax.swing.JPanel {
         tbped_ing.setForeground(new java.awt.Color(0, 109, 86));
         tbped_ing.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null, null, null}
+
             },
             new String [] {
                 "ID", "Ingrediente", "Cantidad_Cajas", "Precio"
@@ -226,6 +251,7 @@ public class Pedido_ingredientes extends javax.swing.JPanel {
         tbped_ing.setRowHeight(25);
         tbped_ing.setSelectionBackground(new java.awt.Color(0, 109, 86));
         tbped_ing.setSelectionForeground(new java.awt.Color(110, 104, 104));
+        tbped_ing.setSelectionMode(javax.swing.ListSelectionModel.SINGLE_SELECTION);
         tbped_ing.setShowGrid(false);
         jScrollPane1.setViewportView(tbped_ing);
 
@@ -261,7 +287,7 @@ public class Pedido_ingredientes extends javax.swing.JPanel {
         tbstockactualpeding.setForeground(new java.awt.Color(0, 109, 86));
         tbstockactualpeding.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null, null, null}
+
             },
             new String [] {
                 "ID", "ingrediente", "Stock Cajas", "Stock Un"
