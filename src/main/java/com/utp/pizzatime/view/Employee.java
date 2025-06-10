@@ -1,5 +1,6 @@
 package com.utp.pizzatime.view;
 
+import com.utp.pizzatime.util.ConfigJMXUtil;
 import com.utp.pizzatime.view.ConsultarStock;
 import java.awt.CardLayout;
 
@@ -27,6 +28,9 @@ public class Employee extends javax.swing.JFrame {
         //tarjetas (aqui coloquen las tarjetas de los nuevos paneles que creen)
         panelEmp.add(consultar, "consultarStock");
         panelEmp.add(registroSalidaUser, "RegistroSalidaUser");
+        
+        //apenas se loguee le dan las notifs
+        ConfigJMXUtil.configListenerJMX(this);
 
     }
 
