@@ -13,4 +13,6 @@ public interface ProductoDAO {
     void insertar(Producto_modificar p) throws SQLException;
     void actualizar(Producto_modificar p) throws SQLException;
     void eliminar(String id) throws SQLException; 
+    String obtenerIdProductoPorNombre(String nombreProducto) throws SQLException;
+
 }

@@ -108,5 +108,19 @@ public class I_DisponibleDAO implements DisponibleDAO {
 
         return idDis;
     }
-    
+          
+      public String generarNuevoIdDisponible(Connection conn) throws SQLException {
+    String sql = "SELECT MAX(ID_DIS) AS max_id FROM DISPONIBLE WHERE ID_DIS LIKE 'DIS%'";
+    try (PreparedStatement ps = conn.prepareStatement(sql);
+         ResultSet rs = ps.executeQuery()) {
+        if (rs.next() && rs.getString("max_id") != null) {
+            String ultimo = rs.getString("max_id"); // e.g. DIS00045
+            int num = Integer.parseInt(ultimo.substring(3));
+            return String.format("DIS%05d", num + 1);
+        }
+    }
+    return "DIS00001"; // primera vez
+}  
+        
+        
 }

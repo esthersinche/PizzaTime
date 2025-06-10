@@ -33,6 +33,7 @@ com\utp\pizzatime\view\RegistroIngresoo$4.class
 com\utp\pizzatime\view\Admin$3.class
 com\utp\pizzatime\view\Pedido_ingredientes$4.class
 com\utp\pizzatime\model\entity\Disponible.class
+com\utp\pizzatime\view\RegistroIngresoo$11.class
 com\utp\pizzatime\view\RegistroIngresoo$7.class
 com\utp\pizzatime\util\SQLConexion.class
 com\utp\pizzatime\view\Reportes.class

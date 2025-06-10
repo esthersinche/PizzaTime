@@ -10,6 +10,7 @@ public class Disponible {
     private String idDis;
     private String idPro;
     private int cantidadCajas;
+    private int cantidadUnidad;
     private Date fechaDis;
     private Date vencimiento;
     private String lote;
@@ -62,5 +63,10 @@ public class Disponible {
         this.lote = lote;
     }
     
-    
+    public int getcantidadUnidad(){
+        return cantidadUnidad;
+    }
+    public void setcantidadUnidad(int cantidadUnidad){
+        this.cantidadUnidad = cantidadUnidad;
+    }
 }
