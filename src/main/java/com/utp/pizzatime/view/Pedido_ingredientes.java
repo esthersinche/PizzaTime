@@ -9,6 +9,7 @@ import com.utp.pizzatime.model.entity.DetallePedido;
 import com.utp.pizzatime.model.entity.Pedido;
 import com.utp.pizzatime.model.entity.Producto_modificar;
 import com.utp.pizzatime.model.entity.Producto_pedido;
+import com.utp.pizzatime.service.FecVenService;
 import com.utp.pizzatime.service.P_ReportGeneratorService;
 import java.awt.Color;
 import java.awt.event.MouseAdapter;
@@ -43,6 +44,7 @@ public class Pedido_ingredientes extends javax.swing.JPanel {
     JMenuItem elimitem;
     private List<Producto_pedido> listaProductos;      // para combo y carrito
     private List<DetallePedido> listaDetalles = new ArrayList<>(); // carrito “persistible”
+    private FecVenService fecvenserv= new FecVenService();
 
     public Pedido_ingredientes() {
         initComponents();
@@ -57,6 +59,8 @@ public class Pedido_ingredientes extends javax.swing.JPanel {
         tbped_ing.addMouseListener(popuplistens);
 
         initProductos();
+   
+        fecvenserv.VeryNotifIng();
 
         //JTableHeader tableheader= tbped_ing.getTableHeader();
     }

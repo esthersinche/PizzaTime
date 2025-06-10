@@ -9,6 +9,6 @@ package com.utp.pizzatime.util;
  * @author Laura
  */
 public interface FecVenMonitorMBean {
-    public void notifFecvenci(String mssg);
+    void notifFecvenci(String mssg);
     
 }
