@@ -312,6 +312,9 @@
           </Border>
         </Property>
       </Properties>
+      <Events>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btninsertargestioningActionPerformed"/>
+      </Events>
     </Component>
     <Component class="javax.swing.JButton" name="btneditargestioning">
       <Properties>
@@ -334,6 +337,9 @@
           </Border>
         </Property>
       </Properties>
+      <Events>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btneditargestioningActionPerformed"/>
+      </Events>
     </Component>
     <Component class="javax.swing.JButton" name="btneliminargestioning">
       <Properties>
@@ -353,6 +359,9 @@
           </Border>
         </Property>
       </Properties>
+      <Events>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btneliminargestioningActionPerformed"/>
+      </Events>
     </Component>
     <Component class="javax.swing.JButton" name="btnguardargestioning">
       <Properties>
@@ -372,6 +381,9 @@
           </Border>
         </Property>
       </Properties>
+      <Events>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnguardargestioningActionPerformed"/>
+      </Events>
     </Component>
     <Container class="javax.swing.JScrollPane" name="jScrollPane1">
       <AuxValues>
@@ -412,6 +424,9 @@
       </Properties>
     </Component>
     <Component class="javax.swing.JTextField" name="txtidgestioning">
+      <Events>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="txtidgestioningActionPerformed"/>
+      </Events>
     </Component>
     <Component class="javax.swing.JTextField" name="txtnomgestioning">
       <Properties>

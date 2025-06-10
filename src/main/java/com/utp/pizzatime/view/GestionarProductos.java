@@ -119,22 +119,42 @@ public class GestionarProductos extends javax.swing.JPanel {
         btninsertargestioning.setForeground(new java.awt.Color(0, 109, 86));
         btninsertargestioning.setText("Insertar");
         btninsertargestioning.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED, new java.awt.Color(204, 204, 204), new java.awt.Color(204, 204, 204), null, null));
+        btninsertargestioning.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btninsertargestioningActionPerformed(evt);
+            }
+        });
 
         btneditargestioning.setBackground(new java.awt.Color(204, 204, 204));
         btneditargestioning.setFont(new java.awt.Font("Tahoma", 3, 12)); // NOI18N
         btneditargestioning.setForeground(new java.awt.Color(0, 109, 86));
         btneditargestioning.setText("Editar");
         btneditargestioning.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED, new java.awt.Color(204, 204, 204), new java.awt.Color(204, 204, 204), null, null));
+        btneditargestioning.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btneditargestioningActionPerformed(evt);
+            }
+        });
 
         btneliminargestioning.setBackground(new java.awt.Color(0, 109, 86));
         btneliminargestioning.setFont(new java.awt.Font("Tahoma", 3, 14)); // NOI18N
         btneliminargestioning.setText("Eliminar");
         btneliminargestioning.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED, new java.awt.Color(204, 204, 204), new java.awt.Color(204, 204, 204), null, null));
+        btneliminargestioning.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btneliminargestioningActionPerformed(evt);
+            }
+        });
 
         btnguardargestioning.setBackground(new java.awt.Color(0, 109, 86));
         btnguardargestioning.setFont(new java.awt.Font("Tahoma", 3, 14)); // NOI18N
         btnguardargestioning.setText("Guardar");
         btnguardargestioning.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED, new java.awt.Color(204, 204, 204), new java.awt.Color(204, 204, 204), null, null));
+        btnguardargestioning.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnguardargestioningActionPerformed(evt);
+            }
+        });
 
         tbprodgestioning.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -152,6 +172,12 @@ public class GestionarProductos extends javax.swing.JPanel {
         jLabel11.setFont(new java.awt.Font("Tahoma", 1, 24)); // NOI18N
         jLabel11.setForeground(new java.awt.Color(0, 109, 86));
         jLabel11.setText("Gestionar Ingrediente");
+
+        txtidgestioning.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                txtidgestioningActionPerformed(evt);
+            }
+        });
 
         txtnomgestioning.setText("jTextField2");
 
@@ -293,6 +319,101 @@ public class GestionarProductos extends javax.swing.JPanel {
         );
     }// </editor-fold>//GEN-END:initComponents
 
+    private void txtidgestioningActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtidgestioningActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_txtidgestioningActionPerformed
+
+    private void btninsertargestioningActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btninsertargestioningActionPerformed
+        // TODO add your handling code here:
+       
+    try {
+        Producto_modificar p = new Producto_modificar(
+            Integer.parseInt(txtmedidagestioning.getText()),
+            Integer.parseInt(txtstockactugestioning.getText()),
+            Integer.parseInt(txtstockcajagestioning.getText()),
+            Integer.parseInt(txtstocmingestioning.getText()),
+            Integer.parseInt(txtstockmaxgestioning.getText()),
+            txtprovgestioning.getText(),
+            txtdescgestioning.getText(),
+            txtidgestioning.getText(),
+            txtnomgestioning.getText(),
+            Double.parseDouble(txtpreciogestioning.getText())
+        );
+        dao.insertar(p);
+        JOptionPane.showMessageDialog(this, "Producto insertado correctamente.");
+        listar(); // Refresca la tabla
+        // No limpiar campos porque indicaste que no
+    } catch (Exception e) {
+        JOptionPane.showMessageDialog(this, "Error al insertar producto: " + e.getMessage());
+    }
+
+
+    }//GEN-LAST:event_btninsertargestioningActionPerformed
+
+    private void btneditargestioningActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btneditargestioningActionPerformed
+        // TODO add your handling code here:
+    try {
+        Producto_modificar p = new Producto_modificar(
+            Integer.parseInt(txtmedidagestioning.getText()),
+            Integer.parseInt(txtstockactugestioning.getText()),
+            Integer.parseInt(txtstockcajagestioning.getText()),
+            Integer.parseInt(txtstocmingestioning.getText()),
+            Integer.parseInt(txtstockmaxgestioning.getText()),
+            txtprovgestioning.getText(),
+            txtdescgestioning.getText(),
+            txtidgestioning.getText(),
+            txtnomgestioning.getText(),
+            Double.parseDouble(txtpreciogestioning.getText())
+        );
+        dao.actualizar(p);
+        JOptionPane.showMessageDialog(this, "Producto actualizado correctamente.");
+        listar();
+    } catch (Exception e) {
+        JOptionPane.showMessageDialog(this, "Error al actualizar producto: " + e.getMessage());
+    }
+
+
+    }//GEN-LAST:event_btneditargestioningActionPerformed
+
+    private void btneliminargestioningActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btneliminargestioningActionPerformed
+        // TODO add your handling code here:
+      
+    try {
+        String id = txtidgestioning.getText();
+        dao.eliminar(id);
+        JOptionPane.showMessageDialog(this, "Producto eliminado correctamente.");
+        listar();
+    } catch (Exception e) {
+        JOptionPane.showMessageDialog(this, "Error al eliminar producto: " + e.getMessage());
+    }
+    }//GEN-LAST:event_btneliminargestioningActionPerformed
+
+    private void btnguardargestioningActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnguardargestioningActionPerformed
+        // TODO add your handling code here:
+       
+    try {
+        Producto_modificar p = new Producto_modificar(
+            Integer.parseInt(txtmedidagestioning.getText()),
+            Integer.parseInt(txtstockactugestioning.getText()),
+            Integer.parseInt(txtstockcajagestioning.getText()),
+            Integer.parseInt(txtstocmingestioning.getText()),
+            Integer.parseInt(txtstockmaxgestioning.getText()),
+            txtprovgestioning.getText(),
+            txtdescgestioning.getText(),
+            txtidgestioning.getText(),
+            txtnomgestioning.getText(),
+            Double.parseDouble(txtpreciogestioning.getText())
+        );
+        dao.insertar(p);
+        JOptionPane.showMessageDialog(this, "Producto guardado correctamente.");
+        listar(); // Actualiza la tabla
+        // No limpiamos porque tú no quieres limpiar
+    } catch (Exception e) {
+        JOptionPane.showMessageDialog(this, "Error al guardar producto: " + e.getMessage());
+    }
+}
+    }//GEN-LAST:event_btnguardargestioningActionPerformed
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btneditargestioning;
@@ -325,3 +446,5 @@ public class GestionarProductos extends javax.swing.JPanel {
     private javax.swing.JTextField txtstockmingestioning;
     // End of variables declaration//GEN-END:variables
 }
+
+
