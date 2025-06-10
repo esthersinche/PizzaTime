@@ -495,48 +495,74 @@ public class RegistroIngresoo extends javax.swing.JPanel {
   //---------------------------------------------------------------------------------------
     
     private void btnguardarprodingresoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnguardarprodingresoActionPerformed
+       
     try {
-        // Recoge los datos del formulario
-        String nombreProducto = cboingingreso.getSelectedItem().toString();
-        int cantidadCajas = Integer.parseInt(txtcantcajasingreso.getText());
-        String lote = txtloteingreso.getText();
-        java.util.Date fechaIngreso = dateChooserFechaIng.getDate(); // ← fecha de disponibilidad
-        java.util.Date fechaVencimiento = dateChooserFechaCad.getDate();
-
-        if (fechaIngreso == null || fechaVencimiento == null) {
-            JOptionPane.showMessageDialog(this, "Debe seleccionar ambas fechas.");
+        // 1. Recoge y valida campos del formulario
+        if (cboingingreso.getSelectedItem() == null 
+                || txtcantcajasingreso.getText().trim().isEmpty() 
+                || txtloteingreso.getText().trim().isEmpty()
+                || dateChooserFechaIng.getDate() == null 
+                || dateChooserFechaCad.getDate() == null) {
+            JOptionPane.showMessageDialog(this,
+                "Por favor complete todos los campos correctamente.",
+                "Campos incompletos",
+                JOptionPane.WARNING_MESSAGE);
             return;
         }
 
-        // Obtener ID del producto
-        I_ProductoDAO productoDAO = new I_ProductoDAO();
-        String idPro = productoDAO.obtenerIdProductoPorNombre(nombreProducto);
-
-        // Crear nuevo objeto Disponible
-        Disponible nuevo = new Disponible();
-        I_DisponibleDAO dao = new I_DisponibleDAO();
-
-        // Generar nuevo ID_DIS
-        try (Connection con = new SQLConexion().establecerConexion()) {
-            String nuevoId = dao.generarNuevoIdDisponible(con);
-            nuevo.setIdDis(nuevoId);
+        String nombreProducto = cboingingreso.getSelectedItem().toString();
+        int cantidadCajas;
+        try {
+            cantidadCajas = Integer.parseInt(txtcantcajasingreso.getText().trim());
+        } catch (NumberFormatException nfe) {
+            JOptionPane.showMessageDialog(this,
+                "La cantidad debe ser un número entero.",
+                "Formato inválido",
+                JOptionPane.ERROR_MESSAGE);
+            return;
         }
 
-        // Asignar datos al objeto
+        // 2. Obtener y validar ID del producto
+        I_ProductoDAO productoDAO = new I_ProductoDAO();
+        String idPro = productoDAO.obtenerIdProductoPorNombre(nombreProducto);
+        if (idPro == null) {
+            JOptionPane.showMessageDialog(this,
+                "No se encontró el producto seleccionado.",
+                "Producto no encontrado",
+                JOptionPane.ERROR_MESSAGE);
+            return;
+        }
+
+        // 3. Generar nuevo ID_DIS y crear objeto Disponibe
+        Disponible nuevo = new Disponible();
+        I_DisponibleDAO dao = new I_DisponibleDAO();
+        try (Connection con = new SQLConexion().establecerConexion()) {
+            nuevo.setIdDis(dao.generarNuevoIdDisponible(con));
+        }
+
         nuevo.setIdPro(idPro);
         nuevo.setCantidadCajas(cantidadCajas);
-        nuevo.setLote(lote);
-        nuevo.setFechaDis(fechaIngreso);      // ← esta es la FECHA_DISPONIBILIDAD
-        nuevo.setVencimiento(fechaVencimiento);
+        nuevo.setLote(txtloteingreso.getText().trim());
+        nuevo.setFechaDis(dateChooserFechaIng.getDate());
+        nuevo.setVencimiento(dateChooserFechaCad.getDate());
 
-        // Insertar en la BD
+        // 4. Insertar en BD
         dao.insertarDisp(nuevo);
 
-        JOptionPane.showMessageDialog(this, "Producto ingresado correctamente.");
+        JOptionPane.showMessageDialog(this,
+            "Producto ingresado correctamente.",
+            "Éxito",
+            JOptionPane.INFORMATION_MESSAGE);
+
+        // 5. Recarga de tabla
         cargarTablaProductosIngreso();
+
     } catch (Exception e) {
         e.printStackTrace();
-        JOptionPane.showMessageDialog(this, "Error al guardar: " + e.getMessage());
+        JOptionPane.showMessageDialog(this,
+            "Ocurrió un error al guardar: " + e.getMessage(),
+            "Error",
+            JOptionPane.ERROR_MESSAGE);
     }
 
 
