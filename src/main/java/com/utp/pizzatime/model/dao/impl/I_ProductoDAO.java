@@ -121,4 +121,23 @@ public class I_ProductoDAO implements ProductoDAO{
         );
     }
    
+    public String obtenerIdProductoPorNombre(String nombreProducto) throws SQLException {
+    String idPro = null;
+    String sql = "SELECT ID_PRO FROM PRODUCTO WHERE NOMBRE_PRO = ?";
+    
+    try (Connection conn = sqlCon.establecerConexion();
+         PreparedStatement ps = conn.prepareStatement(sql)) {
+        
+        ps.setString(1, nombreProducto);
+        ResultSet rs = ps.executeQuery();
+        
+        if (rs.next()) {
+            idPro = rs.getString("ID_PRO");
+        }
+    }
+    
+    return idPro;
+}
+
+    
 }
