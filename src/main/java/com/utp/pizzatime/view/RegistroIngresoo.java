@@ -10,6 +10,7 @@ import com.utp.pizzatime.model.entity.MovimientoCocina;
 import com.utp.pizzatime.model.dao.impl.I_MovimientoCocinaDAO;
 import com.utp.pizzatime.util.SQLConexion;
 import com.utp.pizzatime.model.dao.impl.I_DisponibleDAO;
+import com.utp.pizzatime.model.dao.impl.I_ProductoDAO;
 
 import com.utp.pizzatime.util.SesionActiva;
 import java.sql.Connection;
@@ -24,7 +25,6 @@ import javax.swing.table.DefaultTableModel;
  * @author Dell
  */
 
-
 public class RegistroIngresoo extends javax.swing.JPanel {
 
     /**
@@ -35,10 +35,12 @@ public class RegistroIngresoo extends javax.swing.JPanel {
         cargarIngredientesSalida();
         cargarTiposMovimiento();
         cargarTablaSalida();
+        cargarIngredientesEntrada();
 
         // Seleccionar un valor válido antes de cargar motivos
         ComboBoxTipo.setSelectedIndex(0);
         cargarMotivosPorTipo(ComboBoxTipo.getSelectedItem().toString());
+        cargarTablaProductosIngreso();
     }
 
     /**
@@ -57,7 +59,6 @@ public class RegistroIngresoo extends javax.swing.JPanel {
         btncancelarprodingreso = new javax.swing.JButton();
         btnguardarprodingreso = new javax.swing.JButton();
         Text_FechaaIngreso = new javax.swing.JLabel();
-        txtfechaingreso = new javax.swing.JTextField();
         Texto_RegistroIngreso = new javax.swing.JLabel();
         Text_Ingrediente = new javax.swing.JLabel();
         cboingingreso = new javax.swing.JComboBox<>();
@@ -67,6 +68,7 @@ public class RegistroIngresoo extends javax.swing.JPanel {
         txtloteingreso = new javax.swing.JTextField();
         Text_FechaCaducidad = new javax.swing.JLabel();
         dateChooserFechaCad = new com.toedter.calendar.JDateChooser();
+        dateChooserFechaIng = new com.toedter.calendar.JDateChooser();
         Panel_RegistroSalida = new javax.swing.JPanel();
         jScrollPane3 = new javax.swing.JScrollPane();
         Tabla_Productos_Salida = new javax.swing.JTable();
@@ -93,14 +95,22 @@ public class RegistroIngresoo extends javax.swing.JPanel {
 
         tbprodingreso.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null}
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null}
             },
             new String [] {
-                "Producto", "Cantidad", "Fecha de ingreso", "Fecha de caducidad"
+                "ID_Dis", "Producto", "Cantidad", "Fecha de ingreso", "Fecha de caducidad", "Lote"
             }
-        ));
+        ) {
+            Class[] types = new Class [] {
+                java.lang.Object.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class
+            };
+
+            public Class getColumnClass(int columnIndex) {
+                return types [columnIndex];
+            }
+        });
         jScrollPane2.setViewportView(tbprodingreso);
 
         btncancelarprodingreso.setBackground(new java.awt.Color(0, 109, 86));
@@ -125,8 +135,6 @@ public class RegistroIngresoo extends javax.swing.JPanel {
 
         Text_FechaaIngreso.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         Text_FechaaIngreso.setText("Fecha de Ingreso");
-
-        txtfechaingreso.setEditable(false);
 
         Texto_RegistroIngreso.setFont(new java.awt.Font("Segoe UI", 1, 24)); // NOI18N
         Texto_RegistroIngreso.setForeground(new java.awt.Color(0, 109, 86));
@@ -185,14 +193,14 @@ public class RegistroIngresoo extends javax.swing.JPanel {
                                 .addComponent(dateChooserFechaCad, javax.swing.GroupLayout.PREFERRED_SIZE, 102, javax.swing.GroupLayout.PREFERRED_SIZE)))
                         .addGroup(Panel_RegistroIngresoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(Panel_RegistroIngresoLayout.createSequentialGroup()
+                                .addGap(18, 18, 18)
+                                .addComponent(txtloteingreso, javax.swing.GroupLayout.PREFERRED_SIZE, 85, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addGroup(Panel_RegistroIngresoLayout.createSequentialGroup()
                                 .addGap(7, 7, 7)
                                 .addComponent(Text_FechaaIngreso)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(txtfechaingreso, javax.swing.GroupLayout.PREFERRED_SIZE, 92, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addGroup(Panel_RegistroIngresoLayout.createSequentialGroup()
                                 .addGap(18, 18, 18)
-                                .addComponent(txtloteingreso, javax.swing.GroupLayout.PREFERRED_SIZE, 85, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                                .addComponent(dateChooserFechaIng, javax.swing.GroupLayout.PREFERRED_SIZE, 102, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addContainerGap(279, Short.MAX_VALUE))
                     .addGroup(Panel_RegistroIngresoLayout.createSequentialGroup()
                         .addComponent(Texto_RegistroIngreso)
                         .addGap(0, 0, Short.MAX_VALUE))
@@ -229,16 +237,20 @@ public class RegistroIngresoo extends javax.swing.JPanel {
                     .addComponent(Text_CantidadCajas))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(Panel_RegistroIngresoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(Panel_RegistroIngresoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                        .addComponent(Text_FechaCaducidad)
-                        .addComponent(Text_FechaaIngreso)
-                        .addComponent(txtfechaingreso, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addComponent(dateChooserFechaCad, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 248, Short.MAX_VALUE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(btncancelarprodingreso, javax.swing.GroupLayout.PREFERRED_SIZE, 29, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 18, 18))
+                    .addGroup(Panel_RegistroIngresoLayout.createSequentialGroup()
+                        .addGroup(Panel_RegistroIngresoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(Panel_RegistroIngresoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                                .addComponent(Text_FechaCaducidad)
+                                .addComponent(Text_FechaaIngreso))
+                            .addComponent(dateChooserFechaCad, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(46, 46, 46)
+                        .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 192, Short.MAX_VALUE)
+                        .addGap(34, 34, 34)
+                        .addComponent(btncancelarprodingreso, javax.swing.GroupLayout.PREFERRED_SIZE, 29, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(18, 18, 18))
+                    .addGroup(Panel_RegistroIngresoLayout.createSequentialGroup()
+                        .addComponent(dateChooserFechaIng, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
         );
 
         Boton_Ingreso_Salida.addTab("Ingreso", Panel_RegistroIngreso);
@@ -411,8 +423,123 @@ public class RegistroIngresoo extends javax.swing.JPanel {
         // TODO add your handling code here:
     }//GEN-LAST:event_btncancelarprodingresoActionPerformed
 
+    private void cargarIngredientesEntrada() {
+    try (Connection con = new SQLConexion().establecerConexion()) {
+        String sql = "SELECT NOMBRE_PRO FROM PRODUCTO";
+        PreparedStatement ps = con.prepareStatement(sql);
+        ResultSet rs = ps.executeQuery();
+
+        cboingingreso.removeAllItems();  // Limpiar primero
+
+        while (rs.next()) {
+            cboingingreso.addItem(rs.getString("NOMBRE_PRO")); // Cargar nombres reales
+        }
+    } catch (Exception e) {
+        JOptionPane.showMessageDialog(this, "Error al cargar ingredientes: " + e.getMessage());
+    }
+}
+    //----------------------------------------------------------------------
+    private void cargarTablaProductosIngreso() {
+    DefaultTableModel modelo = new DefaultTableModel();
+    modelo.addColumn("ID");
+    modelo.addColumn("Producto");
+    modelo.addColumn("Cantidad Cajas");
+    modelo.addColumn("Lote");
+    modelo.addColumn("Fecha Ingreso");
+    modelo.addColumn("Fecha Vencimiento");
+
+    try (Connection con = new SQLConexion().establecerConexion()) {
+        String sql = "SELECT d.ID_DIS, p.NOMBRE_PRO, d.CANTIDAD_CAJAS, d.LOTE, d.FECHA_DIS, d.VENCIMIENTO " +
+                     "FROM DISPONIBLE d " +
+                     "JOIN PRODUCTO p ON d.ID_PRO = p.ID_PRO " +
+                     "ORDER BY d.FECHA_DIS DESC";
+        PreparedStatement ps = con.prepareStatement(sql);
+        ResultSet rs = ps.executeQuery();
+
+        while (rs.next()) {
+            Object[] fila = new Object[6];
+            fila[0] = rs.getString("ID_DIS");
+            fila[1] = rs.getString("NOMBRE_PRO");
+            fila[2] = rs.getInt("CANTIDAD_CAJAS");
+            fila[3] = rs.getString("LOTE");
+            fila[4] = rs.getDate("FECHA_DIS");
+            fila[5] = rs.getDate("VENCIMIENTO");
+            modelo.addRow(fila);
+        }
+
+        tbprodingreso.setModel(modelo);
+
+    } catch (Exception e) {
+        JOptionPane.showMessageDialog(this, "Error al cargar la tabla: " + e.getMessage());
+        e.printStackTrace();
+    }
+}    
+    
+    //----------------------------------------------------------
+    private String obtenerIdProductoPorNombre(String nombre) {
+    String id = null;
+    String sql = "SELECT ID_PRO FROM PRODUCTO WHERE NOMBRE_PRO = ?";
+    try (Connection con = new SQLConexion().establecerConexion();
+         PreparedStatement ps = con.prepareStatement(sql)) {
+        ps.setString(1, nombre);
+        ResultSet rs = ps.executeQuery();
+        if (rs.next()) {
+            id = rs.getString("ID_PRO");
+        }
+    } catch (SQLException e) {
+        JOptionPane.showMessageDialog(this, "Error al obtener ID del producto: " + e.getMessage());
+    }
+    return id;
+}
+  //---------------------------------------------------------------------------------------
+  //---------------------------------------------------------------------------------------
+    
     private void btnguardarprodingresoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnguardarprodingresoActionPerformed
-        // TODO add your handling code here:
+    try {
+        // Recoge los datos del formulario
+        String nombreProducto = cboingingreso.getSelectedItem().toString();
+        int cantidadCajas = Integer.parseInt(txtcantcajasingreso.getText());
+        String lote = txtloteingreso.getText();
+        java.util.Date fechaIngreso = dateChooserFechaIng.getDate(); // ← fecha de disponibilidad
+        java.util.Date fechaVencimiento = dateChooserFechaCad.getDate();
+
+        if (fechaIngreso == null || fechaVencimiento == null) {
+            JOptionPane.showMessageDialog(this, "Debe seleccionar ambas fechas.");
+            return;
+        }
+
+        // Obtener ID del producto
+        I_ProductoDAO productoDAO = new I_ProductoDAO();
+        String idPro = productoDAO.obtenerIdProductoPorNombre(nombreProducto);
+
+        // Crear nuevo objeto Disponible
+        Disponible nuevo = new Disponible();
+        I_DisponibleDAO dao = new I_DisponibleDAO();
+
+        // Generar nuevo ID_DIS
+        try (Connection con = new SQLConexion().establecerConexion()) {
+            String nuevoId = dao.generarNuevoIdDisponible(con);
+            nuevo.setIdDis(nuevoId);
+        }
+
+        // Asignar datos al objeto
+        nuevo.setIdPro(idPro);
+        nuevo.setCantidadCajas(cantidadCajas);
+        nuevo.setLote(lote);
+        nuevo.setFechaDis(fechaIngreso);      // ← esta es la FECHA_DISPONIBILIDAD
+        nuevo.setVencimiento(fechaVencimiento);
+
+        // Insertar en la BD
+        dao.insertarDisp(nuevo);
+
+        JOptionPane.showMessageDialog(this, "Producto ingresado correctamente.");
+        cargarTablaProductosIngreso();
+    } catch (Exception e) {
+        e.printStackTrace();
+        JOptionPane.showMessageDialog(this, "Error al guardar: " + e.getMessage());
+    }
+
+
     }//GEN-LAST:event_btnguardarprodingresoActionPerformed
 
     private void cboingingresoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cboingingresoActionPerformed
@@ -654,6 +781,7 @@ public class RegistroIngresoo extends javax.swing.JPanel {
     private javax.swing.JTextField cantidadcou;
     private javax.swing.JComboBox<String> cboingingreso;
     private com.toedter.calendar.JDateChooser dateChooserFechaCad;
+    private com.toedter.calendar.JDateChooser dateChooserFechaIng;
     private javax.swing.JTextField fielLote;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
@@ -662,7 +790,6 @@ public class RegistroIngresoo extends javax.swing.JPanel {
     private javax.swing.JScrollPane jScrollPane3;
     private javax.swing.JTable tbprodingreso;
     private javax.swing.JTextField txtcantcajasingreso;
-    private javax.swing.JTextField txtfechaingreso;
     private javax.swing.JTextField txtloteingreso;
     // End of variables declaration//GEN-END:variables
 }
