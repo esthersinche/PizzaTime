@@ -17,6 +17,7 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import javax.swing.JOptionPane;
+import javax.swing.table.DefaultTableModel;
 
 /**
  *
@@ -33,6 +34,7 @@ public class RegistroIngresoo extends javax.swing.JPanel {
         initComponents();
         cargarIngredientesSalida();
         cargarTiposMovimiento();
+        cargarTablaSalida();
 
         // Seleccionar un valor válido antes de cargar motivos
         ComboBoxTipo.setSelectedIndex(0);
@@ -424,7 +426,37 @@ public class RegistroIngresoo extends javax.swing.JPanel {
     private void Boton_Cancelar_SalidaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_Boton_Cancelar_SalidaActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_Boton_Cancelar_SalidaActionPerformed
-    //combobox de ingredientes
+    // Método para cargar los datos en la tabla después de una operación.
+    private void cargarTablaSalida() {
+        try (Connection con = new SQLConexion().establecerConexion()) {
+            // Modificada la consulta SQL para hacer un JOIN entre DISPONIBLE y PRODUCTO
+            String sql = "SELECT p.NOMBRE_PRO, d.CANTIDAD_CAJAS, d.FECHA_DIS, d.VENCIMIENTO "
+                       + "FROM DISPONIBLE d "
+                       + "JOIN PRODUCTO p ON d.ID_PRO = p.ID_PRO "
+                       + "WHERE d.CANTIDAD_CAJAS > 0"; 
+
+            PreparedStatement ps = con.prepareStatement(sql);
+            ResultSet rs = ps.executeQuery();
+
+            // Limpiar tabla antes de cargar los datos
+            DefaultTableModel model = (DefaultTableModel) Tabla_Productos_Salida.getModel();
+            model.setRowCount(0); // Limpiar filas existentes
+
+            // Agregar los datos al modelo de la tabla
+            while (rs.next()) {
+                Object[] row = new Object[4];
+                row[0] = rs.getString("NOMBRE_PRO");  // Producto
+                row[1] = rs.getInt("CANTIDAD_CAJAS"); // Cantidad
+                row[2] = rs.getDate("FECHA_DIS");     // Fecha de Ingreso
+                row[3] = rs.getDate("VENCIMIENTO");   // Fecha de Caducidad
+                model.addRow(row); // Añadir una nueva fila
+            }
+        } catch (SQLException e) {
+            JOptionPane.showMessageDialog(this, "Error al cargar los datos de la tabla: " + e.getMessage());
+        }
+    }    
+
+//combobox de ingredientes
     private void cargarIngredientesSalida() {
         try (Connection con = new SQLConexion().establecerConexion()) {
             String sql = "SELECT NOMBRE_PRO FROM PRODUCTO";
@@ -488,7 +520,7 @@ public class RegistroIngresoo extends javax.swing.JPanel {
     
     
     private void Boton_Guardar_SalidaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_Boton_Guardar_SalidaActionPerformed
-            try {
+    try {
         String tipo = ComboBoxTipo.getSelectedItem().toString();
         String motivo = ComboBoxMotivo.getSelectedItem().toString();
         String ingredienteSeleccionado = ComboBox_Ingredientes_Salida.getSelectedItem().toString();
@@ -522,6 +554,15 @@ public class RegistroIngresoo extends javax.swing.JPanel {
             movimiento.setCantidad_unit(1); // si fuera necesario
             movimiento.setMotivo("Preparación de platos");
 
+            // Actualizar el stock de DISPONIBLE (descontar la cantidad)
+            try (Connection con = new SQLConexion().establecerConexion()) {
+                String updateSQL = "UPDATE DISPONIBLE SET CANTIDAD_CAJAS = CANTIDAD_CAJAS - ? WHERE ID_DIS = ?";
+                PreparedStatement psUpdate = con.prepareStatement(updateSQL);
+                psUpdate.setInt(1, cantidad); // Descontamos la cantidad
+                psUpdate.setString(2, id_dis);
+                psUpdate.executeUpdate();
+            }
+
         } else if ("Merma".equals(tipo)) {
             // Merma: el usuario selecciona el lote manualmente
             lote = fielLote.getText().trim();
@@ -535,6 +576,15 @@ public class RegistroIngresoo extends javax.swing.JPanel {
             movimiento.setCantidad_unit(cantidad);
             movimiento.setCantidad_cajas(0);
             movimiento.setMotivo(motivo);
+
+            // Actualizar el stock de DISPONIBLE (descontar la cantidad de merma)
+            try (Connection con = new SQLConexion().establecerConexion()) {
+                String updateSQL = "UPDATE DISPONIBLE SET CANTIDAD_CAJAS = CANTIDAD_CAJAS - ? WHERE ID_DIS = ?";
+                PreparedStatement psUpdate = con.prepareStatement(updateSQL);
+                psUpdate.setInt(1, cantidad); // Descontamos la cantidad de merma
+                psUpdate.setString(2, id_dis);
+                psUpdate.executeUpdate();
+            }
         }
 
         // Valores comunes
@@ -550,6 +600,7 @@ public class RegistroIngresoo extends javax.swing.JPanel {
             JOptionPane.showMessageDialog(this, "Salida registrada por merma.");
         }
 
+        cargarTablaSalida();
     } catch (NumberFormatException ex) {
         JOptionPane.showMessageDialog(this, "Ingrese una cantidad válida.");
     } catch (SQLException ex) {
