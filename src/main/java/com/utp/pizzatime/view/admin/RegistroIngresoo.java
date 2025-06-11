@@ -44,6 +44,14 @@ public class RegistroIngresoo extends javax.swing.JPanel {
         cargarTablaProductosIngreso();
     }
 
+    private void clearFieldsIngreso() {
+        cboingingreso.setSelectedIndex(-1);
+        txtcantcajasingreso.setText("");
+        txtloteingreso.setText("");
+        dateChooserFechaIng.setDate(null);
+        dateChooserFechaCad.setDate(null);
+    }
+
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -421,7 +429,7 @@ public class RegistroIngresoo extends javax.swing.JPanel {
     }// </editor-fold>//GEN-END:initComponents
 
     private void btncancelarprodingresoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btncancelarprodingresoActionPerformed
-        
+        clearFieldsIngreso();
     }//GEN-LAST:event_btncancelarprodingresoActionPerformed
 
     private void cargarIngredientesEntrada() {
@@ -567,6 +575,7 @@ public class RegistroIngresoo extends javax.swing.JPanel {
 
             // 5. Recarga de tabla
             cargarTablaProductosIngreso();
+            clearFieldsIngreso();
 
         } catch (Exception e) {
             e.printStackTrace();
@@ -587,8 +596,17 @@ public class RegistroIngresoo extends javax.swing.JPanel {
         // TODO add your handling code here:
     }//GEN-LAST:event_txtloteingresoActionPerformed
 
+    private void clearFieldsSalida() {
+        ComboBox_Ingredientes_Salida.setSelectedIndex(-1);
+        cantidadcou.setText("");
+        fielLote.setText("");
+        ComboBoxTipo.setSelectedIndex(-1);
+        ComboBoxMotivo.removeAllItems();
+        cargarTablaSalida();   // recarga tabla desde BD
+    }
+
     private void Boton_Cancelar_SalidaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_Boton_Cancelar_SalidaActionPerformed
-        // TODO add your handling code here:
+        clearFieldsSalida();
     }//GEN-LAST:event_Boton_Cancelar_SalidaActionPerformed
     // Método para cargar los datos en la tabla después de una operación.
     private void cargarTablaSalida() {
@@ -782,6 +800,7 @@ public class RegistroIngresoo extends javax.swing.JPanel {
             }
 
             cargarTablaSalida();
+            clearFieldsSalida();
         } catch (NumberFormatException ex) {
             JOptionPane.showMessageDialog(this, "Ingrese una cantidad válida.");
         } catch (SQLException ex) {
