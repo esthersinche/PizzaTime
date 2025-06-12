@@ -4,6 +4,13 @@
  */
 package com.utp.pizzatime.view.multi;
 
+import com.utp.pizzatime.util.SQLConexion;
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import javax.swing.JOptionPane;
+import javax.swing.table.DefaultTableModel;
+
 /**
  *
  * @author BeeIsMega
@@ -15,6 +22,7 @@ public class ConsultarStock extends javax.swing.JPanel {
      */
     public ConsultarStock() {
         initComponents();
+        cargarDatosStock(); 
     }
 
     /**
@@ -26,31 +34,23 @@ public class ConsultarStock extends javax.swing.JPanel {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        jLabel1 = new javax.swing.JLabel();
         jScrollPane1 = new javax.swing.JScrollPane();
         tbconsultarstock = new javax.swing.JTable();
-        jComboBox1 = new javax.swing.JComboBox<>();
 
         setBackground(new java.awt.Color(255, 255, 255));
 
-        jLabel1.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
-        jLabel1.setForeground(new java.awt.Color(110, 104, 104));
-        jLabel1.setText("Buscar por ingrediente:");
-
         tbconsultarstock.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null}
+                {null, null, null},
+                {null, null, null},
+                {null, null, null},
+                {null, null, null}
             },
             new String [] {
-                "Title 1", "Title 2", "Title 3", "Title 4"
+                "Producto", "Cantidad Cajas", "Cantidad Unitaria"
             }
         ));
         jScrollPane1.setViewportView(tbconsultarstock);
-
-        jComboBox1.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
@@ -58,31 +58,48 @@ public class ConsultarStock extends javax.swing.JPanel {
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addGap(58, 58, 58)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(jScrollPane1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 622, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addGroup(layout.createSequentialGroup()
-                        .addComponent(jLabel1)
-                        .addGap(18, 18, 18)
-                        .addComponent(jComboBox1, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 622, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(90, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addContainerGap(54, Short.MAX_VALUE)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel1)
-                    .addComponent(jComboBox1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(35, 35, 35)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 362, javax.swing.GroupLayout.PREFERRED_SIZE)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                .addContainerGap(46, Short.MAX_VALUE)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(47, 47, 47))
         );
     }// </editor-fold>//GEN-END:initComponents
 
+    
+    private void cargarDatosStock() {
+    try (Connection con = new SQLConexion().establecerConexion()) {
+        String sql = "SELECT p.NOMBRE_PRO, SUM(d.CANTIDAD_CAJAS) AS CANTIDAD_CAJAS, "
+                   + "SUM(d.CANTIDAD_CAJAS * p.STOCK_CAJAS) AS CANTIDAD_UNITARIA "
+                   + "FROM DISPONIBLE d "
+                   + "JOIN PRODUCTO p ON d.ID_PRO = p.ID_PRO "
+                   + "GROUP BY p.NOMBRE_PRO";
+
+        PreparedStatement ps = con.prepareStatement(sql);
+        ResultSet rs = ps.executeQuery();
+
+        DefaultTableModel model = (DefaultTableModel) tbconsultarstock.getModel();
+        model.setRowCount(0); // Limpiar datos anteriores
+
+        while (rs.next()) {
+            Object[] fila = new Object[3];
+            fila[0] = rs.getString("NOMBRE_PRO");
+            fila[1] = rs.getInt("CANTIDAD_CAJAS");
+            fila[2] = rs.getInt("CANTIDAD_UNITARIA");
+            model.addRow(fila);
+        }
+
+    } catch (Exception e) {
+        JOptionPane.showMessageDialog(this, "Error al cargar datos: " + e.getMessage());
+    }
+}
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JComboBox<String> jComboBox1;
-    private javax.swing.JLabel jLabel1;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JTable tbconsultarstock;
     // End of variables declaration//GEN-END:variables
