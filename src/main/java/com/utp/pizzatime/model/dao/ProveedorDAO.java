@@ -4,10 +4,25 @@
  */
 package com.utp.pizzatime.model.dao;
 
+import java.sql.SQLException;
+import java.util.List;
+import com.utp.pizzatime.model.entity.Proveedor;
+
 /**
  *
  * @author Dell
  */
-public class ProveedorDAO {
-    
+public interface ProveedorDAO {
+
+    List<Proveedor> listarTodos() throws SQLException;
+
+    Proveedor listarPorId(String id) throws SQLException;
+
+    void insertar(Proveedor proveedor) throws SQLException;
+
+    void actualizar(Proveedor proveedor) throws SQLException;
+
+    void eliminar(String id) throws SQLException;
+
+    String obtenerIdProveedorPorNombre(String nombreProveedor) throws SQLException;
 }

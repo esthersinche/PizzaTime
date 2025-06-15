@@ -1,5 +1,7 @@
 package com.utp.pizzatime.view;
 
+import com.utp.pizzatime.view.multi.Employee;
+import com.utp.pizzatime.view.admin.Admin;
 import com.utp.pizzatime.controller.LoginController;
 import com.utp.pizzatime.model.dao.impl.I_EmpleadoDAO;
 import com.utp.pizzatime.model.entity.Empleado;
