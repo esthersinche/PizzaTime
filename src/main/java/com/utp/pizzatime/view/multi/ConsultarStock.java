@@ -73,11 +73,12 @@ public class ConsultarStock extends javax.swing.JPanel {
     
     private void cargarDatosStock() {
     try (Connection con = new SQLConexion().establecerConexion()) {
-        String sql = "SELECT p.NOMBRE_PRO, SUM(d.CANTIDAD_CAJAS) AS CANTIDAD_CAJAS, "
-                   + "SUM(d.CANTIDAD_CAJAS * p.STOCK_CAJAS) AS CANTIDAD_UNITARIA "
+        String sql = "SELECT p.NOMBRE_PRO, "
+                   + "SUM(d.CANTIDAD_CAJAS) AS CANTIDAD_CAJAS, "
+                   + "SUM(d.CANTIDAD_CAJAS) * p.STOCK_CAJAS AS CANTIDAD_UNITARIA "
                    + "FROM DISPONIBLE d "
                    + "JOIN PRODUCTO p ON d.ID_PRO = p.ID_PRO "
-                   + "GROUP BY p.NOMBRE_PRO";
+                   + "GROUP BY p.NOMBRE_PRO, p.STOCK_CAJAS";
 
         PreparedStatement ps = con.prepareStatement(sql);
         ResultSet rs = ps.executeQuery();

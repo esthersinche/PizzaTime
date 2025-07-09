@@ -1,5 +1,6 @@
 package com.utp.pizzatime.view.admin;
 
+import com.utp.pizzatime.controller.SalidaController;
 import com.utp.pizzatime.model.dao.DisponibleDAO;
 import com.utp.pizzatime.model.entity.Disponible;
 import com.utp.pizzatime.model.entity.MovimientoCocina;
@@ -7,6 +8,7 @@ import com.utp.pizzatime.model.dao.impl.I_MovimientoCocinaDAO;
 import com.utp.pizzatime.util.SQLConexion;
 import com.utp.pizzatime.model.dao.impl.I_DisponibleDAO;
 import com.utp.pizzatime.model.dao.impl.I_ProductoDAO;
+import com.utp.pizzatime.model.dto.DisponibleProductoDTO;
 import com.utp.pizzatime.service.ProductoService;
 
 import com.utp.pizzatime.util.SesionActiva;
@@ -14,6 +16,7 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.List;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 
@@ -608,7 +611,7 @@ public class RegistroIngresoo extends javax.swing.JPanel {
     private void Boton_Cancelar_SalidaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_Boton_Cancelar_SalidaActionPerformed
         clearFieldsSalida();
     }//GEN-LAST:event_Boton_Cancelar_SalidaActionPerformed
-    // Método para cargar los datos en la tabla después de una operación.
+/*    // Método para cargar los datos en la tabla después de una operación.
     private void cargarTablaSalida() {
         try (Connection con = new SQLConexion().establecerConexion()) {
             // Modificada la consulta SQL para hacer un JOIN entre DISPONIBLE y PRODUCTO
@@ -695,6 +698,49 @@ public class RegistroIngresoo extends javax.swing.JPanel {
         }
 
         return idDis;
+    }
+
+*/
+    
+    private final SalidaController controller = new SalidaController();
+
+    private void cargarTablaSalida() {
+        List<DisponibleProductoDTO> lista = controller.obtenerDisponiblesParaSalida();
+        DefaultTableModel model = (DefaultTableModel) Tabla_Productos_Salida.getModel();
+        model.setRowCount(0);
+        for (DisponibleProductoDTO dto : lista) {
+            Object[] row = new Object[4];
+            row[0] = dto.getNombreProducto();
+            row[1] = dto.getCantidad();
+            row[2] = dto.getFechaDis();
+            row[3] = dto.getVencimiento();
+            model.addRow(row);
+        }
+    }
+
+    private void cargarIngredientesSalida() {
+        ComboBox_Ingredientes_Salida.removeAllItems();
+        for (String nombre : controller.obtenerNombresProductos()) {
+            ComboBox_Ingredientes_Salida.addItem(nombre);
+        }
+    }
+
+    private void cargarTiposMovimiento() {
+        ComboBoxTipo.removeAllItems();
+        for (String tipo : controller.obtenerTiposMovimiento()) {
+            ComboBoxTipo.addItem(tipo);
+        }
+    }
+
+    private void cargarMotivosPorTipo(String tipo) {
+        ComboBoxMotivo.removeAllItems();
+        for (String motivo : controller.obtenerMotivosPorTipo(tipo)) {
+            ComboBoxMotivo.addItem(motivo);
+        }
+    }
+
+    private String obtenerIdDisponiblePorIngredienteYLote(String nombreProducto, String lote) {
+        return controller.obtenerIdDisponiblePorProductoYLote(nombreProducto, lote);
     }
 
 

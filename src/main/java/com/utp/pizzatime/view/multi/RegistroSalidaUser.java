@@ -1,9 +1,11 @@
 package com.utp.pizzatime.view.multi;
 
+import com.utp.pizzatime.controller.SalidaController;
 import com.utp.pizzatime.model.entity.MovimientoCocina;
 import com.utp.pizzatime.util.SesionActiva;
 import com.utp.pizzatime.util.SQLConexion;
 import com.utp.pizzatime.model.dao.impl.I_MovimientoCocinaDAO;
+import com.utp.pizzatime.model.dto.DisponibleProductoDTO;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -161,7 +163,7 @@ public class RegistroSalidaUser extends javax.swing.JPanel {
     private void btncancelarsalidaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btncancelarsalidaActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_btncancelarsalidaActionPerformed
-
+/*
     // Método para cargar los datos en la tabla después de una operación.
     private void cargarTablaSalida() {
         try (Connection con = new SQLConexion().establecerConexion()) {
@@ -193,7 +195,30 @@ public class RegistroSalidaUser extends javax.swing.JPanel {
     }
 
 
-    
+    */
+    private final SalidaController controller = new SalidaController();
+
+    private void cargarIngredientesDesdeBD() {
+        cboingsalida.removeAllItems();
+        for (String nombre : controller.obtenerNombresProductos()) {
+            cboingsalida.addItem(nombre);
+        }
+    }
+    private void cargarTablaSalida() {
+        List<DisponibleProductoDTO> lista = controller.obtenerDisponiblesParaSalida();
+        DefaultTableModel model = (DefaultTableModel) tbprodsalida.getModel();
+        model.setRowCount(0);
+
+        for (DisponibleProductoDTO dto : lista) {
+            Object[] row = new Object[4];
+            row[0] = dto.getNombreProducto();
+            row[1] = dto.getCantidad();
+            row[2] = dto.getFechaDis();
+            row[3] = dto.getVencimiento();
+            model.addRow(row);
+        }
+    }
+
     private void btnguardarsalidaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnguardarsalidaActionPerformed
         try (Connection con = new SQLConexion().establecerConexion()) {
 
@@ -267,7 +292,7 @@ public class RegistroSalidaUser extends javax.swing.JPanel {
                     "Error", JOptionPane.ERROR_MESSAGE);
 
     }    }//GEN-LAST:event_btnguardarsalidaActionPerformed
-
+/*
     private void cargarIngredientesDesdeBD() {
         try (Connection con = new SQLConexion().establecerConexion()) {
             String sql = "SELECT NOMBRE_PRO FROM PRODUCTO";
@@ -283,7 +308,7 @@ public class RegistroSalidaUser extends javax.swing.JPanel {
             JOptionPane.showMessageDialog(this, "Error al cargar ingredientes: " + e.getMessage());
         }
     }
-
+*/
     private void cboingsalidaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cboingsalidaActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_cboingsalidaActionPerformed
