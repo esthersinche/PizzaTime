@@ -1,6 +1,7 @@
 package com.utp.pizzatime.model.dao.impl;
 
 import com.utp.pizzatime.model.dao.DisponibleDAO;
+import com.utp.pizzatime.model.dto.DisponibleProductoDTO;
 import com.utp.pizzatime.model.entity.Disponible;
 import com.utp.pizzatime.util.SQLConexion;
 import java.sql.Connection;
@@ -121,6 +122,33 @@ public class I_DisponibleDAO implements DisponibleDAO {
     }
     return "DIS00001"; // primera vez
 }  
+
+    public List<DisponibleProductoDTO> listarDisponiblesConProducto() {
+    List<DisponibleProductoDTO> lista = new ArrayList<>();
+    String sql = "SELECT p.NOMBRE_PRO, d.CANTIDAD_CAJAS, d.FECHA_DIS, d.VENCIMIENTO "
+               + "FROM DISPONIBLE d "
+               + "JOIN PRODUCTO p ON d.ID_PRO = p.ID_PRO "
+               + "WHERE d.CANTIDAD_CAJAS > 0";
+
+    try (Connection con = new SQLConexion().establecerConexion();
+         PreparedStatement ps = con.prepareStatement(sql);
+         ResultSet rs = ps.executeQuery()) {
+
+        while (rs.next()) {
+            DisponibleProductoDTO dto = new DisponibleProductoDTO();
+            dto.setNombreProducto(rs.getString("NOMBRE_PRO"));
+            dto.setCantidad(rs.getInt("CANTIDAD_CAJAS"));
+            dto.setFechaDis(rs.getDate("FECHA_DIS"));
+            dto.setVencimiento(rs.getDate("VENCIMIENTO"));
+            lista.add(dto);
+        }
+
+    } catch (Exception e) {
+        e.printStackTrace();
+    }
+
+    return lista;
+    }
         
         
 }

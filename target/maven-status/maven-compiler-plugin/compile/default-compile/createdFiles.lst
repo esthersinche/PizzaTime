@@ -59,10 +59,12 @@ com\utp\pizzatime\view\Login$2.class
 com\utp\pizzatime\view\admin\Admin$4.class
 com\utp\pizzatime\view\admin\RegistroIngresoo$6.class
 com\utp\pizzatime\model\dao\ProveedorDAO.class
+com\utp\pizzatime\model\dto\DisponibleProductoDTO.class
 com\utp\pizzatime\view\admin\Pedido_ingredientes$2.class
 com\utp\pizzatime\view\admin\Admin$7.class
 com\utp\pizzatime\view\admin\ReingresoProd$2.class
 com\utp\pizzatime\model\entity\Empleado.class
+com\utp\pizzatime\controller\SalidaController.class
 com\utp\pizzatime\model\entity\Pedido.class
 com\utp\pizzatime\model\entity\Prioridad.class
 com\utp\pizzatime\model\dao\MovimientoCocinaDAO.class

@@ -159,4 +159,25 @@ public class I_ProductoDAO implements ProductoDAO {
 
         return idPro;
     }
+    
+    @Override
+public List<String> listarNombresProducto() {
+    List<String> lista = new ArrayList<>();
+    String sql = "SELECT NOMBRE_PRO FROM PRODUCTO";
+
+    try (Connection con = sqlCon.establecerConexion();
+         PreparedStatement ps = con.prepareStatement(sql);
+         ResultSet rs = ps.executeQuery()) {
+
+        while (rs.next()) {
+            lista.add(rs.getString("NOMBRE_PRO"));
+        }
+
+    } catch (Exception e) {
+        e.printStackTrace();
+    }
+
+    return lista;
+}
+
 }

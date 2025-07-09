@@ -14,5 +14,7 @@ public interface ProductoDAO {
     void actualizar(Producto_modificar p) throws SQLException;
     void eliminar(String id) throws SQLException; 
     String obtenerIdProductoPorNombre(String nombreProducto) throws SQLException;
+    List<String> listarNombresProducto();
+
 
 }
