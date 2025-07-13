@@ -1,9 +1,12 @@
 package com.utp.pizzatime.view.multi;
 
+import com.utp.pizzatime.service.FecVenService;
 import com.utp.pizzatime.util.ConfigJMXUtil;
+import com.utp.pizzatime.util.JMXSetup;
 import com.utp.pizzatime.view.Login;
-import com.utp.pizzatime.view.multi.ConsultarStock;
 import java.awt.CardLayout;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 /**
  *
@@ -30,8 +33,13 @@ public class Employee extends javax.swing.JFrame {
         panelEmp.add(consultar, "consultarStock");
         panelEmp.add(registroSalidaUser, "RegistroSalidaUser");
         
+        // 1) Registra el MBean en el servidor JMX
+        JMXSetup.registrarMBeansensist();
+        
         //apenas se loguee le dan las notifs
         ConfigJMXUtil.configListenerJMX(this);
+        
+        new FecVenService().VeryNotifIng();
 
     }
 
@@ -159,9 +167,16 @@ public class Employee extends javax.swing.JFrame {
     }//GEN-LAST:event_btnConsultarStockActionPerformed
 
     private void btnlogoutActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnlogoutActionPerformed
+   
+        try {
+            ConfigJMXUtil.unconfigListener();
+        } catch (Exception ex) {
+            Logger.getLogger(Employee.class.getName()).log(Level.SEVERE, null, ex);
+        }
         Login login = new Login();
         login.setVisible(true);
         this.dispose();
+        
     }//GEN-LAST:event_btnlogoutActionPerformed
 
     private void btnRegistrarIngredientesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRegistrarIngredientesActionPerformed

@@ -4,6 +4,7 @@
  */
 package com.utp.pizzatime.service;
 
+import com.utp.pizzatime.util.FecVenMonitor;
 import com.utp.pizzatime.util.FecVenMonitorMBean;
 import com.utp.pizzatime.util.SQLConexion;
 import java.lang.management.ManagementFactory;
@@ -69,13 +70,17 @@ public class FecVenService {
                 msg.append("El Ingrediente: ").append(rs.getString("ID_PRO")).append(" con lote ").append(rs.getString("LOTE")).
                         append(" vence el ").append(rs.getDate("VENCIMIENTO")).append("\n");
             }
-            
+
             if (!msg.isEmpty()) {
-                MBeanServer mbeanserv= ManagementFactory.getPlatformMBeanServer();//agarra server MBeans
-                ObjectName objname= new ObjectName("miapp.vencimientos:type=FecVenMonitor");//da nombre
-                FecVenMonitorMBean fecvenmonitorr= MBeanServerInvocationHandler.newProxyInstance(mbeanserv, objname,
+                MBeanServer mbeanserv = ManagementFactory.getPlatformMBeanServer();//agarra server MBeans
+                ObjectName objname = new ObjectName("miapp.vencimientos:type=FecVenMonitor");//da nombre
+
+                if (!mbeanserv.isRegistered(objname)) {
+                    mbeanserv.registerMBean(new FecVenMonitor(), objname);
+                }
+                FecVenMonitorMBean fecvenmonitorproxy = MBeanServerInvocationHandler.newProxyInstance(mbeanserv, objname,
                         FecVenMonitorMBean.class, false);//hace el proxy
-                fecvenmonitorr.notifFecvenci(msg.toString());  //pasa el mensaje para q pueda ser llamado  
+                fecvenmonitorproxy.notifFecvenci(msg.toString());  //pasa el mensaje para q pueda ser llamado  
             }
         } catch (Exception e) {
             e.printStackTrace();

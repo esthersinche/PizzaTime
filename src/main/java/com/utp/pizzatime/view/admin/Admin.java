@@ -1,15 +1,12 @@
 package com.utp.pizzatime.view.admin;
 
+import com.utp.pizzatime.service.FecVenService;
 import com.utp.pizzatime.util.ConfigJMXUtil;
 import com.utp.pizzatime.view.Login;
 import java.awt.CardLayout;
-import java.lang.management.ManagementFactory;
-import javax.management.MBeanServer;
-import javax.management.NotificationListener;
-import javax.management.ObjectName;
-import javax.swing.JOptionPane;
-import javax.swing.SwingUtilities;
 import com.utp.pizzatime.util.JMXSetup;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 /**
  *
@@ -46,6 +43,8 @@ public class Admin extends javax.swing.JFrame {
 
         //apenas se loguee le dan las notifs
         ConfigJMXUtil.configListenerJMX(this);
+        
+        new FecVenService().VeryNotifIng();
 
     }
 
@@ -218,9 +217,16 @@ public class Admin extends javax.swing.JFrame {
     }//GEN-LAST:event_btnReingresoActionPerformed
 
     private void btnlogoutActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnlogoutActionPerformed
+        
+        try {
+            ConfigJMXUtil.unconfigListener();
+        } catch (Exception ex) {
+            Logger.getLogger(Admin.class.getName()).log(Level.SEVERE, null, ex);
+        }
         Login login = new Login();
         login.setVisible(true);
         this.dispose();
+        
     }//GEN-LAST:event_btnlogoutActionPerformed
 
     private void btnPedidosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnPedidosActionPerformed
