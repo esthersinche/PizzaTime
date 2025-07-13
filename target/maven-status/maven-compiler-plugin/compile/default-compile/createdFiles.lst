@@ -5,6 +5,7 @@ com\utp\pizzatime\util\JMXSetup.class
 com\utp\pizzatime\view\multi\Employee$3.class
 com\utp\pizzatime\service\P_ReportGeneratorService.class
 com\utp\pizzatime\view\admin\RegistroIngresoo$11.class
+com\utp\pizzatime\view\admin\Reportes$4.class
 com\utp\pizzatime\model\dao\impl\I_ProveedorDAO.class
 com\utp\pizzatime\view\admin\GestionarProductos$8.class
 com\utp\pizzatime\view\multi\Employee.class

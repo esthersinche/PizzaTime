@@ -9,6 +9,7 @@ import java.sql.*;
 import org.apache.poi.ss.usermodel.*;
 import org.apache.poi.xssf.usermodel.XSSFWorkbook;
 import com.utp.pizzatime.util.SQLConexion;
+import java.awt.event.ActionEvent;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 
@@ -17,6 +18,15 @@ public class Reportes extends javax.swing.JPanel {
 
     public Reportes() {
         initComponents();
+        
+        // 1) Poblar el combo Ingreso/Salida
+        ComboBoxTipos.removeAllItems();
+        ComboBoxTipos.addItem("Ingreso");
+        ComboBoxTipos.addItem("Salida");
+
+        // 2) Asociar evento al combo
+        ComboBoxTipos.addActionListener(this::ComboBoxTiposActionPerformed);
+
     }
 
     @SuppressWarnings("unchecked")
@@ -29,6 +39,11 @@ public class Reportes extends javax.swing.JPanel {
         jScrollPane2 = new javax.swing.JScrollPane();
         TableRepor = new javax.swing.JTable();
         Button_Repo = new javax.swing.JButton();
+        ComboBoxTipos = new javax.swing.JComboBox<>();
+        DateInicial = new com.toedter.calendar.JDateChooser();
+        DateFinal = new com.toedter.calendar.JDateChooser();
+        jLabel1 = new javax.swing.JLabel();
+        jLabel2 = new javax.swing.JLabel();
 
         jTable1.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -87,6 +102,17 @@ public class Reportes extends javax.swing.JPanel {
             }
         });
 
+        ComboBoxTipos.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+        ComboBoxTipos.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                ComboBoxTiposActionPerformed(evt);
+            }
+        });
+
+        jLabel1.setText("Desde:");
+
+        jLabel2.setText("Hasta:");
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
         layout.setHorizontalGroup(
@@ -94,135 +120,187 @@ public class Reportes extends javax.swing.JPanel {
             .addGroup(layout.createSequentialGroup()
                 .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 633, Short.MAX_VALUE)
                 .addContainerGap())
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(Btn_excelimpo)
+            .addGroup(layout.createSequentialGroup()
                 .addGap(18, 18, 18)
-                .addComponent(Button_Repo)
-                .addGap(15, 15, 15))
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(ComboBoxTipos, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(DateInicial, javax.swing.GroupLayout.DEFAULT_SIZE, 199, Short.MAX_VALUE)
+                    .addComponent(DateFinal, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 46, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 46, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(52, 52, 52)
+                        .addComponent(Btn_excelimpo)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(Button_Repo)
+                        .addGap(24, 24, 24))))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addContainerGap(146, Short.MAX_VALUE)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(Button_Repo)
-                    .addComponent(Btn_excelimpo))
+                .addContainerGap(63, Short.MAX_VALUE)
+                .addComponent(ComboBoxTipos, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
-                .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 262, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(DateInicial, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 22, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(17, 17, 17)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(DateFinal, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                        .addComponent(jLabel2, javax.swing.GroupLayout.DEFAULT_SIZE, 25, Short.MAX_VALUE)
+                        .addComponent(Btn_excelimpo)
+                        .addComponent(Button_Repo)))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 297, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap())
         );
     }// </editor-fold>//GEN-END:initComponents
 
+        //--------------------------------------------------//
+    
     private void Btn_excelimpoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_Btn_excelimpoActionPerformed
 
-        // Crear un JFileChooser para que el usuario elija dónde guardar el archivo
-        JFileChooser fileChooser = new JFileChooser();
-        fileChooser.setDialogTitle("Guardar como");
+        // Asumimos que la tabla ya está cargada por Button_RepoActionPerformed
+    TableModel model = TableRepor.getModel();
+    if (model.getRowCount() == 0) {
+        JOptionPane.showMessageDialog(this, "No hay datos para exportar.");
+        return;
+    }
 
-        // Obtener fecha y hora actual con formato
-        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd_HH-mm-ss");
-        String timestamp = LocalDateTime.now().format(formatter);
-        String fileName = "Stock_PapaJhons_" + timestamp + ".xlsx";
+    // Preparar diálogo de guardar
+    JFileChooser fileChooser = new JFileChooser();
+    fileChooser.setDialogTitle("Guardar como");
+    DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd_HH-mm-ss");
+    String timestamp = LocalDateTime.now().format(formatter);
+    fileChooser.setSelectedFile(new java.io.File("Reporte_Pizzeria_" + timestamp + ".xlsx"));
 
-        fileChooser.setSelectedFile(new java.io.File(fileName));
+    int userSelection = fileChooser.showSaveDialog(this);
+    if (userSelection != JFileChooser.APPROVE_OPTION) {
+        return;
+    }
 
+    String filePath = fileChooser.getSelectedFile().getAbsolutePath();
+    if (!filePath.toLowerCase().endsWith(".xlsx")) {
+        filePath += ".xlsx";
+    }
 
-        // Mostrar el cuadro de diálogo de guardar y capturar la opción del usuario
-        int userSelection = fileChooser.showSaveDialog(this);
+    // Crear y escribir el archivo Excel
+    try (Workbook workbook = new XSSFWorkbook();
+         FileOutputStream out = new FileOutputStream(filePath)) {
 
-        // Si el usuario eligió una ruta y presionó "Guardar"
-        if (userSelection == JFileChooser.APPROVE_OPTION) {
-            // Obtener el archivo seleccionado por el usuario
-            java.io.File fileToSave = fileChooser.getSelectedFile();
-            String filePath = fileToSave.getAbsolutePath();
-
-            // Asegurarse de que el archivo tenga extensión .xlsx
-            if (!filePath.toLowerCase().endsWith(".xlsx")) {
-                filePath += ".xlsx";
-            }
-
-            // Crear un nuevo libro de Excel (.xlsx)
-            try (Workbook workbook = new XSSFWorkbook()) {
-                // Crear una hoja dentro del libro
-                Sheet sheet = workbook.createSheet("Reporte");
-
-                // Obtener el modelo de datos de la JTable
-                TableModel model = TableRepor.getModel();
-
-                // Crear la primera fila del archivo Excel para los nombres de las columnas
-                Row header = sheet.createRow(0);
-                for (int i = 0; i < model.getColumnCount(); i++) {
-                    header.createCell(i).setCellValue(model.getColumnName(i)); // Nombre de la columna
-                }
-
-                // Escribir los datos de cada fila de la JTable en el archivo Excel
-                for (int i = 0; i < model.getRowCount(); i++) {
-                    Row row = sheet.createRow(i + 1); // +1 para dejar la primera fila para los encabezados
-                    for (int j = 0; j < model.getColumnCount(); j++) {
-                        Object value = model.getValueAt(i, j); // Obtener valor de la celda
-                        row.createCell(j).setCellValue(value != null ? value.toString() : ""); // Escribir en Excel
-                    }
-                }
-
-                // Guardar el archivo en la ruta seleccionada por el usuario
-                try (FileOutputStream out = new FileOutputStream(filePath)) {
-                    workbook.write(out); // Escribir el contenido del libro al archivo
-                    // Mostrar mensaje de éxito
-                    JOptionPane.showMessageDialog(this, "Archivo guardado en:\n" + filePath);
-                }
-
-            } catch (IOException e) {
-                // Si ocurre un error al guardar, mostrar mensaje de error
-                JOptionPane.showMessageDialog(this, "Error al guardar el archivo:\n" + e.getMessage());
+        Sheet sheet = workbook.createSheet("Reporte");
+        // Header
+        Row header = sheet.createRow(0);
+        for (int i = 0; i < model.getColumnCount(); i++) {
+            header.createCell(i).setCellValue(model.getColumnName(i));
+        }
+        // Datos
+        for (int r = 0; r < model.getRowCount(); r++) {
+            Row row = sheet.createRow(r + 1);
+            for (int c = 0; c < model.getColumnCount(); c++) {
+                Object val = model.getValueAt(r, c);
+                row.createCell(c).setCellValue(val != null ? val.toString() : "");
             }
         }
+
+        workbook.write(out);
+        JOptionPane.showMessageDialog(this, "Archivo guardado en:\n" + filePath);
+    } catch (IOException e) {
+        JOptionPane.showMessageDialog(this, "Error al guardar el archivo:\n" + e.getMessage());
+    }
 
     }//GEN-LAST:event_Btn_excelimpoActionPerformed
-
+    //------------------------------------------------------------------------------//
+    //-------------------------------------------------------------------//
+    
     private void Button_RepoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_Button_RepoActionPerformed
         
-        // MÉTODO: Carga los datos del producto desde la base de datos y los muestra en el JTable
-        DefaultTableModel model = (DefaultTableModel) TableRepor.getModel();
-        model.setRowCount(0); // Limpiar los datos anteriores antes de agregar nuevos
+             
+    // 1) Lee fechas (java.util.Date)
+    java.util.Date inicio = DateInicial.getDate();
+    java.util.Date fin    = DateFinal.getDate();
+    if (inicio == null || fin == null) {
+        JOptionPane.showMessageDialog(this, "Seleccione ambas fechas.");
+        return;
+    }
 
-        String sql = "SELECT * FROM PRODUCTO"; // Consulta SQL para obtener todos los productos
+    // 2) Prepara el modelo de la tabla
+    DefaultTableModel model = (DefaultTableModel) TableRepor.getModel();
+    model.setRowCount(0);
 
-        try (
-            Connection conn = new SQLConexion().establecerConexion(); // Establecer conexión a la BD
-            PreparedStatement ps = conn.prepareStatement(sql); // Preparar la consulta
-            ResultSet rs = ps.executeQuery() // Ejecutar la consulta
-        ) {
+    // 3) Detecta Ingreso vs Salida
+    String tipo = ComboBoxTipos.getSelectedItem().toString();
+    String sql;
+    if ("Ingreso".equalsIgnoreCase(tipo)) {
+        model.setColumnIdentifiers(new String[]{
+            "ID_DIS", "Producto", "Cant. Cajas", "Lote", "Fecha Ingreso", "Vencimiento"
+        });
+        sql =
+            "SELECT d.ID_DIS, p.NOMBRE_PRO, d.CANTIDAD_CAJAS, d.LOTE, d.FECHA_DIS, d.VENCIMIENTO " +
+            "FROM DISPONIBLE d " +
+            " JOIN PRODUCTO p ON d.ID_PRO = p.ID_PRO " +
+            "WHERE d.FECHA_DIS BETWEEN ? AND ? " +
+            "ORDER BY d.FECHA_DIS";
+    } else {
+        model.setColumnIdentifiers(new String[]{
+            "ID_MOV", "Producto", "Cant. Cajas", "Cant. Unid.", "Fecha Salida", "Motivo"
+        });
+        sql =
+            "SELECT m.ID_MOV, p.NOMBRE_PRO, m.CANTIDAD_CAJAS, m.CANTIDAD_UNIT, m.FECHA_MOV, m.MOTIVO " +
+            "FROM MOVIMIENTO_COCINA m " +
+            " JOIN DISPONIBLE d ON m.ID_DIS = d.ID_DIS " +
+            " JOIN PRODUCTO p ON d.ID_PRO = p.ID_PRO " +
+            "WHERE m.FECHA_MOV BETWEEN ? AND ? " +
+            "ORDER BY m.FECHA_MOV";
+    }
 
-            // Iterar sobre cada resultado y agregarlo a la tabla
+    // 4) Ejecuta la consulta y llena la tabla
+    try (Connection conn = new SQLConexion().establecerConexion();
+         PreparedStatement ps = conn.prepareStatement(sql)) {
+
+        ps.setDate(1, new java.sql.Date(inicio.getTime()));
+        ps.setDate(2, new java.sql.Date(fin   .getTime()));
+        try (ResultSet rs = ps.executeQuery()) {
             while (rs.next()) {
-                Object[] fila = new Object[]{
-                    rs.getString("ID_PRO"),
-                    rs.getString("NOMBRE_PRO"),
-                    rs.getInt("MEDIDA"),
-                    rs.getInt("STOCK_ACTUAL"),
-                    rs.getInt("STOCK_CAJAS"),
-                    rs.getInt("STOCK_MIN"),
-                    rs.getInt("STOCK_MAX"),
-                    rs.getString("ID_PROV"),
-                    rs.getDouble("PRECIO"),
-                    rs.getString("DESCRIPCION")
-                };
-                model.addRow(fila); // Añadir fila al JTable
+                Object[] fila = new Object[model.getColumnCount()];
+                for (int i = 0; i < fila.length; i++) {
+                    fila[i] = rs.getObject(i+1);
+                }
+                model.addRow(fila);
             }
-
-        } catch (SQLException e) {
-            // Mostrar error si la consulta o conexión fallan
-            JOptionPane.showMessageDialog(this, "Error al cargar los datos: " + e.getMessage());
         }
+    } catch (SQLException ex) {
+        JOptionPane.showMessageDialog(this, "Error al generar reporte: " + ex.getMessage());
+    }
         
     }//GEN-LAST:event_Button_RepoActionPerformed
+
+    //------------------------------------------------------------------------------//
+    
+    private void ComboBoxTiposActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ComboBoxTiposActionPerformed
+        
+        if (DateInicial.getDate() == null || DateFinal.getDate() == null) {
+        return;
+        }
+        Button_RepoActionPerformed(null);
+        
+    }//GEN-LAST:event_ComboBoxTiposActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JToggleButton Btn_excelimpo;
     private javax.swing.JButton Button_Repo;
+    private javax.swing.JComboBox<String> ComboBoxTipos;
+    private com.toedter.calendar.JDateChooser DateFinal;
+    private com.toedter.calendar.JDateChooser DateInicial;
     private javax.swing.JTable TableRepor;
+    private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabel2;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JTable jTable1;
