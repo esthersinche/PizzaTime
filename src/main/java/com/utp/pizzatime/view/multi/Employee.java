@@ -26,6 +26,7 @@ public class Employee extends javax.swing.JFrame {
      */
     public Employee() {
         initComponents();
+        this.setLocationRelativeTo(null);
         card = new CardLayout();
         panelEmp.setLayout(card);
 

@@ -60,6 +60,7 @@ public class RegistroSalidaUser extends javax.swing.JPanel {
 
         btncancelarsalida.setBackground(new java.awt.Color(0, 109, 86));
         btncancelarsalida.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
+        btncancelarsalida.setForeground(new java.awt.Color(255, 255, 255));
         btncancelarsalida.setText("Cancelar");
         btncancelarsalida.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -69,6 +70,7 @@ public class RegistroSalidaUser extends javax.swing.JPanel {
 
         btnguardarsalida.setBackground(new java.awt.Color(0, 109, 86));
         btnguardarsalida.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
+        btnguardarsalida.setForeground(new java.awt.Color(255, 255, 255));
         btnguardarsalida.setText("Guardar");
         btnguardarsalida.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {

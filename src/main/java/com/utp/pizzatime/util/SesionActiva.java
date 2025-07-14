@@ -8,5 +8,4 @@ import com.utp.pizzatime.model.entity.Empleado;
  */
 public class SesionActiva {
         public static Empleado empleadoLogueado;
-
 }

@@ -27,6 +27,7 @@ public class Admin extends javax.swing.JFrame {
      */
     public Admin() {
         initComponents();
+        this.setLocationRelativeTo(null);
         card = new CardLayout();
         panelAdm.setLayout(card);
 

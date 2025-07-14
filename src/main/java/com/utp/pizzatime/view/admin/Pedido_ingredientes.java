@@ -388,7 +388,7 @@ public class Pedido_ingredientes extends javax.swing.JPanel {
             return;
         }
 
-        // Encuentra el producto en listaProductos
+        //Encuentra el producto en listaProductos
         Producto_pedido prod = listaProductos.stream()
                 .filter(p -> p.getNOMBRE_PRO().equals(nombre))
                 .findFirst().orElse(null);
@@ -396,7 +396,7 @@ public class Pedido_ingredientes extends javax.swing.JPanel {
             return;
         }
 
-        // 1) Añade fila al carrito (tbped_ing)
+        //Añade fila al carrito (tbped_ing)
         DefaultTableModel cartModel = (DefaultTableModel) tbped_ing.getModel();
         cartModel.addRow(new Object[]{
             prod.getID_PRO(),
@@ -405,7 +405,7 @@ public class Pedido_ingredientes extends javax.swing.JPanel {
             prod.getPRECIO()
         });
 
-        // 2) Crea el DetallePedido con idDet e idPed a null
+        //Crea el DetallePedido con idDet e idPed a null
         DetallePedido det = new DetallePedido(
                 null, // idDet null para que el DAO lo genere
                 null, // idPed null para que el DAO lo genere
@@ -416,7 +416,7 @@ public class Pedido_ingredientes extends javax.swing.JPanel {
         );
         listaDetalles.add(det);
 
-        // 3) Actualiza total en pantalla
+        //Actualiza total en pantalla
         actualizarTotal();
 
 
