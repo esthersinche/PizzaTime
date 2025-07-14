@@ -5,7 +5,6 @@ import com.utp.pizzatime.model.dao.PrioridadDAO;
 import com.utp.pizzatime.model.dao.impl.I_MovimientoCocinaDAO;
 import com.utp.pizzatime.model.dao.impl.I_PrioridadDAO;
 import com.utp.pizzatime.model.dao.impl.I_ProductoDAO;
-import com.utp.pizzatime.model.entity.MovimientoCocina;
 import com.utp.pizzatime.model.entity.Prioridad;
 import com.utp.pizzatime.model.entity.Producto_modificar;
 import java.sql.SQLException;
@@ -14,6 +13,10 @@ import java.util.List;
 import javax.swing.DefaultComboBoxModel;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
+import java.time.LocalDate;
+import java.time.ZoneId;
+import java.time.format.DateTimeFormatter;
+import java.util.Date;
 
 /**
  *
@@ -53,9 +56,11 @@ public class ReingresoProd extends javax.swing.JPanel {
     }
 
     private void initReingresoFecha() {
+        Date hoy = new java.util.Date();
         txtFechaReingreso.setText(new SimpleDateFormat("yyyy-MM-dd").format(new java.util.Date()));
+        dateCaducidad.setMinSelectableDate(hoy);
     }
-    
+
     private void cargarReingresosEnTabla() {
         try {
             listaReingresos = prioDao.findAllPrioridades();
@@ -75,7 +80,7 @@ public class ReingresoProd extends javax.swing.JPanel {
             JOptionPane.showMessageDialog(this, "Error al cargar reingresos:\n" + ex.getMessage());
         }
     }
-    
+
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -247,7 +252,6 @@ public class ReingresoProd extends javax.swing.JPanel {
             return;
         }
 
-        // Resuelvo ID_PRO
         String idPro = listaIngredientes.stream()
                 .filter(p -> p.getNOMBRE_PRO().equals(nombre))
                 .map(Producto_modificar::getID_PRO)
@@ -256,7 +260,6 @@ public class ReingresoProd extends javax.swing.JPanel {
             return;
         }
 
-        // Recupero ID_MOV asociado al lote
         String idMov;
         try {
             I_MovimientoCocinaDAO movDao = new I_MovimientoCocinaDAO();
@@ -273,15 +276,31 @@ public class ReingresoProd extends javax.swing.JPanel {
                     "Error", JOptionPane.ERROR_MESSAGE);
             return;
         }
+        
+        java.util.Date utilDate = dateCaducidad.getDate();
+        if (utilDate == null) {
+            JOptionPane.showMessageDialog(this,
+                    "Debes seleccionar una fecha de caducidad",
+                    "Fecha inválida", JOptionPane.WARNING_MESSAGE);
+            return;
+        }
+        
+        LocalDate fechaSeleccionada = utilDate.toInstant()
+                .atZone(ZoneId.systemDefault())
+                .toLocalDate();
+        LocalDate hoy = LocalDate.now();
+        if (fechaSeleccionada.isBefore(hoy)) {
+            JOptionPane.showMessageDialog(this,
+                    "La fecha de caducidad no puede ser anterior a hoy ("
+                    + hoy.format(DateTimeFormatter.ISO_DATE) + ")",
+                    "Fecha inválida", JOptionPane.WARNING_MESSAGE);
+            return;
+        }
 
-        // obtener la fecha de caducidad del JDateChooser
-        java.util.Date utilDate = dateCaducidad.getDate();  // de JCalendar
-        java.sql.Date sqlVenc = new java.sql.Date(utilDate.getTime());
+        java.sql.Date sqlVenc = java.sql.Date.valueOf(fechaSeleccionada);
 
-        // fecha de reingreso (de hoy)
         java.sql.Date sqlReing = new java.sql.Date((new java.util.Date()).getTime());
 
-        // Construyendo el objeto Prioridad
         Prioridad pr = new Prioridad();
         pr.setIdMov(idMov);
         pr.setCantidadUnit(unidades);
@@ -289,7 +308,6 @@ public class ReingresoProd extends javax.swing.JPanel {
         pr.setVencimiento(sqlVenc);
         pr.setLote(lote);
 
-        // Insertando con DAO
         try {
             prioDao.insertPrioridad(pr);
             JOptionPane.showMessageDialog(this, "Reingreso registrado");
@@ -299,7 +317,6 @@ public class ReingresoProd extends javax.swing.JPanel {
         }
     }//GEN-LAST:event_btnRegistrarActionPerformed
 
-    
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JLabel Text_CantidadCajas1;

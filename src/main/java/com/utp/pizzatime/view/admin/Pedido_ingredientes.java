@@ -45,6 +45,7 @@ public class Pedido_ingredientes extends javax.swing.JPanel {
      */
     JPopupMenu popmenuanticlick; //para q al hacer anticlick en un row se pueda eliminar
     JMenuItem elimitem;
+    private List<Producto_modificar> listaProductosMod;
     private List<Producto_pedido> listaProductos;      // para combo y carrito
     private List<DetallePedido> listaDetalles = new ArrayList<>(); // carrito “persistible”
     private FecVenService fecvenserv = new FecVenService();
@@ -74,6 +75,8 @@ public class Pedido_ingredientes extends javax.swing.JPanel {
         try {
             List<Producto_modificar> productos = productoService.listarTodos();
 
+            listaProductosMod = productos;
+
             // 1) Llenar el combo
             listaProductos = new ArrayList<>();
             DefaultComboBoxModel<String> modeloCombo = new DefaultComboBoxModel<>();
@@ -97,6 +100,7 @@ public class Pedido_ingredientes extends javax.swing.JPanel {
                     p.getSTOCK_ACTUAL()
                 });
             }
+
         } catch (SQLException ex) {
             JOptionPane.showMessageDialog(this,
                     "Error al cargar productos:\n" + ex.getMessage(),
@@ -396,6 +400,33 @@ public class Pedido_ingredientes extends javax.swing.JPanel {
             return;
         }
 
+        //Ahora Buscamos el Producto_modificar por nombre
+        Producto_modificar pmod = listaProductosMod.stream()
+                .filter(p -> p.getNOMBRE_PRO().equals(nombre))
+                .findFirst().orElse(null);
+        if (pmod == null) {
+            return;  // no debería pasar
+        }
+        int stockActual = pmod.getSTOCK_ACTUAL();
+        int stockMax = pmod.getSTOCK_MAX();
+
+        // 2) Calculamos cuánto hay YA en el carrito para este ingrediente
+        int enCarrito = listaDetalles.stream()
+                .filter(d -> d.getID_PRO().equals(pmod.getID_PRO()))
+                .mapToInt(DetallePedido::getCantidadCajas)
+                .sum();
+
+        //Alerta de sopreaso de umbral maximo en almacen
+        if (stockActual + enCarrito + cantidad > stockMax) {
+            JOptionPane.showMessageDialog(this,
+                    "No puedes pedir " + cantidad + " cajas de “" + nombre + "”.\n"
+                    + "Stock actual: " + stockActual + "\n"
+                    + "Ya en carrito: " + enCarrito + "\n"
+                    + "Máximo permitido: " + stockMax,
+                    "Umbral excedido", JOptionPane.WARNING_MESSAGE);
+            return;
+        }
+
         //Añade fila al carrito (tbped_ing)
         DefaultTableModel cartModel = (DefaultTableModel) tbped_ing.getModel();
         cartModel.addRow(new Object[]{
@@ -418,7 +449,6 @@ public class Pedido_ingredientes extends javax.swing.JPanel {
 
         //Actualiza total en pantalla
         actualizarTotal();
-
 
     }//GEN-LAST:event_btnaddingadminActionPerformed
 
