@@ -451,6 +451,7 @@ public class GestionarProductos extends javax.swing.JPanel {
         try {
             prodService.eliminarProducto(id);
             cargarProductosEnTabla();
+            limpiarCampos();
             JOptionPane.showMessageDialog(this, "Producto eliminado");
         } catch (SQLException e) {
             JOptionPane.showMessageDialog(this, "Error BD:\n" + e.getMessage());
@@ -494,6 +495,7 @@ public class GestionarProductos extends javax.swing.JPanel {
             );
             prodService.actualizarProducto(p);
             cargarProductosEnTabla();
+            limpiarCampos();
             JOptionPane.showMessageDialog(this, "Producto actualizado");
         } catch (NumberFormatException e) {
             JOptionPane.showMessageDialog(this, "Formato numérico inválido");
@@ -526,6 +528,7 @@ public class GestionarProductos extends javax.swing.JPanel {
             );
             prodService.crearProducto(p);
             cargarProductosEnTabla();
+            limpiarCampos();
             JOptionPane.showMessageDialog(this, "Producto creado");
         } catch (NumberFormatException e) {
             JOptionPane.showMessageDialog(this, "Formato numérico inválido");
@@ -545,7 +548,6 @@ public class GestionarProductos extends javax.swing.JPanel {
                 JOptionPane.showMessageDialog(this, "No existe ese ID");
                 return;
             }
-            // Cargo los campos en la UI (pero sin tocar stock_actual ni stock_cajas)
             txtNomProv.setText(pr.getNOMBRE_PROV());
             txtTelefonoProv.setText(String.valueOf(pr.getTELEFONO()));
             txtDirProv.setText(pr.getDIRECCION());
@@ -562,6 +564,7 @@ public class GestionarProductos extends javax.swing.JPanel {
         try {
             provService.eliminarProveedor(id);
             cargarProveedoresEnTabla();
+            limpiarCampos();
             JOptionPane.showMessageDialog(this, "Proveedor eliminado");
         } catch (SQLException e) {
             JOptionPane.showMessageDialog(this, "Error BD:\n" + e.getMessage());
@@ -581,7 +584,8 @@ public class GestionarProductos extends javax.swing.JPanel {
             );
 
             provService.actualizarProveedor(pr);
-            cargarProductosEnTabla();
+            cargarProveedoresEnTabla();
+            limpiarCampos();
             JOptionPane.showMessageDialog(this, "Producto actualizado");
         } catch (NumberFormatException e) {
             JOptionPane.showMessageDialog(this, "Formato numérico inválido");
@@ -601,7 +605,8 @@ public class GestionarProductos extends javax.swing.JPanel {
                     id, nom, telf, dir
             );
             provService.crearProveedor(pr);
-            cargarProductosEnTabla();
+            cargarProveedoresEnTabla();
+            limpiarCampos();
             JOptionPane.showMessageDialog(this, "Producto creado");
         } catch (NumberFormatException e) {
             JOptionPane.showMessageDialog(this, "Formato numérico inválido");
@@ -610,6 +615,21 @@ public class GestionarProductos extends javax.swing.JPanel {
         }
     }//GEN-LAST:event_btnGuardarNuevoProvActionPerformed
 
+    private void limpiarCampos() {
+        txtIDProv.setText("");
+        txtNomProv.setText("");
+        txtTelefonoProv.setText("");
+        txtDirProv.setText("");
+        
+        txtIDIng.setText("");
+        txtNomIng.setText("");
+        txtMedida.setText("");
+        txtStockMin.setText("");
+        txtStockMax.setText("");        
+        cboProvIng.setSelectedIndex(-1);
+        txtPrecio.setText("");
+        txtDesc.setText("");        
+    }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnBuscarIng;

@@ -3,6 +3,8 @@ package com.utp.pizzatime.model.dao.impl;
 import com.utp.pizzatime.model.dao.ProveedorDAO;
 import com.utp.pizzatime.model.entity.Proveedor;
 import com.utp.pizzatime.util.SQLConexion;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import java.sql.*;
 import java.util.ArrayList;
@@ -14,6 +16,7 @@ import java.util.List;
  */
 public class I_ProveedorDAO implements ProveedorDAO {
 
+    private static final Logger log = LoggerFactory.getLogger(I_ProveedorDAO.class);
     private static final String SQL_FIND_ALL
             = "SELECT ID_PROV, NOMBRE_PROV, TELEFONO, DIRECCION FROM PROVEEDOR";
     private static final String SQL_FIND_BY_ID = SQL_FIND_ALL + " WHERE ID_PROV = ?";
@@ -77,10 +80,15 @@ public class I_ProveedorDAO implements ProveedorDAO {
 
     @Override
     public void eliminar(String id) throws SQLException {
+        log.debug("eliminar({})", id);
         try (Connection conn = sqlCon.establecerConexion(); PreparedStatement st = conn.prepareStatement(SQL_DELETE)) {
 
             st.setString(1, id);
-            st.executeUpdate();
+            int filas = st.executeUpdate();
+            log.info("eliminar: filas afectadas = {}", filas);
+        } catch (SQLException ex) {
+            log.error("Error al eliminar producto {}", id, ex);
+            throw ex;
         }
     }
 
