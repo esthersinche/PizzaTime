@@ -50,4 +50,7 @@ public class DisponibleProductoDTO {
         this.vencimiento = vencimiento;
     }
 
+
+    //xd
+
 }
