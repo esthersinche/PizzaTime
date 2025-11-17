@@ -1,0 +1,22 @@
+name: CI Test PizzaTime
+
+on:
+  pull_request:
+    branches: [ "main", "develop" ]
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout del repositorio
+        uses: actions/checkout@v3
+
+      - name: Configurar JDK
+        uses: actions/setup-java@v3
+        with:
+          java-version: '17'
+          distribution: 'temurin'
+
+      - name: Ejecutar pruebas con Maven
+        run: mvn -B test
