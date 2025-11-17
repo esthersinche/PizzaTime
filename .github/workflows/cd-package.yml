@@ -1,0 +1,30 @@
+name: CD Package PizzaTime
+
+on:
+  push:
+    branches: [ "main" ]
+  tags:
+    - "v*.*.*"
+
+jobs:
+  package:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout del repositorio
+        uses: actions/checkout@v3
+
+      - name: Configurar JDK
+        uses: actions/setup-java@v3
+        with:
+          java-version: '17'
+          distribution: 'temurin'
+
+      - name: Empaquetar proyecto con Maven
+        run: mvn -B clean package
+
+      - name: Guardar JAR como artefacto
+        uses: actions/upload-artifact@v4
+        with:
+          name: pizzatime-jar
+          path: target/*.jar
