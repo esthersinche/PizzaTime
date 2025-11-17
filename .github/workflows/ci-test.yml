@@ -2,7 +2,7 @@ name: CI Test PizzaTime
 
 on:
   pull_request:
-    branches: [ "main", "develop" ]
+    branches: [ "main" ]
 
 jobs:
   test:
