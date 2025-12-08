@@ -13,24 +13,28 @@ public class SQLConexion {
 
     private Connection conn = null;
 
-    private final String usuario = "sa";              // Tu usuario SQL Server
-    private final String contrasenia = "contrasena";  // Tu contraseña
+    private final String usuario = "adminbdpizza";              // Para todos
+    private final String contrasenia = "Prueba-bdpizza123";  // Para todos
     private final String bd = "BDPIZZA";              
-    private final String ip = "localhost";            
-    private final String puerto = "1433";             
 
+        // Servidor de Azure 
+    private final String ip = "bdpizza.database.windows.net"; 
+    private final String puerto = "1433";   
+
+    // Cadena JDBC actualizada para Azure SQL
     private final String cadena = "jdbc:sqlserver://" 
-        + ip + ":" + puerto + 
-        ";databaseName=" + bd + 
-        ";encrypt=true;trustServerCertificate=true";
+        + ip + ":" + puerto 
+        + ";database=" + bd 
+        + ";encrypt=true;trustServerCertificate=false;loginTimeout=30";
 
     public Connection establecerConexion() {
         try {
             conn = DriverManager.getConnection(cadena, usuario, contrasenia);
-            log.info("Conexion exitosa a la base de datos {}:{} (BD={})", ip, puerto, bd);
+            log.info("Conexión exitosa a Azure SQL en {}:{} (BD={})", ip, puerto, bd);
             
         } catch (SQLException e) {
-            log.info("Conexion fallida a la base de datos {}:{} (BD={})", ip, puerto, bd);
+            log.error("Conexión fallida a Azure SQL en {}:{} (BD={}) -> {}",
+                      ip, puerto, bd, e.getMessage());
         }
         return conn;
     }

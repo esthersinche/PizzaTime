@@ -4,6 +4,8 @@
 
 package com.utp.pizzatime;
 
+import com.utp.pizzatime.view.Login;
+
 /**
  *
  * @author BeeIsMega
@@ -11,7 +13,12 @@ package com.utp.pizzatime;
 public class PizzaTime {
 
     public static void main(String[] args) {
-        System.out.println("Hello World!"); 
+
+        // Iniciar interfaz gráfica en el hilo correcto
+        javax.swing.SwingUtilities.invokeLater(() -> {
+            Login login = new Login();
+            login.setVisible(true);
+        });
+
     }
-    //aaaaa
 }
