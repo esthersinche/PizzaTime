@@ -1,4 +1,4 @@
-name: Sprint 5 deploy
+name: Deploy Java App and DB to Azure
 
 on:
   push:
@@ -12,6 +12,13 @@ jobs:
       - name: Checkout repo
         uses: actions/checkout@v3
 
+      - name: Setup Java
+        uses: actions/setup-java@v4
+        with:
+          distribution: 'temurin'
+          java-version: '20'   
+          cache: maven
+
       - name: Login to Azure
         uses: azure/login@v1
         with:
@@ -23,16 +30,17 @@ jobs:
       - name: Deploy Azure SQL DB
         run: |
           az sql db create \
-            --resource-group HD-ProyectoFinal \
+            --resource-group HD-Proyectofinal> \
             --server bdpizza \
-            --name pizza_bd \
+            --name pizza_db \
             --service-objective S0 || echo "DB ya existe o se omite error"
 
-      - name: Generate executable
+      - name: Generate executable with Launch4j
         run: |
-          sudo apt-get update && sudo apt-get install -y openjdk-20
+          sudo apt-get update
+          sudo apt-get install -y openjdk-20
           java -jar launch4j.jar config.xml
-          
+
       - name: Upload executable artifact
         uses: actions/upload-artifact@v4
         with:
