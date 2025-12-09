@@ -19,9 +19,6 @@ jobs:
         distribution: temurin
         java-version: 20
 
-    - name: Update DB connection
-      run: sed -i 's/<jdbc_url_dev>/<jdbc_url_prod>/g' src/main/resources/application.properties
-
     - name: Compile Maven project
       run: mvn clean package
 
@@ -37,8 +34,7 @@ jobs:
           -i ./db/deploy.sql
 
     - name: Generate executable with Launch4j
-      run: |
-        java -jar launch4j/launch4j.jar launch4j/config.xml
+      run: java -jar launch4j/launch4j.jar launch4j/config.xml
 
     - name: Upload .exe to GitHub Release
       uses: softprops/action-gh-release@v1
@@ -46,4 +42,5 @@ jobs:
         files: ./target/PizzaTime.exe
       env:
         GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+
 
