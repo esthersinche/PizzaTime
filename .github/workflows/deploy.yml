@@ -1,62 +1,49 @@
-name: Build and Deploy PizzaTime
+name: Sprint 5 Deploy
 
 on:
   push:
-    branches: [ main ]
+    branches:
+      - main
 
 jobs:
-  build-deploy:
+  build-and-deploy:
     runs-on: ubuntu-latest
 
     steps:
-    
-    - name: Checkout repository
+    - name: Checkout code
       uses: actions/checkout@v3
 
-   
     - name: Set up JDK 20
       uses: actions/setup-java@v3
       with:
-        java-version: '20'
-        distribution: 'temurin'
+        distribution: temurin
+        java-version: 20
 
-    
-    - name: Cache Maven packages
-      uses: actions/cache@v3
-      with:
-        path: ~/.m2
-        key: ${{ runner.os }}-maven-${{ hashFiles('**/pom.xml') }}
-        restore-keys: |
-          ${{ runner.os }}-maven-
+    - name: Update DB connection
+      run: sed -i 's/<jdbc_url_dev>/<jdbc_url_prod>/g' src/main/resources/application.properties
 
-   
-    - name: Build with Maven
+    - name: Compile Maven project
       run: mvn clean package
 
-    
-    - name: Update DB connection
-      run: |
-        sed -i 's/<jdbc_url_dev>/<jdbc_url_prod>/g' src/main/resources/application.properties
-        sed -i 's/<db_user_dev>/<db_user_prod>/g' src/main/resources/application.properties
-        sed -i 's/<db_pass_dev>/<db_pass_prod>/g' src/main/resources/application.properties
-
-    
-    - name: Deploy database to Azure
-      uses: azure/sql-action@v1
+    - name: Login to Azure
+      uses: azure/login@v1
       with:
-        connection-string: ${{ secrets.AZURE_SQL_CONNECTION_STRING }}
-        script: scripts/deploy.sql
+        creds: ${{ secrets.AZURE_CREDENTIALS }}
 
-    
-    - name: Build Windows Executable
+    - name: Deploy Database to Azure
+      run: |
+        sqlcmd -S ${{ secrets.AZURE_SQL_SERVER }} -d ${{ secrets.AZURE_SQL_DB }} \
+          -U ${{ secrets.AZURE_SQL_USER }} -P ${{ secrets.AZURE_SQL_PASSWORD }} \
+          -i ./db/deploy.sql
+
+    - name: Generate executable with Launch4j
       run: |
         java -jar launch4j/launch4j.jar launch4j/config.xml
 
-    
-    - name: Upload Artifacts
-      uses: actions/upload-artifact@v4
+    - name: Upload .exe to GitHub Release
+      uses: softprops/action-gh-release@v1
       with:
-        name: PizzaTime-Build
-        path: |
-          target/*.jar
-          target/*.exe
+        files: ./target/PizzaTime.exe
+      env:
+        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+
