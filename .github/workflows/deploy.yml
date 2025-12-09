@@ -1,59 +1,40 @@
 name: Sprint 5 deploy
 
 on:
-  workflow_dispatch:  
   push:
-    branches:
-      - main
+    branches: [ main ]
 
 jobs:
-  build-test:
+  build-and-deploy:
     runs-on: ubuntu-latest
+
     steps:
-      - name: Checkout del repositorio
+      - name: Checkout repo
         uses: actions/checkout@v3
 
-      - name: Configurar JDK 20
-        uses: actions/setup-java@v3
+      - name: Login to Azure
+        uses: azure/login@v1
         with:
-          java-version: '20'
-          distribution: 'temurin'
+          creds: ${{ secrets.AZURE_CREDENTIALS }}
 
-      - name: Instalar dependencias y compilar
-        run: mvn clean install -DskipTests=false
+      - name: Build Maven project
+        run: mvn clean package
 
-      - name: Pruebas automáticas
+      - name: Deploy Azure SQL DB
         run: |
-          echo "Ejecutando pruebas unitarias..."
-          mvn test
-          echo "Pruebas completadas exitosamente"
+          az sql db create \
+            --resource-group HD-ProyectoFinal \
+            --server bdpizza \
+            --name pizza_bd \
+            --service-objective S0 || echo "DB ya existe o se omite error"
 
-  simulate-deploy-db:
-    runs-on: ubuntu-latest
-    needs: build-test
-    steps:
-      - name: Despliegue de base de datos
+      - name: Generate executable
         run: |
-          echo "Iniciando despliegue de BD..."
-          echo "   - Validando scripts SQL..."
-          echo "   - Sincronizando esquemas..."
-          echo "   - Migración completada"
-          echo "BD DESPLEGADA"
-
-  simulate-deploy-app:
-    runs-on: ubuntu-latest
-    needs: simulate-deploy-db
-    steps:
-      - name: Empaquetado de artefacto
-        run: |
-          echo " Empaquetando artefacto Java..."
-          echo "   - Generando .jar..."
-          echo "   - Artefacto creado correctamente"
-
-      - name: Despliegue de la aplicación
-        run: |
-          echo "Iniciando despliegue"
-          echo "   - Subiendo artefacto a servidor Azure..."
-          echo "   - Actualizando versión..."
-          echo "   - Reiniciando servicio..."
-          echo "APLICACIÓN DESPLEGADA"
+          sudo apt-get update && sudo apt-get install -y openjdk-20
+          java -jar launch4j.jar config.xml
+          
+      - name: Upload executable artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: PizzaTime-executable
+          path: dist/PizzaTime.exe
